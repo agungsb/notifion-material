@@ -83,19 +83,19 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
 app.run(['$rootScope', '$mdSidenav', '$log', '$timeout', '$interval', '$http',
     function($rootScope, $mdSidenav, $log, $timeout, $interval, $http) {
         $rootScope.i = 0;
-        var callAtTimeout = function() {
-            $rootScope.i++;
-            console.log($rootScope.i);
+//        var callAtTimeout = function() {
+//            $rootScope.i++;
+//            console.log($rootScope.i);
             $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
                 console.log(feedback);
                 $rootScope.user = feedback;
-                $timeout(function() {
-                    callAtTimeout();
-                }, 500);
+//                $timeout(function() {
+//                    callAtTimeout();
+//                }, 500);
             }).error(function(error) {
                 console.log(error);
             });
-        }
+//        }
 //        callAtTimeout(); Sementara, di-disable dulu fungsinya
 //        $interval(function() {
 //            $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
