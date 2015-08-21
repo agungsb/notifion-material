@@ -1,0 +1,78 @@
+<div layout="column">
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="sidenav" hide-gt-md>
+                <i class="material-icons" style="margin-top: 22%;">&#xE5D2;</i>
+            </md-button>
+            <h2>
+                <span>Buat Surat</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding>
+        <form name="submitSurat">
+            <div layout layout-sm="column">
+                <md-input-container style="width: 80%">
+                    <label>Subject</label>
+                    <input type="text" name="subject" ng-model="subject"/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Tanggal Surat</label>
+                    <input type="date" readonly ng-click="openDatePicker($event)" ng-model="tanggalsurat" required>
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container style="width: 35%;">
+                    <label>No. Surat</label>
+                    <input type="text" name="nosurat" ng-model="nosurat" required>
+                </md-input-container>
+                <md-input-container style="width: 35%;">
+                    <label>Lampiran</label>
+                    <input type="text" name="lampiran" ng-model="lampiran" required>
+                </md-input-container>
+                <md-input-container style="width: 35%;">
+                    <label>Hal</label>
+                    <input type="text" name="hal" ng-model="hal" required>
+                </md-input-container>
+            </div>
+            <md-contact-chips 
+                name="tujuan"
+                ng-model="ctrl.contactsTujuan" 
+                md-contacts="ctrl.querySearchTujuan($query)" 
+                md-contact-name="name" 
+                md-contact-image="image" 
+                md-contact-email="keterangan" 
+                md-require-match="true" 
+                filter-selected="ctrl.filterSelectedTujuan" 
+                placeholder="Tujuan" required>
+            </md-contact-chips>
+            <md-contact-chips 
+                name="penandatangan"
+                ng-model="ctrl.contactsPenandatangan" 
+                md-contacts="ctrl.querySearchPenandatangan($query)" 
+                md-contact-name="name" 
+                md-contact-image="image" 
+                md-contact-email="keterangan" 
+                md-require-match="true" 
+                filter-selected="ctrl.filterSelectedPenandatangan" 
+                placeholder="Penandatangan">
+            </md-contact-chips>
+            <md-contact-chips 
+                name="tembusan"
+                ng-model="ctrl.contactsTembusan" 
+                md-contacts="ctrl.querySearchTembusan($query)" 
+                md-contact-name="name" 
+                md-contact-image="image" 
+                md-contact-email="keterangan" 
+                md-require-match="true" 
+                filter-selected="ctrl.filterSelectedTembusan" 
+                placeholder="Tembusan">
+            </md-contact-chips>
+            <br>
+            <text-angular ng-model="isisurat" class="materialize-textarea" required></text-angular>
+            <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="submitSurat.$invalid || submitSurat.tujuan.$modelValue.length === 0
+                        || submitSurat.penandatangan.$modelValue.length === 0
+                        || submitSurat.tembusan.$modelValue.length === 0">Submit</md-button>
+        </form>
+    </md-content>
+</div>

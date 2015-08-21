@@ -1,0 +1,154 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 21, 2015, 2:06:37 PM
+    Author     : Agung
+*/
+
+.ng-scope.sn { height: 100%; } /* agar sidenav-nya full height */
+md-sidenav{min-width: 104px;}
+
+.divider-border{
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.animate-hide {
+    -webkit-transition: all linear 0.1s;
+    transition: all linear 0.1s;
+    opacity: 1;
+}
+
+.animate-hide.ng-hide {
+    height: 0px;
+    width: 0px;
+    opacity: 0;
+}
+
+.hideme{
+    visibility: hidden;
+    transition: all linear 0.1s;
+    opacity: 0;
+}
+
+.text-warn{
+    color: rgb(244,67,54);
+}
+
+.time-date {
+    font-size: 14px !important;
+}
+
+.time-date > .control > .slider > .date-control {
+    /* hide overflow-x on Firefox */
+    overflow: hidden;
+}
+
+/* back/forward arrows */
+.title .md-button {
+    min-width: 0;
+}
+
+.time-date > .control > .slider > .date-control > .headers {
+    margin-top: 0;
+}
+
+.time-date > .control > .slider > .date-control > .title{
+    margin-right: 40px;
+}
+
+/* date cells */
+.time-date > .control > .slider > .date-control .day-cell {
+    min-height: 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* switch control buttons */
+.time-date > .control > .slider > .switch-control {
+    margin: 0;
+    min-width: 0;
+    font-size: 18px;
+}
+
+.time-date > .display > .title{
+    background-color: rgb(33,150,243); /* primary color */
+    color: #FFF;
+}
+
+.time-date > .display > .content{
+    background-color: rgb(33,150,243);
+    color: #FFF;
+}
+
+.time-date > .control > .slider > .date-control > .days .day-cell.selected{
+    background-color: rgb(33,150,243);
+}
+
+.time-date > .control > .slider > .date-control > .days .day-cell:hover, .time-date > .control > .slider > .date-control > .days .day-cell:active{
+    background-color: rgb(33,150,243); 
+    color: #FFF;
+}
+
+md-tabs md-ink-bar{
+    color: rgb(33,150,243);
+    background-color: rgb(33,150,243);
+}
+
+md-tabs .md-tab.md-active, md-tabs .md-tab.md-focused{
+    color: rgb(33,150,243);
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+        url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+        url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+// Rules for sizing the icon.
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }

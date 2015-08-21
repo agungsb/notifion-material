@@ -1,0 +1,21 @@
+<md-dialog style="height: auto;">
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>PDF Preview</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="closeDialog()" aria-label="Close">
+                <i class="material-icons" style="margin-top: 22%;">&#xE5CD;</i>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content md-theme="app-blue" layout-padding>
+        <md-content class="md-button-group" ng-if="isSigned == 0">
+            <md-button md-theme="app-blue" class="md-raised md-primary" ng-click="accSurat()">Acc</md-button>
+            <md-button md-theme="app-blue" class="md-raised md-warn" ng-click="rejectSurat()">Reject</md-button>
+        </md-content>
+        <embed ng-src="{{content}}" style="height: 0px;"></embed>
+        <object data="{{content}}" type="application/pdf" width="100%" height="320"></object>
+    </md-content>
+</md-dialog>
