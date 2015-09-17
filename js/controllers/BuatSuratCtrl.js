@@ -80,7 +80,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
 //            console.log(newVal);
 //            $scope.isi = newVal.replace('style=', "oala");
 //            $scope.isi = $scope.isi.replace(' style=\"color: rgba(0, 0, 0, 0.870588);float: none;background-color: rgb(255, 255, 255);\"', "");
-            $scope.isi = newVal.replace(/\s+style\=\"|color\: rgba\(0\, 0\, 0\, 0.870588\)\;|float\: none\;|background\-color\: rgb\(255\, 255\, 255\)\;\"|<span>|<\/span >/gi, "");
+            $scope.isi = newVal.replace(/color\: rgba\(0\, 0\, 0\, 0.870588\)\;|float\: none\;|background\-color\: rgb\(255\, 255\, 255\)\;|<br\/>/gi, "");
             console.log($scope.isi);
         }
     })

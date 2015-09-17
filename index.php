@@ -34,6 +34,7 @@
         <script src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
         <script src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
         <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+        <script src="bower_components/textAngular/src/textAngularSetup.js" type="text/javascript"></script>
         <script src="bower_components/md-date-time/dist/md-date-time.js" type="text/javascript"></script>
 
         <script src="js/app.js" type="text/javascript"></script>
