@@ -14,13 +14,13 @@ function HomeCtrl($http, $scope, $state, $mdSidenav, $mdUtil, $log) {
             localStorage.removeItem('token');
             $state.go('login');
         };
-//        $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
-//            console.log(feedback);
-//            $scope.user = feedback;
-//        }).error(function(error) {
-//            $scope.error = error;
-//            console.log(error);
-//        });
+        $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
+            console.log(feedback);
+            $scope.user = feedback;
+        }).error(function(error) {
+            $scope.error = error;
+            console.log(error);
+        });
 
         $scope.toggleLeft = buildToggler('left', $mdUtil, $mdSidenav, $log);
     }

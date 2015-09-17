@@ -33,7 +33,7 @@ function DashboardCtrl($scope, $http, $state, $window, $mdDialog, SuratMasukServ
                 function DialogController($scope, $http, $mdDialog, $sce) {
                     var data = {'id': id, 'token': localStorage.getItem('token')};
                     $http({
-                        url: "http://localhost/notifion-api/view/" + id + "/" + localStorage.getItem('token'),
+                        url: "http://localhost/notifion-api/view/"+id+"/"+localStorage.getItem('token'),
                         method: "GET",
                         headers: {'Accept': 'application/pdf'},
                         responseType: 'arraybuffer'

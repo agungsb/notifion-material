@@ -5,13 +5,13 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
 
     $scope.subject = "Test Subject";
     $scope.tanggalsurat = new Date();
-    $scope.isisurat = "asdf";
+//    $scope.isisurat = "asdf";
     $scope.nosurat = "999/UN.39.18/TU/15";
     $scope.lampiran = 2;
     $scope.hal = "KP";
 
     $scope.openDatePicker = function($event) {
-        $rootScope.$on('savedDate', function(evens, args){
+        $rootScope.$on('savedDate', function(evens, args) {
             $scope.tanggalsurat = new Date(args.value);
         })
         $mdDialog.show({
@@ -26,7 +26,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
             $scope.closeDialog = function() {
                 $mdDialog.hide();
             };
-            $scope.saveDate = function(value){
+            $scope.saveDate = function(value) {
                 $rootScope.$emit('savedDate', {'value': value});
                 $mdDialog.hide();
             }
@@ -74,9 +74,55 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
         console.log(data);
     });
 
-    $scope.submit = function() {
+    $scope.$watch('isisurat', function(newVal, oldVal) {
+        if (typeof (newVal) !== 'undefined') {
+            $scope.isi = newVal;
+//            console.log(newVal);
+//            $scope.isi = newVal.replace('style=', "oala");
+//            $scope.isi = $scope.isi.replace(' style=\"color: rgba(0, 0, 0, 0.870588);float: none;background-color: rgb(255, 255, 255);\"', "");
+            $scope.isi = newVal.replace(/\s+style\=\"|color\: rgba\(0\, 0\, 0\, 0.870588\)\;|float\: none\;|background\-color\: rgb\(255\, 255\, 255\)\;\"|<span>|<\/span >/gi, "");
+            console.log($scope.isi);
+        }
+    })
 
-        alert($scope.tanggalsurat);
+    $scope.submit = function() {
+        var data = {
+            "token": localStorage.getItem('token'),
+            "subject": $scope.subject,
+            "tanggal_surat": $scope.tanggalsurat,
+            "tujuan": self.contactsTujuan,
+            "penandatangan": self.contactsPenandatangan,
+            "nosurat": $scope.nosurat,
+            "lampiran": $scope.lampiran,
+            "hal": $scope.hal,
+            "isi": $scope.isi,
+            "tembusan": self.contactsTembusan
+        };
+
+//        alert(JSON.stringify(data));
+
+        console.log(data);
+
+        $http.post("http://localhost/notifion-api/submitSurat", data).success(function(feedback) {
+//            alert(feedback);
+            console.log(feedback);
+        }).error(function(data) {
+            console.log(data);
+        })
+    };
+
+    /* Scope Preview Surat */
+    $scope.previewSurat = function($event, id, status) {
+//                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
+//                $window.open(url, '_blank');
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'templates/dialogs/pdfDialog.html',
+            parent: angular.element(document.body),
+            targetEvent: $event
+        }).then(function() {
+            console.log('finished');
+        });
 
         var data = {
             "token": localStorage.getItem('token'),
@@ -87,18 +133,35 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
             "nosurat": $scope.nosurat,
             "lampiran": $scope.lampiran,
             "hal": $scope.hal,
-            "isi": $scope.isisurat,
-            "tembusan": self.contactsTembusan
+            "isi": $scope.isi,
+            "tembusan": self.scontactsTembusan
         };
-
-//        alert(JSON.stringify(data));
-
-        $http.post("http://localhost/notifion-api/submitSurat", data).success(function(feedback) {
+//        $http.post("http://localhost/notifion-api/test", data).success(function(feedback) {
 //            alert(feedback);
-            console.log(feedback);
-        }).error(function(data) {
+//            console.log(feedback);
+//        }).error(function(data) {
+//            console.log(data);
+//        })
+
+        function DialogController($scope, $http, $mdDialog, $sce) {
             console.log(data);
-        })
+            $http({
+                url: "http://localhost/notifion-api/preview2",
+                method: "POST",
+                data: data,
+                headers: {'Accept': 'application/pdf'},
+                responseType: 'arraybuffer'
+            }).success(function(feedback) {
+                var file = new Blob([feedback], {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                console.log(fileURL);
+                $scope.content = $sce.trustAsResourceUrl(fileURL);
+            });
+            $scope.isSigned = status;
+            $scope.closeDialog = function() {
+                $mdDialog.hide();
+            };
+        }
     };
 
     /**
@@ -143,7 +206,6 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
         }
 
         return contacts.map(function(c, index) {
-            var cParts = c.split(' ');
             var contact = {
                 name: c,
                 keterangan: arrList[index].keterangan,
@@ -151,6 +213,8 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
                 image: 'http://lorempixel.com/50/50/people?' + index
             };
             contact._lowername = contact.name.toLowerCase();
+            contact.nama = arrList[index].nama;
+            contact.nip = arrList[index].nip;
             return contact;
         });
     }

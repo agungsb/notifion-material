@@ -42,6 +42,7 @@
         <script src="js/controllers/DashboardCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>
         
+        <script src="js/directives/NavDirective.js" type="text/javascript"></script>
         <script src="js/directives/MainDirective.js" type="text/javascript"></script>
         
         <script src="js/services/SuratKeluarService.js" type="text/javascript"></script>

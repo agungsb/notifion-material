@@ -80,31 +80,7 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     }
                 })
     }]);
-app.run(['$rootScope', '$mdSidenav', '$log', '$timeout', '$interval', '$http',
-    function($rootScope, $mdSidenav, $log, $timeout, $interval, $http) {
-        $rootScope.i = 0;
-//        var callAtTimeout = function() {
-//            $rootScope.i++;
-//            console.log($rootScope.i);
-            $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
-                console.log(feedback);
-                $rootScope.user = feedback;
-//                $timeout(function() {
-//                    callAtTimeout();
-//                }, 500);
-            }).error(function(error) {
-                console.log(error);
-            });
-//        }
-//        callAtTimeout(); Sementara, di-disable dulu fungsinya
-//        $interval(function() {
-//            $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
-//                console.log(feedback);
-//                $rootScope.user = feedback;
-//            }).error(function(error) {
-//                console.log(error);
-//            });
-//        }, 1000);
+app.run(['$rootScope', '$mdSidenav', '$log', function($rootScope, $mdSidenav, $log) {
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             // Close the sidenav everytime state is changed
             $mdSidenav('left').close().then(function() {
