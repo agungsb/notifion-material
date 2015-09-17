@@ -12,13 +12,19 @@
     <md-content layout-padding>
         <form name="submitSurat">
             <div layout layout-sm="column">
-                <md-input-container style="width: 80%">
+                <md-input-container style="width: 35%">
                     <label>Subject</label>
                     <input type="text" name="subject" ng-model="subject"/>
                 </md-input-container>
                 <md-input-container flex>
                     <label>Tanggal Surat</label>
                     <input type="date" readonly ng-click="openDatePicker($event)" ng-model="tanggalsurat" required>
+                </md-input-container>
+                <md-input-container style="width: 25%;">
+                    <label>Kode Hal</label>
+                    <md-select ng-model="hal">
+                        <md-option ng-repeat="kodehal in kodehals" value="{{kodehal.kode_hal}}">{{kodehal.deskripsi}}</md-option>
+                    </md-select>
                 </md-input-container>
             </div>
             <div layout layout-sm="column">
@@ -34,14 +40,6 @@
                                     <label>Hal</label>
                                     <input type="text" name="hal" ng-model="hal" required>
                                 </md-input-container>-->
-            </div>
-            <div layout="row">
-                <md-input-container>
-                    <label>State</label>
-                    <md-select ng-model="hal">
-                        <md-option ng-repeat="kodehal in kodehals" value="{{kodehal.kode_hal}}">{{kodehal.deskripsi}}</md-option>
-                    </md-select>
-                </md-input-container>
             </div>
             <md-contact-chips 
                 name="tujuan"
@@ -85,5 +83,4 @@
             <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat()">Preview</md-button>
         </form>
     </md-content>
-    {{isi}}
 </div>
