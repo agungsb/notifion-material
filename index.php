@@ -22,7 +22,7 @@
         <div ui-view class="sn"></div>
 
         <!--<script src="bower_components/angular/angular.js"></script>-->
-        <script src="bower_components/angular/angular-1.4.0.js" type="text/javascript"></script>
+        <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
         <!--<script src="bower_components/angular/angular-1.3.15.js" type="text/javascript"></script>-->
         <!--<script src="bower_components/angular-cookies/angular-cookies.min.js" type="text/javascript"></script>-->
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>

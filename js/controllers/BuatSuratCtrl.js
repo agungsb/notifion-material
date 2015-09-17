@@ -8,7 +8,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
 //    $scope.isisurat = "asdf";
     $scope.nosurat = "999/UN.39.18/TU/15";
     $scope.lampiran = 2;
-    $scope.hal = "KP";
+//    $scope.hal = "KP";
 
     $scope.openDatePicker = function($event) {
         $rootScope.$on('savedDate', function(evens, args) {
@@ -218,4 +218,12 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
             return contact;
         });
     }
+
+    /* kode hal */
+    $http.get('http://localhost/notifion-api/kodeHals').success(function(feedback) {
+        console.log(feedback);
+        $scope.kodehals = feedback.result;
+    }).error(function() {
+        console.log("error");
+    });
 }

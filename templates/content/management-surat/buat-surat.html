@@ -30,9 +30,17 @@
                     <label>Lampiran</label>
                     <input type="text" name="lampiran" ng-model="lampiran" required>
                 </md-input-container>
-                <md-input-container style="width: 35%;">
-                    <label>Hal</label>
-                    <input type="text" name="hal" ng-model="hal" required>
+                <!--                <md-input-container style="width: 35%;">
+                                    <label>Hal</label>
+                                    <input type="text" name="hal" ng-model="hal" required>
+                                </md-input-container>-->
+            </div>
+            <div layout="row">
+                <md-input-container>
+                    <label>State</label>
+                    <md-select ng-model="hal">
+                        <md-option ng-repeat="kodehal in kodehals" value="{{kodehal.kode_hal}}">{{kodehal.deskripsi}}</md-option>
+                    </md-select>
                 </md-input-container>
             </div>
             <md-contact-chips 
@@ -43,7 +51,9 @@
                 md-contact-image="image" 
                 md-contact-email="keterangan" 
                 md-require-match="true" 
-                filter-selected="ctrl.filterSelectedTujuan" 
+                filter-selected="ctrl.filterSelectedTujuan"
+                md-highlight-flags="i"
+                md-no-cache="true"
                 placeholder="Tujuan" required>
             </md-contact-chips>
             <md-contact-chips 
@@ -68,12 +78,11 @@
                 filter-selected="ctrl.filterSelectedTembusan" 
                 placeholder="Tembusan">
             </md-contact-chips>
-            <br>
+            <hr/>
             <text-angular ng-model="isisurat" class="materialize-textarea" required></text-angular>
             <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="submitSurat.$invalid || submitSurat.tujuan.$modelValue.length === 0
                         || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
             <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat()">Preview</md-button>
         </form>
     </md-content>
-    data {{isi}}
 </div>
