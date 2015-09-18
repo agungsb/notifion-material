@@ -1,6 +1,6 @@
 'use strict';
 
-function EditBioCtrl($scope, $http, $state) {
+function EditBioCtrl($scope, $http, $state, $mdToast) {
     $scope.checkNumber = function(e) {
         var key = typeof e.which === 'undefined' ? e.keyCode : e.which;
         if ((key <= 57) && (key >= 48)) {
@@ -11,6 +11,7 @@ function EditBioCtrl($scope, $http, $state) {
     };
 
     $scope.submit = function() {
+        $scope.isSubmitting = true;
         var data = {
             "token": localStorage.getItem('token'),
             "nama": $scope.nama,
@@ -22,12 +23,21 @@ function EditBioCtrl($scope, $http, $state) {
             "nohp1": $scope.nohp1,
             "nohp2": $scope.nohp2
         };
-        
-         console.log(data);
+
+        console.log(data);
 
         $http.post("http://localhost/notifion-api/editBio", data).success(function(feedback) {
 //            alert(feedback);
             console.log(feedback);
+            $scope.isSubmitting = false;
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content('Berhasil Update')
+                    .position('right')
+                    .hideDelay(1000)
+                    ).then(function(response) {
+                $state.go('home.dashboard');
+            });
         }).error(function(data) {
             console.log(data);
         })

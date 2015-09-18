@@ -10,8 +10,9 @@
         </div>
     </md-toolbar>
     <md-content layout-padding>
+        <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
         <form name="editBiodata">
-            <div layout layout-sm="column" >
+            <div layout layout-sm="column">
                 <md-input-container flex>
                     <label>Nama</label>
                     <input type="text" name="nama" ng-model="nama" required/>
@@ -50,7 +51,7 @@
                     <input type="text" name="nohp2" ng-model="nohp2" ng-keypress="checkNumber($event)" required/>
                 </md-input-container>
             </div>
-            <md-button ng-click="submit()" class="md-raised md-primary md-button" ng-disabled="editBiodata.$invalid">Submit</md-button>
+            <md-button ng-click="submit()" class="md-raised md-primary md-button" ng-disabled="editBiodata.$invalid || isSubmitting">Submit</md-button>
         </form>
     </md-content>
 </div>
