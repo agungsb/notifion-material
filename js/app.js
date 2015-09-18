@@ -39,8 +39,12 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 .state('home.tambahUser', {
                     url: "tambah-user",
                     templateUrl: "templates/content/management-user/tambah-user.html",
-                    controller: function($scope, $http, $state) {
-                    }
+                    controller: TambahUserCtrl
+                })
+                .state('home.editBio', {
+                    url: "edit-bio",
+                    templateUrl: "templates/content/management-user/editBio.html",
+                    controller: EditBioCtrl
                 })
                 .state('home.buatSurat', {
                     url: "buat-surat",
@@ -80,8 +84,16 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     }
                 })
     }]);
-app.run(['$rootScope', '$mdSidenav', '$log', function($rootScope, $mdSidenav, $log) {
+app.run(['$rootScope', '$mdSidenav', '$log', '$http',
+    function($rootScope, $mdSidenav, $log, $http) {
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
+                console.log(feedback);
+                $rootScope.userInfo = feedback;
+                $rootScope.userInfoIsReady = true;
+            }).error(function(error) {
+                console.log(error);
+            });
             // Close the sidenav everytime state is changed
             $mdSidenav('left').close().then(function() {
                 $log.debug('close LEFT is done');

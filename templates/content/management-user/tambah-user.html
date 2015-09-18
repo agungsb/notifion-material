@@ -1,53 +1,17 @@
-<div class="container">
-    <div style="width: 550px; margin: 0 auto; margin-top: 50px; ">
-        <div class="widget-item z-depth-1">
-            <div>
-                <div class="row">
-                    <form class="col s11" novalidate name="signinForm">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="username icon_prefix" type="text" class="validate" ng-model="account" name="account" required>
-                                <label for="username">Account</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="password" class="validate" ng-model="password" name="password" required>
-                                <label for="password">Password</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="nama" name="password" required>
-                                <label for="password">Nama</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="email" class="validate" ng-model="email1" name="email1" required>
-                                <label for="email1">Email 1</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="email2" name="password" required>
-                                <label for="password">Email 2</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="nohp1" name="password" required>
-                                <label for="password">No Handphone 1</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="nohp2" name="password" required>
-                                <label for="password">No Handphone 2</label>
-                            </div>
-                            <button class="btn waves-effect waves-light" ng-disabled="signinForm.$invalid" ng-click="login()">
-                                Tambah
-                                <i class="mdi-action-assessment right"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<div layout="coloummn">
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="sidenav" hide-gt-md>
+                <i class="material-icons" style="margin-top: 22%;">&#xE5D2;</i>
+            </md-button>
+            <h2>
+                <span>Tambah User</span>
+            </h2>
         </div>
-    </div>
-</div> <!-- End Container -->
+    </md-toolbar>
+    <md-content>
+        <form name="tambahUser">
+            
+        </form>
+    </md-content>
+</div>

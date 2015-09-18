@@ -12,6 +12,7 @@ function DashboardCtrl($scope, $http, $state, $window, $mdDialog, SuratMasukServ
         }
         $http.get("http://localhost/notifion-api/surats/" + localStorage.getItem('token') + "/" + 0 + "/" + 10).success(function(feedback) {
             console.log(feedback);
+            $scope.suratsIsReady = true;
             if (feedback.result.length == 0) {
                 $scope.tableIsEmpty = true;
             } else {

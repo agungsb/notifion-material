@@ -42,6 +42,8 @@
         <script src="js/controllers/HomeCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/DashboardCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
         
         <script src="js/directives/NavDirective.js" type="text/javascript"></script>
         <script src="js/directives/MainDirective.js" type="text/javascript"></script>

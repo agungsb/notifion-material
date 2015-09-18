@@ -1,0 +1,56 @@
+<div layout="column">
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="sidenav" hide-gt-md>
+                <i class="material-icons" style="margin-top: 22%;">&#xE5D2;</i>
+            </md-button>
+            <h2>
+                <span>Edit Biodata</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding>
+        <form name="editBiodata">
+            <div layout layout-sm="column" >
+                <md-input-container flex>
+                    <label>Nama</label>
+                    <input type="text" name="nama" ng-model="nama" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>NIP</label>
+                    <input type="text" name="nama" ng-model="nip" ng-keypress="checkNumber($event)" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Password</label>
+                    <input type="password" name="password" ng-model="password" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Jenis Kelamin</label>
+                    <md-select name="gender" ng-model="gender" required>
+                        <md-option value="L">Pria</md-option>
+                        <md-option value="P">Wanita</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Email 1</label>
+                    <input type="email" name="email1" ng-model="email1" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Email 2</label>
+                    <input type="email" name="email2" ng-model="email2" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>No. Handphone 1</label>
+                    <input type="text" name="nohp1" ng-model="nohp1" ng-keypress="checkNumber($event)" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>No. Handphone 2</label>
+                    <input type="text" name="nohp2" ng-model="nohp2" ng-keypress="checkNumber($event)" required/>
+                </md-input-container>
+            </div>
+            <md-button ng-click="submit()" class="md-raised md-primary md-button" ng-disabled="editBiodata.$invalid">Submit</md-button>
+        </form>
+    </md-content>
+</div>
