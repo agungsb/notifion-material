@@ -4,11 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahUserCtrl.js</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/buat-surat.html</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/editBio.html</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/dashboard.html</file>
             <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/tambah-user.html</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/BuatSuratCtrl.js</file>
         </group>
     </open-files>
 </project-private>
