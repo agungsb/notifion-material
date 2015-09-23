@@ -90,6 +90,7 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http',
             $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
                 console.log(feedback);
                 $rootScope.userInfo = feedback;
+                console.log($rootScope.userInfo);
                 $rootScope.userInfoIsReady = true;
             }).error(function(error) {
                 console.log(error);

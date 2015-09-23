@@ -1,4 +1,4 @@
-<div layout="coloummn">
+<div layout="column">
     <md-toolbar class="md-background" md-theme="app-blue">
         <div class="md-toolbar-tools">
             <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="sidenav" hide-gt-md>
@@ -10,8 +10,55 @@
         </div>
     </md-toolbar>
     <md-content>
-        <form name="tambahUser">
-            
-        </form>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <form name="tambahUser">
+                <md-tab label="Tambah Account">
+                    <md-content>
+                        <md-list class="md-padding">
+                            <h1 style="text-align: center;">List User</h1>
+                            <md-list-item class="md-3-line animate-hide">
+                                <div class="md-list-item-text">
+                                    <h3>{{user.nama}}</h3>
+                                </div>
+                                <md-button md-theme="app-blue" class="md-primary" ng-click="setFavorite($index, surat.id)" aria-label="isFavorite">
+                                    <i class="material-icons md-48" ng-if="!surat.isFavorite" style="margin-top: 10%;">star_border</i>
+                                    <i class="material-icons md-48" ng-if="surat.isFavorite" style="margin-top: 10%;">star_black</i>
+                                </md-button>
+                                <md-button md-theme="app-blue" class="md-primary" ng-click="viewSurat($event, surat.id)">
+                                    <i class="material-icons md-48" style="margin-top: 10%;">&#xE8A0;</i>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                        <div layout layout-sm="column">
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Account</label>
+                                <input type="text" name="account" ng-model="account" required/>
+                            </md-input-container>
+                        </div>
+                        <div layout layout-sm="column">
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Password</label>
+                                <input type="password" name="pass" ng-model="pass" required/>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Tambah Instansi">
+                    <md-content>
+
+                    </md-content>
+                </md-tab>
+                <md-tab label="Tambah Kode Hal Surat">
+                    <md-content>
+
+                    </md-content>
+                </md-tab>
+                <md-tab label="Tambah Kode Unit Surat">
+                    <md-content>
+
+                    </md-content>
+                </md-tab>
+            </form>
+        </md-tabs>
     </md-content>
 </div>

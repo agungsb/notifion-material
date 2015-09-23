@@ -10,6 +10,7 @@ function DashboardCtrl($scope, $http, $state, $window, $mdDialog, SuratMasukServ
             }
             SuratMasukService.setFavorite(localStorage.getItem('token'), suratId, $scope.surats[index].isFavorite);
         }
+        
         $http.get("http://localhost/notifion-api/surats/" + localStorage.getItem('token') + "/" + 0 + "/" + 10).success(function(feedback) {
             console.log(feedback);
             $scope.suratsIsReady = true;
@@ -20,6 +21,7 @@ function DashboardCtrl($scope, $http, $state, $window, $mdDialog, SuratMasukServ
             }
             $scope.surats = feedback.result;
             $scope.tableReady = true;
+//            scope untuk view surat
             $scope.viewSurat = function($event, id) {
 //                var url = "http://localhost/notifion-api/view/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
@@ -59,6 +61,7 @@ function DashboardCtrl($scope, $http, $state, $window, $mdDialog, SuratMasukServ
         }).error(function(error) {
             console.log(error);
         });
+        
         $http.get("http://localhost/notifion-api/suratsKeluar/" + localStorage.getItem('token') + "/" + 0 + "/" + 10).success(function(feedback) {
             console.log(feedback);
             $scope.hideMe = [];

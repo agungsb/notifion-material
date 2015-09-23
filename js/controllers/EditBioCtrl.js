@@ -1,6 +1,16 @@
 'use strict';
 
-function EditBioCtrl($scope, $http, $state, $mdToast) {
+function EditBioCtrl($rootScope, $scope, $http, $state, $mdToast) {
+    $rootScope.$watch('userInfo', function(newVal, oldVal){
+        if(typeof(newVal) !== 'undefined'){
+            $scope.nama = newVal.nama;
+            $scope.email1= newVal.email1;
+            $scope.nip = newVal.nip;
+            $scope.password = newVal.password;
+            $scope.gender = newVal.gender;
+        }
+    });
+    
     $scope.checkNumber = function(e) {
         var key = typeof e.which === 'undefined' ? e.keyCode : e.which;
         if ((key <= 57) && (key >= 48)) {

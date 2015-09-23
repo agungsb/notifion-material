@@ -9,7 +9,10 @@
             </h2>
         </div>
     </md-toolbar>
-    <md-content layout-padding>
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!$root.userInfoIsReady">
+        <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <md-content layout-padding ng-if="$root.userInfoIsReady">
         <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
         <form name="editBiodata">
             <div layout layout-sm="column">
@@ -28,8 +31,8 @@
                 <md-input-container flex>
                     <label>Jenis Kelamin</label>
                     <md-select name="gender" ng-model="gender" required>
-                        <md-option value="L">Pria</md-option>
-                        <md-option value="P">Wanita</md-option>
+                        <md-option value="1">Pria</md-option>
+                        <md-option value="2">Wanita</md-option>
                     </md-select>
                 </md-input-container>
             </div>
