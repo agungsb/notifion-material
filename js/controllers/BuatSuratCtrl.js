@@ -5,10 +5,6 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
 
     $scope.subject = "Test Subject";
     $scope.tanggalsurat = new Date();
-//    $scope.isisurat = "asdf";
-    $scope.nosurat = "999/UN.39.18/TU/15";
-    $scope.lampiran = 2;
-//    $scope.hal = "KP";
 
     $scope.openDatePicker = function($event) {
         $rootScope.$on('savedDate', function(evens, args) {
@@ -93,14 +89,13 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             "tujuan": self.contactsTujuan,
             "penandatangan": self.contactsPenandatangan,
             "nosurat": $scope.nosurat,
-            "lampiran": $scope.lampiran,
             "hal": $scope.hal,
             "isi": $scope.isi,
             "tembusan": self.contactsTembusan
         };
-        
+
         var files = $scope.filesList;
-        
+
         Upload.upload({
             url: 'http://localhost/notifion-api/submitSurat',
             fields: data,
@@ -123,27 +118,6 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
         }).error(function(data) {
             console.log(data);
         });
-
-//        Request.postRequest("submitSurat", data).success(function(feedback) {
-//            $mdToast.show(
-//                    $mdToast.simple()
-//                    .content('Berhasil submit surat')
-//                    .position('right')
-//                    .hideDelay(1000)
-//                    ).then(function() {
-//                $state.reload();
-//            });
-//        }).error(function(data) {
-//            $mdToast.show(
-//                    $mdToast.simple()
-//                    .content('Terjadi kesalahan submit surat')
-//                    .position('right')
-//                    .hideDelay(1000)
-//                    ).then(function() {
-////                $state.reload();
-//                console.log(data);
-//            });
-//        });
     };
 
     /* Scope Preview Surat */
@@ -166,17 +140,11 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             "tujuan": self.contactsTujuan,
             "penandatangan": self.contactsPenandatangan,
             "nosurat": $scope.nosurat,
-            "lampiran": $scope.lampiran,
+            "lampiran": $scope.filesList.length,
             "hal": $scope.hal,
             "isi": $scope.isi,
             "tembusan": self.scontactsTembusan
         };
-//        $http.post("http://localhost/notifion-api/test", data).success(function(feedback) {
-//            alert(feedback);
-//            console.log(feedback);
-//        }).error(function(data) {
-//            console.log(data);
-//        })
 
         function DialogController($scope, $http, $mdDialog, $sce) {
             console.log(data);
@@ -273,31 +241,4 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             }
         }
     });
-
-    $scope.upload = function() {
-        var files = $scope.filesList;
-//        if (files && files.length) {
-//            for (var i = 0; i < files.length; i++) {
-//                var file = files[i];
-        Upload.upload({
-            url: 'http://localhost/notifion-api/attachments',
-            fields: {// parameter yang akan dikirim
-                'token': $rootScope.session_auth.token,
-            },
-//                    file: files,
-            file: {"files[]": files},
-            fileFormDataName: 'source' // ganti parameter yang akan dikirim dari 'file' menjadi 'source' (mengikuti ketentuan parameter dari API)
-        }).progress(function(evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            $scope.log = 'progress: ' + progressPercentage + '% ' +
-                    evt.config.file.name + '\n' + $scope.log;
-        }).success(function(data, status, headers, config) {
-            console.log(data);
-            $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
-        }).error(function(data) {
-            console.log(data);
-        });
-//            }
-//        }
-    };
 }
