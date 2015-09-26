@@ -27,19 +27,11 @@
                     </md-select>
                 </md-input-container>
             </div>
-            <div layout layout-sm="column">
-                <md-input-container style="width: 35%;">
-                    <label>No. Surat</label>
-                    <input type="text" name="nosurat" ng-model="nosurat" required>
-                </md-input-container>
-                <md-input-container style="width: 35%;">
-                    <label>Lampiran</label>
-                    <input type="text" name="lampiran" ng-model="lampiran" required>
-                </md-input-container>
-                <!--                <md-input-container style="width: 35%;">
-                                    <label>Hal</label>
-                                    <input type="text" name="hal" ng-model="hal" required>
-                                </md-input-container>-->
+            <md-button class="md-raised md-primary" ngf-drop="" ngf-select="" ng-model="files" ngf-allow-dir="true" ngf-accept="'application/pdf'">
+                <i class="material-icons">&#xE2BC;</i>
+            </md-button>
+            <div ng-repeat="fileList in filesList track by $index">
+                {{fileList.name}} - {{fileList.size}} - {{fileList.type}}
             </div>
             <md-contact-chips 
                 name="tujuan"
@@ -82,20 +74,5 @@
                         || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
             <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat()">Preview</md-button>
         </form>
-        <div ngf-drop="" ngf-select="" ng-model="files" class="drop-box ng-untouched ng-valid ng-dirty" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'application/pdf'">
-            <br>
-            <p><i class="icon-upload font-3x"></i></p>
-            Klik di sini untuk mengupload pdf.
-            <span class="btn btn-lg btn-link link-black no-padd tooltip-css" data-tip="Maximal ukuran file video 20mb dengan format mp4, webm atau mov">
-                <i class="icon-attention"></i>
-            </span>
-            <br>
-            <br>
-        </div>
-        <div ng-repeat="fileList in filesList track by $index">
-            {{fileList.name}} - {{fileList.size}} - {{fileList.type}}
-            {{log}}
-        </div>
-        <button class="md-raised md-warn" ng-click="upload(files)">Upload Att</button>
     </md-content>
 </div>

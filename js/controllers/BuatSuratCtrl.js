@@ -98,29 +98,52 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             "isi": $scope.isi,
             "tembusan": self.contactsTembusan
         };
-
-        console.log(data);
-
-        Request.postRequest("submitSurat", data).success(function(feedback) {
+        
+        var files = $scope.filesList;
+        
+        Upload.upload({
+            url: 'http://localhost/notifion-api/submitSurat',
+            fields: data,
+            file: {"files[]": files}
+        }).progress(function(evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            $scope.log = 'progress: ' + progressPercentage + '% ' +
+                    evt.config.file.name + '\n' + $scope.log;
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
             $mdToast.show(
                     $mdToast.simple()
                     .content('Berhasil submit surat')
                     .position('right')
                     .hideDelay(1000)
                     ).then(function() {
-                $state.reload();
+//                $state.reload();
             });
         }).error(function(data) {
-            $mdToast.show(
-                    $mdToast.simple()
-                    .content('Terjadi kesalahan submit surat')
-                    .position('right')
-                    .hideDelay(1000)
-                    ).then(function() {
+            console.log(data);
+        });
+
+//        Request.postRequest("submitSurat", data).success(function(feedback) {
+//            $mdToast.show(
+//                    $mdToast.simple()
+//                    .content('Berhasil submit surat')
+//                    .position('right')
+//                    .hideDelay(1000)
+//                    ).then(function() {
 //                $state.reload();
-                console.log(data);
-            });
-        })
+//            });
+//        }).error(function(data) {
+//            $mdToast.show(
+//                    $mdToast.simple()
+//                    .content('Terjadi kesalahan submit surat')
+//                    .position('right')
+//                    .hideDelay(1000)
+//                    ).then(function() {
+////                $state.reload();
+//                console.log(data);
+//            });
+//        });
     };
 
     /* Scope Preview Surat */
