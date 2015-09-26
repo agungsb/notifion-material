@@ -14,6 +14,7 @@ function TambahUserCtrl($scope, $http, $state, $mdToast) {
     }).error(function(error) {
         console.log(error);
     });
+    
 //    get Instansi
     $http.get("http://localhost/notifion-api/instansi").success(function(feedback) {
          console.log(feedback);
@@ -29,15 +30,45 @@ function TambahUserCtrl($scope, $http, $state, $mdToast) {
         console.log(error);
     });
     
-    /* Institusi */
-    $http.get('http://localhost/notifion-api/institusi').success(function(feedback) {
-        console.log(feedback);
-            if (feedback.result_Institusi.length == 0) {
+    //    get kode hal
+    $http.get("http://localhost/notifion-api/kodeHals").success(function(feedback) {
+         console.log(feedback);
+            if (feedback.result.length == 0) {
                 $scope.tableIsEmpty = true;
             } else {
                 $scope.tableIsEmpty = false;
             }
-            $scope.institusis = feedback.result_Institusi;
+            $scope.kodehals = feedback.result;
+            $scope.tableReady = true;
+            
+    }).error(function(error) {
+        console.log(error);
+    });
+    
+    //    get kode unit
+    $http.get("http://localhost/notifion-api/kodeUnits").success(function(feedback) {
+         console.log(feedback);
+            if (feedback.result.length == 0) {
+                $scope.tableIsEmpty = true;
+            } else {
+                $scope.tableIsEmpty = false;
+            }
+            $scope.kodeunits = feedback.result;
+            $scope.tableReady = true;
+            
+    }).error(function(error) {
+        console.log(error);
+    });
+    
+    /* Institusi */
+    $http.get('http://localhost/notifion-api/institusi').success(function(feedback) {
+        console.log(feedback);
+            if (feedback.result.length == 0) {
+                $scope.tableIsEmpty = true;
+            } else {
+                $scope.tableIsEmpty = false;
+            }
+            $scope.institusis = feedback.result;
             $scope.tableReady = true;
     }).error(function() {
         console.log("error");
@@ -111,6 +142,59 @@ function TambahUserCtrl($scope, $http, $state, $mdToast) {
             $mdToast.show(
                     $mdToast.simple()
                     .content('Berhasil Tambah Data')
+                    .position('right')
+                    .hideDelay(1000)
+                    ).then(function(response) {
+                $state.go('home.tambahUser');
+            });
+        }).error(function(data) {
+            console.log(data);
+        })
+    };
+    
+    $scope.submitKodeHal = function() {
+        $scope.isSubmitting = true;
+        var data = {
+            "kode_hal": $scope.kodehal,
+            "deskripsi": $scope.deskripsi
+        };
+
+        console.log(data);
+
+        $http.post("http://localhost/notifion-api/addKodeHal", data).success(function(feedback) {
+//            alert(feedback);
+            console.log(feedback);
+            $scope.isSubmitting = false;
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content('Berhasil Tambah Kode Hal')
+                    .position('right')
+                    .hideDelay(1000)
+                    ).then(function(response) {
+                $state.go('home.tambahUser');
+            });
+        }).error(function(data) {
+            console.log(data);
+        })
+    };
+    
+    $scope.submitKodeUnit = function() {
+        $scope.isSubmitting = true;
+        var data = {
+            "kode_unit": $scope.kodeunit,
+            "deskripsi": $scope.deskripsi,
+            "id_institusi": $scope.inst
+        };
+
+        console.log(data);
+
+        $http.post("http://localhost/notifion-api/addKodeUnit", data).success(function(feedback) {
+//            alert(feedback);
+            console.log(feedback);
+            $scope.isSubmitting = false;
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content('Berhasil Tambah Kode Unit')
                     .position('right')
                     .hideDelay(1000)
                     ).then(function(response) {
