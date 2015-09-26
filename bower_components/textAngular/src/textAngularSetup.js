@@ -46,7 +46,7 @@ angular.module('textAngularSetup', [])
 		focussed: "focussed",
 		toolbar: "btn-toolbar",
 		toolbarGroup: "btn-group",
-		toolbarButton: "btn btn-default",
+		toolbarButton: "md-raised md-background",
 		toolbarButtonActive: "active",
 		disabled: "disabled",
 		textEditor: 'form-control',

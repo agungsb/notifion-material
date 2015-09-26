@@ -37,6 +37,11 @@
 	height: auto;
 	min-height: 300px;
 	padding: 6px 12px;
+        background: #ebebeb;
+}
+
+.ta-root.focussed .ta-bind{
+    background: #FFF;
 }
 
 .ta-editor:focus {

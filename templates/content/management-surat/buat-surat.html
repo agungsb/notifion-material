@@ -79,7 +79,6 @@
                 filter-selected="ctrl.filterSelectedTembusan" 
                 placeholder="Tembusan">
             </md-contact-chips>
-            <hr/>
             <text-angular ng-model="isisurat" class="materialize-textarea" required></text-angular>
             <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="submitSurat.$invalid || submitSurat.tujuan.$modelValue.length === 0
                         || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
