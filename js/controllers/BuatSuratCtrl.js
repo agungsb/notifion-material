@@ -5,6 +5,8 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
 
     $scope.subject = "Test Subject";
     $scope.tanggalsurat = new Date();
+    
+    $scope.filesList = []; // Inisialisasi scope filesList untuk attachment
 
     $scope.openDatePicker = function($event) {
         $rootScope.$on('savedDate', function(evens, args) {
@@ -241,4 +243,14 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             }
         }
     });
+    
+    $scope.roundFileSize = function(size){
+        var result = size/1024/1024;
+        return result.toFixed(2) + " Mb";
+    }
+    
+    $scope.removeFile = function(index){
+        $scope.filesList.splice(index, 1);
+        console.log($scope.filesList);
+    }
 }

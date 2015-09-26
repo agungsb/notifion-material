@@ -27,11 +27,22 @@
                     </md-select>
                 </md-input-container>
             </div>
-            <md-button class="md-raised md-primary" ngf-drop="" ngf-select="" ng-model="files" ngf-allow-dir="true" ngf-accept="'application/pdf'">
-                <i class="material-icons">&#xE2BC;</i>
+            <md-button class="md-raised md-background" ngf-drop="" ngf-select="" ng-model="files" ngf-allow-dir="true" ngf-accept="'application/pdf'">
+                <md-icon class="material-icons">&#xE2BC;</md-icon>
             </md-button>
-            <div ng-repeat="fileList in filesList track by $index">
-                {{fileList.name}} - {{fileList.size}} - {{fileList.type}}
+            <div layout="row" layout-wrap>
+                <md-card ng-repeat="fileList in filesList track by $index" flex="20">
+                    <div class="md-actions" layout="row" layout-align="top center">
+                        <md-button class="md-raised md-warn" ng-click="removeFile($index)">
+                            <md-icon class="material-icons">&#xE5CD;</md-icon>
+                        </md-button>
+                    </div>
+                    <img ng-src="img/acrobat.png" class="md-card-image" alt="Washed Out">
+                    <md-card-content>
+                        <p class="md-title" ng-bind="fileList.name"></p>
+                        <p class="text-lighten-4" ng-bind="roundFileSize(fileList.size)"></p>
+                    </md-card-content>
+                </md-card>
             </div>
             <md-contact-chips 
                 name="tujuan"
