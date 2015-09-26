@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('notifionApp', ['ui.router', 'ngMaterial', 'textAngular', 'ngCookies', 'mdDateTime']);
+var app = angular.module('notifionApp', ['ui.router', 'ngMaterial', 'textAngular', 'ngCookies', 'mdDateTime', 'ngFileUpload']);
 
 app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
 

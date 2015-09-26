@@ -1,6 +1,6 @@
 'use strict';
 
-function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
+function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $mdToast) {
     var self = this;
 
     $scope.subject = "Test Subject";
@@ -33,7 +33,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
         }
     }
 
-    $http.get('http://localhost/notifion-api/tujuan').success(function(feedback) {
+    Request.getTujuanRequest().success(function(feedback) {
         console.log(feedback);
         $scope.results = feedback;
 
@@ -87,7 +87,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
 
     $scope.submit = function() {
         var data = {
-            "token": localStorage.getItem('token'),
+            "token": $rootScope.session_auth.token,
             "subject": $scope.subject,
             "tanggal_surat": $scope.tanggalsurat,
             "tujuan": self.contactsTujuan,
@@ -99,15 +99,27 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
             "tembusan": self.contactsTembusan
         };
 
-//        alert(JSON.stringify(data));
-
         console.log(data);
 
-        $http.post("http://localhost/notifion-api/submitSurat", data).success(function(feedback) {
-//            alert(feedback);
-            console.log(feedback);
+        Request.postRequest("submitSurat", data).success(function(feedback) {
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content('Berhasil submit surat')
+                    .position('right')
+                    .hideDelay(1000)
+                    ).then(function() {
+                $state.reload();
+            });
         }).error(function(data) {
-            console.log(data);
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content('Terjadi kesalahan submit surat')
+                    .position('right')
+                    .hideDelay(1000)
+                    ).then(function() {
+//                $state.reload();
+                console.log(data);
+            });
         })
     };
 
@@ -125,7 +137,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
         });
 
         var data = {
-            "token": localStorage.getItem('token'),
+            "token": $rootScope.session_auth.token,
             "subject": $scope.subject,
             "tanggal_surat": $scope.tanggalsurat,
             "tujuan": self.contactsTujuan,
@@ -220,10 +232,49 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
     }
 
     /* kode hal */
-    $http.get('http://localhost/notifion-api/kodeHals').success(function(feedback) {
+    Request.getRequest('kodeHals', {}).success(function(feedback) {
         console.log(feedback);
         $scope.kodehals = feedback.result;
     }).error(function() {
         console.log("error");
     });
+
+    $scope.filesList = [];
+
+    $scope.$watch('files', function(newVal, oldVal) {
+        if (typeof (newVal) !== 'undefined') {
+            if (newVal !== null) {
+                if (newVal.type === "application/pdf") {
+                    $scope.filesList.push(newVal);
+                }
+            }
+        }
+    });
+
+    $scope.upload = function() {
+        var files = $scope.filesList;
+//        if (files && files.length) {
+//            for (var i = 0; i < files.length; i++) {
+//                var file = files[i];
+        Upload.upload({
+            url: 'http://localhost/notifion-api/attachments',
+            fields: {// parameter yang akan dikirim
+                'token': $rootScope.session_auth.token,
+            },
+//                    file: files,
+            file: {"files[]": files},
+            fileFormDataName: 'source' // ganti parameter yang akan dikirim dari 'file' menjadi 'source' (mengikuti ketentuan parameter dari API)
+        }).progress(function(evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            $scope.log = 'progress: ' + progressPercentage + '% ' +
+                    evt.config.file.name + '\n' + $scope.log;
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+        }).error(function(data) {
+            console.log(data);
+        });
+//            }
+//        }
+    };
 }

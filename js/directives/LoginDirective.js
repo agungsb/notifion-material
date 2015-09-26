@@ -4,8 +4,8 @@ app.directive('loginDirective', ['$rootScope', function($rootScope) {
         return {
             restrict: 'E',
             templateUrl: 'templates/login.html',
-            controller: ['$scope', '$state', 'Request', 'Session',
-                function($scope, $state, Request, Session) {
+            controller: ['$scope', '$state', 'Request', 'Session', '$mdToast',
+                function($scope, $state, Request, Session, $mdToast) {
                     $scope.submit = function() {
                         $scope.isAuthenticating = true;
                         var data = {
@@ -13,7 +13,7 @@ app.directive('loginDirective', ['$rootScope', function($rootScope) {
                             'password': $scope.password
                         };
                         console.log(data);
-                        Request.loginRequest(data).success(function(feedback) {
+                        Request.postRequest('login', data, {}).success(function(feedback) {
                             console.log(data);
                             console.log(feedback);
                             if (feedback.status) {
@@ -27,7 +27,14 @@ app.directive('loginDirective', ['$rootScope', function($rootScope) {
                                     'login': feedback.status
                                 });
                             } else {
-                                $scope.error = feedback;
+                                $mdToast.show(
+                                        $mdToast.simple()
+                                        .content('Login gagal. Mohon periksa kembali Account dan Password anda')
+                                        .position('right')
+                                        .hideDelay(1000)
+                                        ).then(function(response) {
+                                    $scope.isAuthenticating = false;
+                                });
                             }
                         }).error(function(error) {
                             console.log(error);

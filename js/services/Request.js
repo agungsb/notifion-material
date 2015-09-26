@@ -19,9 +19,28 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
         obj.getSuratDraftRequest = function(offset, limit) {
             return $http.get(baseUrl + 'suratsDraft/' + $rootScope.session_auth.token + '/' + offset + '/' + limit)
         };
-        obj.getPenandatanganRequest = function(){
-            return $http.get('http://localhost/notifion-api/penandatangan/' + $rootScope.session_auth.token); 
+        obj.getTujuanRequest = function() {
+            return $http.get(baseUrl + 'tujuan');
+        }
+        obj.getPenandatanganRequest = function() {
+            return $http.get(baseUrl + 'penandatangan/' + $rootScope.session_auth.token);
         };
+
+        obj.getRequest = function(url, options) {
+            return $http({
+                url: baseUrl + url,
+                method: "GET",
+                options: options
+            });
+        }
+        obj.postRequest = function(url, data, options) {
+            return $http({
+                url: baseUrl + url,
+                method: "POST",
+                data: data,
+                options: options
+            });
+        }
 
         return obj;
     }]);

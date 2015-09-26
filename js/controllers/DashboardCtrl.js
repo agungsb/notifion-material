@@ -61,7 +61,7 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
         console.log(feedback);
         $scope.hideMe = [];
         $scope.suratsKeluar = feedback.result;
-        for (var i = 0; i < feedback.result.length; i++) {
+        for (var i = 0; i < feedback.count; i++) {
             $scope.hideMe[i] = false;
         }
         ;
@@ -111,7 +111,7 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
         console.log(feedback);
         $scope.hideMe = [];
         $scope.suratsDraft = feedback.result;
-        for (var i = 0; i < feedback.result.length; i++) {
+        for (var i = 0; i < feedback.count; i++) {
             $scope.hideMe[i] = false;
         }
         $scope.editSurat = editDialog;

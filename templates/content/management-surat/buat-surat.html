@@ -22,7 +22,7 @@
                 </md-input-container>
                 <md-input-container style="width: 25%;">
                     <label>Kode Hal</label>
-                    <md-select ng-model="hal">
+                    <md-select ng-model="hal" required>
                         <md-option ng-repeat="kodehal in kodehals" value="{{kodehal.kode_hal}}">{{kodehal.deskripsi}}</md-option>
                     </md-select>
                 </md-input-container>
@@ -82,5 +82,20 @@
                         || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
             <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat()">Preview</md-button>
         </form>
+        <div ngf-drop="" ngf-select="" ng-model="files" class="drop-box ng-untouched ng-valid ng-dirty" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'application/pdf'">
+            <br>
+            <p><i class="icon-upload font-3x"></i></p>
+            Klik di sini untuk mengupload pdf.
+            <span class="btn btn-lg btn-link link-black no-padd tooltip-css" data-tip="Maximal ukuran file video 20mb dengan format mp4, webm atau mov">
+                <i class="icon-attention"></i>
+            </span>
+            <br>
+            <br>
+        </div>
+        <div ng-repeat="fileList in filesList track by $index">
+            {{fileList.name}} - {{fileList.size}} - {{fileList.type}}
+            {{log}}
+        </div>
+        <button class="md-raised md-warn" ng-click="upload(files)">Upload Att</button>
     </md-content>
 </div>

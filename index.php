@@ -37,6 +37,7 @@
         <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
         <script src="bower_components/textAngular/src/textAngularSetup.js" type="text/javascript"></script>
         <script src="bower_components/md-date-time/dist/md-date-time.js" type="text/javascript"></script>
+        <script src="bower_components/ng-file-upload/ng-file-upload.js" type="text/javascript"></script>
 
         <script src="js/app.js" type="text/javascript"></script>
         
