@@ -8,10 +8,12 @@
   "main": "index.php",
   "license": "MIT",
   "dependencies": {
-    "angular": "~1.4.1",
+    "angular": "~1.4.5",
     "angular-ui-router": "~0.2.15",
-    "angular-cookies": "~1.4.1",
-    "angular-material": "~0.10.0",
-    "md-date-time": "~0.0.14"
+    "angular-cookies": "~1.4.5",
+    "angular-material": "~0.11.0",
+    "angular-aria": "~1.4.5",
+    "md-date-time": "~0.0.14",
+    "angular-animate": "~1.4.5"
   }
 }

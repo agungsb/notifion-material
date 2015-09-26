@@ -1,53 +1,135 @@
-<div class="container">
-    <div style="width: 550px; margin: 0 auto; margin-top: 50px; ">
-        <div class="widget-item z-depth-1">
-            <div>
-                <div class="row">
-                    <form class="col s11" novalidate name="signinForm">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="username icon_prefix" type="text" class="validate" ng-model="account" name="account" required>
-                                <label for="username">Account</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="password" class="validate" ng-model="password" name="password" required>
-                                <label for="password">Password</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="nama" name="password" required>
-                                <label for="password">Nama</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="email" class="validate" ng-model="email1" name="email1" required>
-                                <label for="email1">Email 1</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="email2" name="password" required>
-                                <label for="password">Email 2</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="nohp1" name="password" required>
-                                <label for="password">No Handphone 1</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <input id="password" type="text" class="validate" ng-model="nohp2" name="password" required>
-                                <label for="password">No Handphone 2</label>
-                            </div>
-                            <button class="btn waves-effect waves-light" ng-disabled="signinForm.$invalid" ng-click="login()">
-                                Tambah
-                                <i class="mdi-action-assessment right"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<div layout="column">
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="sidenav" hide-gt-md>
+                <i class="material-icons" style="margin-top: 22%;">&#xE5D2;</i>
+            </md-button>
+            <h2>
+                <span>Tambah User</span>
+            </h2>
         </div>
-    </div>
-</div> <!-- End Container -->
+    </md-toolbar>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Tambah Account">
+                <md-content>
+                    <md-list class="md-padding">
+                        <h1 style="text-align: center;">List User</h1>
+                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users">
+                            <div class="md-list-item-text">
+                                <h3>Account</h3>
+                                <h4>{{user.account}}</h4>
+                            </div>
+                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete()">
+                                <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                    <div layout layout-sm="column">
+                        <md-input-container flex="33" style="padding: 20px; margin-bottom: -50px;">
+                            <h3>Tambah Account Operator</h3>
+                        </md-input-container>
+                    </div>
+                    <form name="tambahUserOP">
+                        <div layout layout-sm="column">
+                            <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Account</label>
+                                <input type="text" name="account" ng-model="account" required/>
+                            </md-input-container>
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Password</label>
+                                <input type="password" name="password" ng-model="password" required/>
+                            </md-input-container>
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Institusi</label>
+                                <md-select ng-model="ins">
+                                    <md-option ng-repeat="institusi in institusis" value="{{institusi.id_institusi}}">{{institusi.nama_institusi}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <md-button ng-click="submitOP()" class="md-raised md-primary md-button" ng-disabled="tambahUserOP.$invalid || isSubmitting">Submit</md-button>        
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Tambah Instansi">
+                <md-content>
+                    <md-list class="md-padding">
+                        <h1 style="text-align: center;">List Instansi</h1>
+                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="instansi in instansis">
+                            <div class="md-list-item-text">
+                                <h3>Nama Instansi</h3>
+                                <h4>{{instansi.nama_instansi}}</h4>
+                            </div>
+                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete()">
+                                <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                    <div layout layout-sm="column">
+                        <md-input-container flex="33" style="padding: 20px; margin-bottom: -50px;">
+                            <h3>Tambah Instansi</h3>
+                        </md-input-container>
+                    </div>
+                    <form name="tambahInstansi">
+                        <div layout layout-sm="column">
+                            <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Instansi</label>
+                                <input type="text" name="instansi" ng-model="instansi" required/>
+                            </md-input-container>
+                        </div>
+                        <md-button ng-click="submitInstansi()" class="md-raised md-primary md-button" ng-disabled="tambahInstansi.$invalid || isSubmitting">Submit</md-button>        
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Tambah Institusi">
+                <md-content>
+                    <md-list class="md-padding">
+                        <h1 style="text-align: center;">List Institusi</h1>
+                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="institusi in institusis">
+                            <div class="md-list-item-text">
+                                <h3>Nama Institusi</h3>
+                                <h4>{{institusi.nama_institusi}}</h4>
+                            </div>
+                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete()">
+                                <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                    <div layout layout-sm="column">
+                        <md-input-container flex="33" style="padding: 20px; margin-bottom: -50px;">
+                            <h3>Tambah Institusi</h3>
+                        </md-input-container>
+                    </div>
+                    <form name="tambahInstitusi">
+                        <div layout layout-sm="column">
+                            <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Institusi</label>
+                                <input type="text" name="institusi" ng-model="institusi" required/>
+                            </md-input-container>
+                            <md-input-container flex="33" style="padding: 20px;">
+                                <label>Instansi</label>
+                                <md-select ng-model="instansi">
+                                    <md-option ng-repeat="instansi in instansis" value="{{instansi.id_instansi}}">{{instansi.nama_instansi}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <md-button ng-click="submitInstitusi()" class="md-raised md-primary md-button" ng-disabled="tambahInstitusi.$invalid || isSubmitting">Submit</md-button>        
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Tambah Kode Hal Surat">
+                <md-content>
+
+                </md-content>
+            </md-tab>
+            <md-tab label="Tambah Kode Unit Surat">
+                <md-content>
+
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>

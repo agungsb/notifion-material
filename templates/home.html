@@ -2,45 +2,28 @@
     <section layout="row" flex>
         <md-sidenav md-theme="app-blue" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
             <md-content layout-padding>
-                <md-list-item ng->
-                    <img src="img/100-1.jpeg" class="md-avatar" alt=""/>
-                    <p>{{user.nama}}</p>
-                </md-list-item>
+                <md-list-item ng-if="$root.userInfoIsReady">
+                    <img src="img/100-1.jpeg" class="md-avatar"/>
+                    <p ng-bind="$root.userInfo.nama" ng-cloak></p>
+                </md-list-item>   
+                <md-progress-circular class="md-app-blue-theme" ng-if="!$root.userInfoIsReady" md-mode="indeterminate"></md-progress-circular>
             </md-content>
             <md-content layout-padding>
                 <md-list-item>
-                    <md-menu>
-                        <md-button aria-label="Dashboard" ng-click="changeState('home.dashboard')">
-                            Dashboard
-                        </md-button>                        
-                        <md-menu-content width="3"></md-menu-content>
-                    </md-menu>
+                    <md-button aria-label="Dashboard" ng-click="changeState('home.dashboard')">
+                        Dashboard
+                    </md-button>                        
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item>
-                    <md-menu>
-                        <md-button aria-label="Open Management User menu" ng-click="$mdOpenMenu()">
-                            Management User
-                        </md-button>
-                        <md-menu-content width="3">
-                            <md-menu-item>
-                                <md-button>
-                                    Daftar User
-                                </md-button>
-                            </md-menu-item>
-                            <md-menu-item>
-                                <md-button>
-                                    Tambah User
-                                </md-button>
-                            </md-menu-item>
-                            <md-menu-divider></md-menu-divider>
-                            <md-menu-item>
-                                <md-button ng-click="$mdCloseMenu()">
-                                    Tutup
-                                </md-button>
-                            </md-menu-item>
-                        </md-menu-content>
-                    </md-menu>
+                    <md-button aria-label="Edit Bio" ng-click="changeState('home.editBio')">
+                        Edit Biodata
+                    </md-button>
+                </md-list-item>
+                <md-list-item>
+                    <md-button ng-click="changeState('home.tambahUser')">
+                        Tambah User SA
+                    </md-button>
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item>
@@ -80,11 +63,11 @@
         </md-sidenav>
         <md-content flex>
             <div layout="column" layout-fill layout-align="top center">
-<!--                <div>
-                    <md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md>
-                        Toggle left
-                    </md-button>
-                </div>-->
+                <!--                <div>
+                                    <md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md>
+                                        Toggle left
+                                    </md-button>
+                                </div>-->
                 <div ui-view></div>
             </div>
         </md-content>

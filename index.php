@@ -22,7 +22,7 @@
         <div ui-view class="sn"></div>
 
         <!--<script src="bower_components/angular/angular.js"></script>-->
-        <script src="bower_components/angular/angular-1.4.0.js" type="text/javascript"></script>
+        <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
         <!--<script src="bower_components/angular/angular-1.3.15.js" type="text/javascript"></script>-->
         <!--<script src="bower_components/angular-cookies/angular-cookies.min.js" type="text/javascript"></script>-->
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
@@ -34,6 +34,7 @@
         <script src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
         <script src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
         <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+        <script src="bower_components/textAngular/src/textAngularSetup.js" type="text/javascript"></script>
         <script src="bower_components/md-date-time/dist/md-date-time.js" type="text/javascript"></script>
 
         <script src="js/app.js" type="text/javascript"></script>
@@ -41,6 +42,8 @@
         <script src="js/controllers/HomeCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/DashboardCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
         
         <script src="js/directives/NavDirective.js" type="text/javascript"></script>
         <script src="js/directives/MainDirective.js" type="text/javascript"></script>

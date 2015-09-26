@@ -13,7 +13,10 @@
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Surat Masuk">
                 <md-content>
-                    <md-list class="md-padding">
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!suratsIsReady">
+                        <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                    <md-list class="md-padding" ng-if="suratsIsReady">
                         <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="surat in surats track by $index">
                             <div class="md-list-item-text">
                                 <h3>{{surat.subject}}</h3>

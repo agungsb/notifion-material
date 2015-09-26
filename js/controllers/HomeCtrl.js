@@ -1,7 +1,8 @@
-function HomeCtrl($http, $scope, $state, $mdSidenav, $mdUtil, $log) {
+function HomeCtrl($http, $scope, $state, $mdSidenav, $mdUtil, $log, $rootScope) {
     if ((localStorage.getItem('token') == '') || (typeof (localStorage.getItem('token'))) == 'undefined' || (localStorage.getItem('token')) == null) {
         $state.go('login');
     } else {
+        $scope.user = $rootScope.userInfo;
         $scope.closeSidenav = function() {
             $mdSidenav('left').close().then(function() {
                 $log.debug('close LEFT is done');
@@ -14,13 +15,6 @@ function HomeCtrl($http, $scope, $state, $mdSidenav, $mdUtil, $log) {
             localStorage.removeItem('token');
             $state.go('login');
         };
-        $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
-            console.log(feedback);
-            $scope.user = feedback;
-        }).error(function(error) {
-            $scope.error = error;
-            console.log(error);
-        });
 
         $scope.toggleLeft = buildToggler('left', $mdUtil, $mdSidenav, $log);
     }
