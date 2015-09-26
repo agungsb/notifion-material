@@ -10,9 +10,9 @@ function DashboardCtrl($scope, $http, $state, $window, $mdDialog, SuratMasukServ
             }
             SuratMasukService.setFavorite(localStorage.getItem('token'), suratId, $scope.surats[index].isFavorite);
         }
-        $http.get("http://localhost/notifion-api/surats/" + localStorage.getItem('token') + "/" + 0 + "/" + 10).success(function(feedback) {
+        $http.get("http://192.168.2.113/notifion-api/surats/" + localStorage.getItem('token') + "/" + 0 + "/" + 10).success(function(feedback) {
             console.log(feedback);
-            if (feedback.result.length == 0) {
+            if (feedback.count === 0) {
                 $scope.tableIsEmpty = true;
             } else {
                 $scope.tableIsEmpty = false;
