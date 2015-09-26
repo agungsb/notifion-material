@@ -58,7 +58,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, $http) {
         console.log(data);
     });
 
-    $http.get('http://localhost/notifion-api/penandatangan/' + localStorage.getItem('token')).success(function(feedback) {
+    Request.getPenandatanganRequest().success(function(feedback) {
         console.log(feedback);
         $scope.results = feedback;
 

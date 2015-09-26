@@ -93,7 +93,7 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             $rootScope.call_auth_me = function() {
                 $rootScope.session_auth = Session.cookie.get('n-auth');
                 console.log($rootScope.session_auth);
-                Request.userInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
+                Request.getUserInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
                     console.log(feedback);
                     $rootScope.userInfo = feedback;
                     console.log($rootScope.userInfo);

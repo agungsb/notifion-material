@@ -7,10 +7,10 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
         }
         SuratMasukService.setFavorite(localStorage.getItem('token'), suratId, $scope.surats[index].isFavorite);
     };
-    Request.suratMasukRequest(0, 10).success(function(feedback) {
+    Request.getSuratMasukRequest(0, 10).success(function(feedback) {
         console.log(feedback);
         $scope.suratsIsReady = true;
-        if (feedback.result.length == 0) {
+        if (feedback.count === 0) {
             $scope.tableIsEmpty = true;
         } else {
             $scope.tableIsEmpty = false;
@@ -30,9 +30,8 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
                 console.log('finished');
             });
             function DialogController($scope, $http, $mdDialog, $sce) {
-                var data = {'id': id, 'token': localStorage.getItem('token')};
                 $http({
-                    url: "http://localhost/notifion-api/view/" + id + "/" + localStorage.getItem('token'),
+                    url: "http://localhost/notifion-api/view/" + id + "/" + $rootScope.session_auth.token,
                     method: "GET",
                     headers: {'Accept': 'application/pdf'},
                     responseType: 'arraybuffer'
@@ -58,7 +57,7 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
         console.log(error);
     });
 
-    Request.suratKeluarRequest(0, 10).success(function(feedback) {
+    Request.getSuratKeluarRequest(0, 10).success(function(feedback) {
         console.log(feedback);
         $scope.hideMe = [];
         $scope.suratsKeluar = feedback.result;
@@ -79,7 +78,7 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
             });
 
             function DialogController($scope, $http, $mdDialog, $sce) {
-                var data = {'id': id, 'token': localStorage.getItem('token')};
+                var data = {'id': id, 'token': $rootScope.session_auth.token};
                 $http({
                     url: "http://localhost/notifion-api/preview",
                     method: "POST",
@@ -97,10 +96,10 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
                     $mdDialog.hide();
                 };
                 $scope.accSurat = function() {
-                    SuratKeluarService.accSurat(id, localStorage.getItem('token'));
+                    SuratKeluarService.accSurat(id, $rootScope.session_auth.token);
                 };
                 $scope.rejectSurat = function() {
-                    SuratKeluarService.rejectSurat(id, localStorage.getItem('token'));
+                    SuratKeluarService.rejectSurat(id, $rootScope.session_auth.token);
                 };
             }
         };
@@ -108,7 +107,7 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
         console.log(error);
     });
 
-    Request.suratKeluarRequest(0, 10).success(function(feedback) {
+    Request.getSuratDraftRequest(0, 10).success(function(feedback) {
         console.log(feedback);
         $scope.hideMe = [];
         $scope.suratsDraft = feedback.result;
