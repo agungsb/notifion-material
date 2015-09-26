@@ -33,71 +33,100 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 .state('home.listUser', {
                     url: "list-user",
                     templateUrl: "templates/content/management-user/list-user.html",
-                    controller: function($scope, $http, $state) {
-                    }
+                    onEnter: ['$rootScope', '$state', '$timeout',
+                        function($rootScope, $state, $timeout) {
+                            if (!$rootScope.isLogin) {
+                                $timeout(function() {
+                                    $state.go('home.dashboard');
+                                })
+                            }
+                        }]
                 })
                 .state('home.tambahUser', {
                     url: "tambah-user",
                     templateUrl: "templates/content/management-user/tambah-user.html",
-                    controller: TambahUserCtrl
+                    controller: TambahUserCtrl,
+                    onEnter: ['$rootScope', '$state', '$timeout',
+                        function($rootScope, $state, $timeout) {
+                            if (!$rootScope.isLogin) {
+                                $timeout(function() {
+                                    $state.go('home.dashboard');
+                                })
+                            }
+                        }]
                 })
                 .state('home.editBio', {
                     url: "edit-bio",
                     templateUrl: "templates/content/management-user/editBio.html",
-                    controller: EditBioCtrl
+                    controller: EditBioCtrl,
+                    onEnter: ['$rootScope', '$state', '$timeout',
+                        function($rootScope, $state, $timeout) {
+                            if (!$rootScope.isLogin) {
+                                $timeout(function() {
+                                    $state.go('home.dashboard');
+                                })
+                            }
+                        }]
                 })
                 .state('home.buatSurat', {
                     url: "buat-surat",
                     templateUrl: "templates/content/management-surat/buat-surat.html",
                     controller: BuatSuratCtrl,
-                    controllerAs: 'ctrl'
-                })
-                .state('login', {
-                    url: "/",
-                    templateUrl: "templates/login.html",
-                    controller: function($rootScope, $scope, $state, $http) {
-                        $scope.submit = function() {
-                            $scope.isAuthenticating = true;
-                            var data = {
-                                'account': $scope.account,
-                                'password': $scope.password
-                            };
-                            console.log(data);
-                            $http.post('http://localhost/notifion-api/login', data).success(function(feedback) {
-                                console.log(data);
-                                console.log(feedback);
-                                $scope.isAuthenticating = false;
-                                $scope.account = "";
-                                $scope.password = "";
-                                if (feedback.status) {
-                                    // Put cookie
-                                    localStorage.setItem('token', feedback.token);
+                    controllerAs: 'ctrl',
+                    onEnter: ['$rootScope', '$state', '$timeout',
+                        function($rootScope, $state, $timeout) {
+                            if (!$rootScope.isLogin) {
+                                $timeout(function() {
                                     $state.go('home.dashboard');
-                                } else {
-                                    $scope.error = feedback;
-                                }
-                            }).error(function(error) {
-                                console.log(error);
-                                $scope.error = error;
-                            })
-                        }
-                    }
+                                })
+                            }
+                        }]
                 })
     }]);
-app.run(['$rootScope', '$mdSidenav', '$log', '$http',
-    function($rootScope, $mdSidenav, $log, $http) {
+
+app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state',
+    function($rootScope, $mdSidenav, $log, $http, Session, Request, $timeout, $state) {
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            $http.get('http://localhost/notifion-api/user/' + localStorage.getItem('token')).success(function(feedback) {
-                console.log(feedback);
-                $rootScope.userInfo = feedback;
-                console.log($rootScope.userInfo);
-                $rootScope.userInfoIsReady = true;
-            }).error(function(error) {
-                console.log(error);
+            $rootScope.isLogin = false;
+            $rootScope.isLogin = Session.isLogin();
+            console.log($rootScope.isLogin);
+            $rootScope.call_auth_me = function() {
+                $rootScope.session_auth = Session.cookie.get('n-auth');
+                console.log($rootScope.session_auth);
+                Request.userInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
+                    console.log(feedback);
+                    $rootScope.userInfo = feedback;
+                    console.log($rootScope.userInfo);
+                    $rootScope.userInfoIsReady = true;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+
+            $rootScope.$on('reCallAuth', function(event) {
+                $rootScope.call_auth_me();
             });
+            if ($rootScope.isLogin) {
+                $rootScope.call_auth_me();
+            }
+
             // Close the sidenav everytime state is changed
             $mdSidenav('left').close().then(function() {
                 $log.debug('close LEFT is done');
             });
+
+            var current = Session.isLogin();
+            $rootScope.callAtTimeout = function() {
+                if (current !== Session.isLogin()) {
+                    current = Session.isLogin();
+                    $state.reload();
+                    $rootScope.isLogin = current;
+                }
+                $timeout(function() {
+                    $rootScope.callAtTimeout();
+                }, 1500);
+                return current;
+            };
+            $rootScope.callAtTimeout();
         });
     }]);

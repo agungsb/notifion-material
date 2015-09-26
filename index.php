@@ -15,6 +15,7 @@
         <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="bower_components/textAngular/dist/textAngular.css" rel="stylesheet" type="text/css"/>
         <link href="css/app.css" rel="stylesheet" type="text/css"/>
+        <link href="css/animations.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -45,9 +46,11 @@
         <script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
         
-        <script src="js/directives/NavDirective.js" type="text/javascript"></script>
         <script src="js/directives/MainDirective.js" type="text/javascript"></script>
+        <script src="js/directives/LoginDirective.js" type="text/javascript"></script>
         
+        <script src="js/services/Session.js" type="text/javascript"></script>
+        <script src="js/services/Request.js" type="text/javascript"></script>
         <script src="js/services/SuratKeluarService.js" type="text/javascript"></script>
         <script src="js/services/SuratMasukService.js" type="text/javascript"></script>
     </body>
