@@ -13,18 +13,6 @@
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Tambah Account">
                 <md-content>
-                    <md-list class="md-padding">
-                        <h1 style="text-align: center;">List User</h1>
-                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users">
-                            <div class="md-list-item-text">
-                                <h3>Account</h3>
-                                <h4>{{user.account}}</h4>
-                            </div>
-                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete()">
-                                <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
-                            </md-button>
-                        </md-list-item>
-                    </md-list>
                     <div layout layout-sm="column">
                         <md-input-container flex="33" style="padding: 20px; margin-bottom: -50px;">
                             <h3>Tambah Account Operator</h3>
@@ -33,10 +21,10 @@
                     <form name="tambahUserOP">
                         <div layout layout-sm="column">
                             <!--<md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>-->
-                            <md-input-container flex="33" style="padding: 20px;">
-                                <label>Account</label>
-                                <input type="text" name="account" ng-model="account" required/>
-                            </md-input-container>
+                            <!--                            <md-input-container flex="33" style="padding: 20px;">
+                                                            <label>Account</label>
+                                                            <input type="text" name="account" ng-model="account" required/>
+                                                        </md-input-container>-->
                             <md-input-container flex="33" style="padding: 20px;">
                                 <label>Password</label>
                                 <input type="password" name="password" ng-model="password" required/>
@@ -50,6 +38,35 @@
                         </div>
                         <md-button ng-click="submitOP()" class="md-raised md-primary md-button" ng-disabled="tambahUserOP.$invalid || isSubmitting">Submit</md-button>        
                     </form>
+                    <md-list class="md-padding">
+                        <h1 style="text-align: center;">List User</h1>
+                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users">
+                            <div class="md-list-item-text">
+                                <h3>Account</h3>
+                                <h4>{{user.account}}</h4>
+                            </div>
+                            <div class="md-list-item-text">
+                                <h3>Institusi</h3>
+                                <h4>{{user.nama_institusi}}</h4>
+                            </div>
+                            <div class="md-list-item-text">
+                                <h3>Password</h3>
+                                <h4>{{user.password}}</h4>
+                            </div>
+                            <md-button md-theme="app-blue" class="md-primary" ng-click="edit()">
+                                <i class="material-icons md-48" style="margin-top: 10%;">&#xE254;</i>
+                                <md-tooltip>
+                                    Edit
+                                </md-tooltip>
+                            </md-button>
+                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete()">
+                                <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
+                                <md-tooltip>
+                                    Delete
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
                 </md-content>
             </md-tab>
             <md-tab label="Tambah Instansi">
