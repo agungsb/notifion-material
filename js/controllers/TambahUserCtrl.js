@@ -97,14 +97,22 @@ function TambahUserCtrl($scope, $http, $state, $mdToast) {
             $scope.isSubmitting = false;
             $mdToast.show(
                     $mdToast.simple()
-                    .content('Berhasil Tambah Data')
+                    .content(feedback.result)
                     .position('right')
                     .hideDelay(1000)
                     ).then(function(response) {
-                $state.go('home.tambahUser');
+                $state.reload();
             });
         }).error(function(data) {
-            console.log(data);
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content(data.result)
+                    .position('right')
+                    .hideDelay(1000)
+                    ).then(function(response) {
+                console.log(data);  
+                 $state.reload();
+            });
         })
     };
 

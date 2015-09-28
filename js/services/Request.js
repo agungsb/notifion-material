@@ -33,11 +33,20 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
                 options: options
             });
         }
+        
         obj.postRequest = function(url, data, options) {
             return $http({
                 url: baseUrl + url,
                 method: "POST",
                 data: data,
+                options: options
+            });
+        }
+        
+        obj.delRequest = function(url, data, options) {
+            return $http({
+                url: baseUrl + url,
+                method: "DELETE",
                 options: options
             });
         }
