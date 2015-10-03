@@ -43,6 +43,15 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
             });
         };
         
+        obj.putRequest = function(url, data, options) {
+            return $http({
+                url: baseUrl + url,
+                method: "PUT",
+                data: data,
+                options: options
+            });
+        };
+        
         obj.deleteRequest = function(url, data, options) {
             return $http({
                 url: baseUrl + url,

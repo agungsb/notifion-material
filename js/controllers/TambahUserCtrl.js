@@ -1,6 +1,6 @@
 'use strict';
 
-function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Session) {
+function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Session, $mdDialog) {
 
     $scope.keepString = function(String) {
         return String;
@@ -45,7 +45,7 @@ function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Se
             });
         };
 
-        $scope.delete = function(account, index) {
+        $scope.deleteOP = function(account, index) {
             Request.deleteRequest('hapusUser/' + $rootScope.session_auth.token + "/" + account).success(function(feedback) {
                 console.log(feedback);
                 $scope.users.splice(index, 1);
@@ -62,6 +62,44 @@ function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Se
             });
 //      alert(account);
         };
+
+        $scope.editOP = editDialog;
+        function editDialog(institusis, user, index) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'templates/dialogs/eUserDialog.html',
+                parent: angular.element(document.body)
+            }).then(function() {
+                console.log('finished');
+            });
+
+            function DialogController($scope, $http, $mdDialog, Request, Session, $rootScope) {
+                $scope.user = user;
+                $scope.password = $scope.user.password;
+                $scope.id_institusi = $scope.user.id_institusi;
+                $scope.index = index;
+                $scope.institusis = institusis;
+
+                $scope.submitEditOP = function() {
+                    Request.putRequest('/editUser' + $rootScope.session_auth.token).success(function(feedback) {
+//                        if (feedback.result === 'success') {
+                        $rootScope.$emit('editSuccess', {'$mdDialog': $mdDialog, 'index': $scope.index, 'password': $scope.password});
+//                        }
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+
+                $scope.closeDialog = function() {
+                    $mdDialog.hide();
+
+                };
+            }
+        }
+        $rootScope.$on('editSuccess', function(event, args) {
+            args.$mdDialog.hide();
+            $scope.users[args.index].password = args.password;
+        });
     }).error(function(error) {
         console.log(error);
     });
@@ -131,11 +169,11 @@ function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Se
                 $scope.isSubmitting = false;
                 $mdToast.show(
                         $mdToast.simple()
-                        .content('Berhasil Tambah Kode Hal')
+                        .content(feedback.result)
                         .position('right')
                         .hideDelay(1000)
                         ).then(function(response) {
-                    $state.go('home.tambahUser');
+                    $state.reload();
                 });
             }).error(function(data) {
                 console.log(data);
@@ -214,15 +252,16 @@ function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Se
                 $scope.isSubmitting = false;
                 $mdToast.show(
                         $mdToast.simple()
-                        .content('Berhasil Tambah Data')
+                        .content(feedback.result)
                         .position('right')
                         .hideDelay(1000)
                         ).then(function(response) {
-                    $state.go('home.tambahUser');
+                    $state.reload();
+//                    $state.go('home.tambahUser');
                 });
             }).error(function(data) {
                 console.log(data);
-            })
+            });
         };
     }).error(function() {
         console.log("error");
