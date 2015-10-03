@@ -41,15 +41,15 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
                 data: data,
                 options: options
             });
-        }
+        };
         
-        obj.delRequest = function(url, data, options) {
+        obj.deleteRequest = function(url, data, options) {
             return $http({
                 url: baseUrl + url,
                 method: "DELETE",
                 options: options
             });
-        }
+        };
 
         return obj;
     }]);

@@ -31,7 +31,7 @@
                             </md-input-container>
                             <md-input-container flex="33" style="padding: 20px;">
                                 <label>Institusi</label>
-                                <md-select ng-model="ins">
+                                <md-select ng-model="ins" required>
                                     <md-option ng-repeat="institusi in institusis" ng-value="keepString(institusi.id_institusi)">{{institusi.nama_institusi}}</md-option>
                                 </md-select>
                             </md-input-container>
@@ -40,7 +40,7 @@
                     </form>
                     <md-list class="md-padding">
                         <h1 style="text-align: center;">List User</h1>
-                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users">
+                        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users track by user.account">
                             <div class="md-list-item-text">
                                 <h3>Account</h3>
                                 <h4>{{user.account}}</h4>
@@ -59,7 +59,7 @@
                                     Edit
                                 </md-tooltip>
                             </md-button>
-                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete()">
+                            <md-button md-theme="app-blue" class="md-primary" ng-click="delete(user.account, $index)">
                                 <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
                                 <md-tooltip>
                                     Delete
