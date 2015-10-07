@@ -62,6 +62,78 @@ function TambahUserCtrl($rootScope, $scope, $http, $state, $mdToast, Request, Se
             });
 //      alert(account);
         };
+        
+        $scope.deleteInstansi = function(id_instansi, index) {
+            Request.deleteRequest('hapusInstansi/' + $rootScope.session_auth.token + "/" + id_instansi).success(function(feedback) {
+                console.log(feedback);
+                $scope.instansis.splice(index, 1);
+                $mdToast.show(
+                        $mdToast.simple()
+                        .content(feedback.result)
+                        .position('right')
+                        .hideDelay(1000)
+                        ).then(function(response) {
+//                    $state.reload();
+                });
+            }).error(function(error) {
+                console.log(error);
+            });
+//      alert(account);
+        };
+        
+        $scope.deleteInstitusi = function(id_institusi, index) {
+            Request.deleteRequest('hapusInstitusi/' + $rootScope.session_auth.token + "/" + id_institusi).success(function(feedback) {
+                console.log(feedback);
+                $scope.institusis.splice(index, 1);
+                $mdToast.show(
+                        $mdToast.simple()
+                        .content(feedback.result)
+                        .position('right')
+                        .hideDelay(1000)
+                        ).then(function(response) {
+//                    $state.reload();
+                });
+            }).error(function(error) {
+                console.log(error);
+            });
+//      alert(account);
+        };
+        
+         $scope.deleteKodeHal = function(kode_hal, index) {
+            Request.deleteRequest('hapusKodeHal/' + $rootScope.session_auth.token + "/" + kode_hal).success(function(feedback) {
+                console.log(feedback);
+                $scope.institusis.splice(index, 1);
+                $mdToast.show(
+                        $mdToast.simple()
+                        .content(feedback.result)
+                        .position('right')
+                        .hideDelay(1000)
+                        ).then(function(response) {
+//                    $state.reload();
+                });
+            }).error(function(error) {
+                console.log(error);
+            });
+//      alert(account);
+        };
+        
+        $scope.deleteKodeUnit = function(kode_unit, index) {
+            Request.deleteRequest('hapusKodeUnit/' + $rootScope.session_auth.token + "/" + kode_unit).success(function(feedback) {
+                console.log(feedback);
+                $scope.institusis.splice(index, 1);
+                $mdToast.show(
+                        $mdToast.simple()
+                        .content(feedback.result)
+                        .position('right')
+                        .hideDelay(1000)
+                        ).then(function(response) {
+//                    $state.reload();
+                });
+            }).error(function(error) {
+                console.log(error);
+            });
+//      alert(account);
+        };
 
         $scope.editOP = editDialog;
         function editDialog(institusis, user, index) {

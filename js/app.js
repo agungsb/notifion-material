@@ -51,7 +51,15 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                             if (!$rootScope.isLogin) {
                                 $timeout(function() {
                                     $state.go('home.dashboard');
-                                })
+                                });
+                            } else {
+                                if ($rootScope.userInfoIsReady) {
+                                    if ($rootScope.userInfo.jenis_user !== '2') {
+                                        $timeout(function() {
+                                            $state.go('home.dashboard');
+                                        });
+                                    }
+                                }
                             }
                         }]
                 })
@@ -79,6 +87,14 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                                 $timeout(function() {
                                     $state.go('home.dashboard');
                                 })
+                            } else {
+                                if ($rootScope.userInfoIsReady) {
+                                    if ($rootScope.userInfo.jenis_user !== '2') {
+                                        $timeout(function() {
+                                            $state.go('home.dashboard');
+                                        });
+                                    }
+                                }
                             }
                         }]
                 })
