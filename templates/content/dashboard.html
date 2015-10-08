@@ -46,6 +46,9 @@
                                 <h4>{{suratkeluar.hal}}</h4>
                                 <p>{{suratkeluar.tanggal}}</p>
                                 <p ng-bind-html="suratkeluar.isi"></p>
+                                <span ng-repeat="suratkeluarlampiran in suratkeluar.lampiran track by $index">
+                                    <a target="_blank" ng-href="http://localhost/notifion-api/{{suratkeluarlampiran.file_path}}">Lampiran ke {{($index+1)}}</a> &nbsp;
+                                </span>
                             </div>
                             <md-button md-theme="app-blue" ng-disabled="true" ng-if="suratkeluar.ditandatangani == 1">
                                 <i class="material-icons md-48" style="margin-top: 10%;">&#xE876;</i>

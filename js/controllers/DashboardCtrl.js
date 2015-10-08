@@ -7,6 +7,8 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
         }
         SuratMasukService.setFavorite(localStorage.getItem('token'), suratId, $scope.surats[index].isFavorite);
     };
+    
+    
     Request.getSuratMasukRequest(0, 10).success(function(feedback) {
         console.log(feedback);
         $scope.suratsIsReady = true;
@@ -29,6 +31,7 @@ function DashboardCtrl($rootScope, $scope, $http, $state, $window, $mdDialog, Se
             }).then(function() {
                 console.log('finished');
             });
+            
             function DialogController($scope, $http, $mdDialog, $sce) {
                 $http({
                     url: "http://localhost/notifion-api/view/" + id + "/" + $rootScope.session_auth.token,

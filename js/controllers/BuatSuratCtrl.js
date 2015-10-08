@@ -5,7 +5,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
 
     $scope.subject = "Test Subject";
     $scope.tanggalsurat = new Date();
-    
+
     $scope.filesList = []; // Inisialisasi scope filesList untuk attachment
 
     $scope.openDatePicker = function($event) {
@@ -81,27 +81,30 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             $scope.isi = newVal.replace(/color\: rgba\(0\, 0\, 0\, 0.870588\)\;|float\: none\;|background\-color\: rgb\(255\, 255\, 255\)\;|<br\/>/gi, "");
             console.log($scope.isi);
         }
-    })
+    });
 
     $scope.submit = function() {
         var data = {
             "token": $rootScope.session_auth.token,
             "subject": $scope.subject,
+            "lampiran": $scope.filesList.length,
             "tanggal_surat": $scope.tanggalsurat,
             "tujuan": self.contactsTujuan,
             "penandatangan": self.contactsPenandatangan,
             "nosurat": $scope.nosurat,
             "hal": $scope.hal,
             "isi": $scope.isi,
-            "tembusan": self.contactsTembusan
+            "tembusan": self.contactsTembusan,
+            "is_uploaded": $scope.tabUploadSurat
         };
 
         var files = $scope.filesList;
+        var selectedSurat = $scope.selectedSurat;
 
         Upload.upload({
             url: 'http://localhost/notifion-api/submitSurat',
             fields: data,
-            file: {"files[]": files}
+            file: {"files[]": files, "isi": selectedSurat}
         }).progress(function(evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.log = 'progress: ' + progressPercentage + '% ' +
@@ -224,6 +227,9 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
         });
     }
 
+    /* Posisi tab apakah di 'Tulis Surat' atau 'Upload Surat' */
+    $scope.tabUploadSurat = false; // Inisialisasi awal, tab bukan berada di tabUploadSurat, melainkan di tabTulisSurat
+
     /* kode hal */
     Request.getRequest('kodeHals', {}).success(function(feedback) {
         console.log(feedback);
@@ -234,7 +240,7 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
 
     $scope.filesList = [];
 
-    $scope.$watch('files', function(newVal, oldVal) {
+    $scope.$watch('files', function(newVal) {
         if (typeof (newVal) !== 'undefined') {
             if (newVal !== null) {
                 if (newVal.type === "application/pdf") {
@@ -243,13 +249,28 @@ function BuatSuratCtrl($mdDialog, $rootScope, $scope, Upload, Request, $state, $
             }
         }
     });
-    
-    $scope.roundFileSize = function(size){
-        var result = size/1024/1024;
+
+    $scope.uploadSurat = null;
+    $scope.selectedSurat = {};
+    $scope.$watch('uploadSurat', function(newVal) {
+        console.log(newVal);
+        if ((newVal) !== null) {
+            $scope.uploadSuratIsReady = true;
+            $scope.selectedSurat = newVal;
+            $scope.removeUploadSurat = function() {
+                $scope.uploadSuratIsReady = false;
+                $scope.selectedSurat = null;
+                console.log($scope.selectedSurat);
+            };
+        }
+    });
+
+    $scope.roundFileSize = function(size) {
+        var result = size / 1024 / 1024;
         return result.toFixed(2) + " Mb";
     }
-    
-    $scope.removeFile = function(index){
+
+    $scope.removeFile = function(index) {
         $scope.filesList.splice(index, 1);
         console.log($scope.filesList);
     }

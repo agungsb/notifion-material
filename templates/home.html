@@ -21,13 +21,13 @@
                         Edit Biodata
                     </md-button>
                 </md-list-item>
-                <md-list-item>
+                <md-list-item ng-if="$root.userInfo.jenis_user === '2'">
                     <md-button ng-click="changeState('home.tambahUser')">
-                        Tambah User SA
+                        Tambah User SA 
                     </md-button>
                 </md-list-item>
                 <md-divider></md-divider>
-                <md-list-item>
+                <md-list-item ng-if="$root.userInfo.jenis_user === '2'">
                     <md-menu>
                         <md-button aria-label="Open Management Surat menu" ng-click="$mdOpenMenu()">
                             Management Surat
