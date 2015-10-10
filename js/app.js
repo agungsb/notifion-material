@@ -35,7 +35,7 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                         }]
                 })
                 .state('login', {
-                    url: "/",
+                    url: "/login",
                     template: '<login-directive class="fade-animation"></login-directive>',
                     onEnter: ['$rootScope', '$state', function($rootScope, $state) {
                             if ($rootScope.isLogin) {
@@ -43,12 +43,6 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                             }
                         }]
                 })
-//                .state('home.suratMasuk', {
-//                    url: "",
-//                    absract: true,
-//                    templateUrl: "templates/content/dashboard.html",
-//                    controller: DashboardCtrl
-//                })
                 .state('home.suratMasuk', {
                     url: "",
                     templateUrl: "templates/content/management-surat/surat-masuk.html",
@@ -66,53 +60,23 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 })
                 .state('home.listUser', {
                     url: "list-user",
-                    templateUrl: "templates/content/management-user/list-user.html",
-                    onEnter: ['$rootScope', '$state', // Saat user memasuki state ini, maka lakukan pengecekan apakah user merupakan operator atau bukan
-                        function($rootScope, $state) {
-                            if ($rootScope.userInfoIsReady) { // Jika userInfo telah 'ready'
-                                if ($rootScope.userInfo.jenis_user !== '2') { // Jika jenis_user bukan operator, alihkan ke suratmasuk
-                                    $state.go('home.suratMasuk');
-                                }
-                            }
-                        }]
+                    templateUrl: "templates/content/management-user/list-user.html"
                 })
                 .state('home.tambahUser', {
                     url: "tambah-user",
                     templateUrl: "templates/content/management-user/tambah-user.html",
-                    controller: TambahUserCtrl,
-                    onEnter: ['$rootScope', '$state',
-                        function($rootScope, $state) {
-                            if ($rootScope.userInfoIsReady) {
-                                if ($rootScope.userInfo.jenis_user !== '2') {
-                                    $state.go('home.suratMasuk');
-                                }
-                            }
-                        }]
+                    controller: TambahUserCtrl
                 })
                 .state('home.editBio', {
                     url: "edit-bio",
                     templateUrl: "templates/content/management-user/editBio.html",
-                    controller: EditBioCtrl,
-                    onEnter: ['$rootScope', '$state',
-                        function($rootScope, $state) {
-                            if (!$rootScope.isLogin) {
-                                $state.go('login');
-                            }
-                        }]
+                    controller: EditBioCtrl
                 })
                 .state('home.buatSurat', {
                     url: "buat-surat",
                     templateUrl: "templates/content/management-surat/buat-surat.html",
                     controller: BuatSuratCtrl,
-                    controllerAs: 'ctrl',
-                    onEnter: ['$rootScope', '$state',
-                        function($rootScope, $state) {
-                            if ($rootScope.userInfoIsReady) {
-                                if ($rootScope.userInfo.jenis_user !== '2') {
-                                    $state.go('home.suratMasuk');
-                                }
-                            }
-                        }]
+                    controllerAs: 'ctrl'
                 });
     }]);
 app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state', '$templateCache',
@@ -121,7 +85,7 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             $rootScope.isLogin = false;
             $rootScope.isLogin = Session.isLogin();
             console.log($rootScope.isLogin);
-            $rootScope.call_auth_me = function() {
+            var call_auth_me = function() {
                 $rootScope.session_auth = Session.cookie.get('n-auth');
                 console.log($rootScope.session_auth);
                 Request.getUserInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
@@ -134,10 +98,10 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                 });
             };
             $rootScope.$on('reCallAuth', function(event) {
-                $rootScope.call_auth_me();
+                call_auth_me();
             });
             if ($rootScope.isLogin) {
-                $rootScope.call_auth_me();
+                call_auth_me();
             }
 
             // Close the sidenav everytime state is changed
@@ -149,6 +113,7 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
         var callAtTimeout = function() {
             if (current !== Session.isLogin()) {
                 current = Session.isLogin();
+//                console.log(current);
                 $state.reload();
                 $rootScope.isLogin = current;
             }
