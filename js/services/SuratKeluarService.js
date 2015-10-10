@@ -20,20 +20,22 @@ app.service('SuratKeluarService', ['$http', '$rootScope', '$mdToast', 'Request',
                     console.log(data);
                 });
             },
-            koreksiSurat: function(id) {
+            koreksiSurat: function(id, pesan) {
                 var data = {
                     "id_surat": id,
-                    "token": $rootScope.session_auth.token
+                    "token": $rootScope.session_auth.token,
+                    "pesan": pesan
                 };
-                Request.putRequest("rejectSurat", data).success(function(feedback) {
-                    console.log(feedback);
-                    $mdToast.simple()
-                            .content('Surat telah dikembalikan untuk dikoreksi')
-                            .position('right')
-                            .hideDelay(1000);
-                }).error(function(data) {
-                    console.log(data);
-                });
+                alert(JSON.stringify(data));
+//                Request.putRequest("rejectSurat", data).success(function(feedback) {
+//                    console.log(feedback);
+//                    $mdToast.simple()
+//                            .content('Surat telah dikembalikan untuk dikoreksi')
+//                            .position('right')
+//                            .hideDelay(1000);
+//                }).error(function(data) {
+//                    console.log(data);
+//                });
             }
         };
     }]);

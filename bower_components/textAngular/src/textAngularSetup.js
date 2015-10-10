@@ -38,9 +38,7 @@ angular.module('textAngularSetup', [])
 //		['justifyLeft','justifyCenter','justifyRight','justifyFull','indent','outdent'],
 //		['html', 'insertImage', 'insertLink', 'insertVideo', 'wordcount', 'charcount']
 
-		['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'],
-		['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
-                ['justifyLeft','justifyCenter','justifyRight','justifyFull','indent','outdent']
+		['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'justifyLeft','justifyCenter','justifyRight','justifyFull','indent','outdent', 'clear']
 	],
 	classes: {
 		focussed: "focussed",

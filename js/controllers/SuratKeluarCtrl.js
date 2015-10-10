@@ -11,15 +11,23 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                 SuratKeluarService.acceptSurat(id);
             };
             $scope.koreksiSurat = function($event, id) {
-                SuratKeluarService.koreksiSurat(id);
+//                SuratKeluarService.koreksiSurat(id);
                 $mdDialog.show({
                     controller: DialogController,
-                    templateUrl: 'templates/dialogs/pdfDialog.html',
+                    templateUrl: 'templates/dialogs/koreksiSuratDialog.html',
                     parent: angular.element(document.body),
                     targetEvent: $event
                 }).then(function() {
                     console.log('finished');
                 });
+                function DialogController($scope, $mdDialog, $sce) {
+                    $scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    };
+                    $scope.submit = function() {
+                        SuratKeluarService.koreksiSurat(id, $scope.pesan);
+                    };
+                }
             };
             $scope.previewSurat = function($event, id) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
