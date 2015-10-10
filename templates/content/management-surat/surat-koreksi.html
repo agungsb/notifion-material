@@ -1,0 +1,18 @@
+<md-toolbar class="md-background" md-theme="app-blue">
+    <toolbar-directive title="Surat Koreksi"></toolbar-directive>
+</md-toolbar>
+<md-content>
+    <md-list class="md-padding">
+        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="suratdraft in suratsDraft track by ::suratdraft" ng-hide="hideMe[$index]">
+            <div class="md-list-item-text">
+                <h3 ng-bind="::suratdraft.subject"></h3>
+                <h4 ng-bind="::suratdraft.hal"></h4>
+                <p ng-bind="::suratdraft.tanggal"></p>
+                <!--<p ng-bind-html="suratdraft.isi"></p>-->
+            </div>
+            <md-button md-theme="app-blue" class="md-primary" ng-click="editSurat($event, suratdraft.id)">
+                <i class="material-icons md-48" style="margin-top: 10%;">&#xE254;</i>
+            </md-button>
+        </md-list-item>
+    </md-list>
+</md-content>

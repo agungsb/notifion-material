@@ -2,6 +2,8 @@
 <html ng-app="notifionApp">
 
     <head>
+        <base href="/"></base>
+        <!--<base href="/notifion-material/"></base>-->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="">
@@ -16,11 +18,14 @@
         <link href="bower_components/textAngular/dist/textAngular.css" rel="stylesheet" type="text/css"/>
         <link href="css/app.css" rel="stylesheet" type="text/css"/>
         <link href="css/animations.css" rel="stylesheet" type="text/css"/>
+        <link href="css/sidenav.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
 
         <div ui-view class="sn"></div>
+        
+        <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
 
         <!--<script src="bower_components/angular/angular.js"></script>-->
         <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
@@ -40,16 +45,22 @@
         <script src="bower_components/ng-file-upload/ng-file-upload.js" type="text/javascript"></script>
 
         <script src="js/app.js" type="text/javascript"></script>
-        
+
         <script src="js/controllers/HomeCtrl.js" type="text/javascript"></script>
-        <script src="js/controllers/DashboardCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/SuratMasukCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/SuratKeluarCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/SuratKoreksiCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
-        
+
         <script src="js/directives/MainDirective.js" type="text/javascript"></script>
-        <script src="js/directives/LoginDirective.js" type="text/javascript"></script>
-        
+        <script src="js/directives/LoginLogoutDirective.js" type="text/javascript"></script>
+        <script src="js/directives/ToolbarDirective.js" type="text/javascript"></script>
+        <script src="js/directives/MenuToggleDirective.js" type="text/javascript"></script>
+        <script src="js/directives/MenuLinkDirective.js" type="text/javascript"></script>
+
+        <script src="js/services/Menu.js" type="text/javascript"></script>
         <script src="js/services/Session.js" type="text/javascript"></script>
         <script src="js/services/Request.js" type="text/javascript"></script>
         <script src="js/services/SuratKeluarService.js" type="text/javascript"></script>

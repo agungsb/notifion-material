@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahUserCtrl.js</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/js/app.js</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/dashboard.html</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/dialogs/pdfDialog.html</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/tambah-user.html</file>
-            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/DashboardCtrl.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

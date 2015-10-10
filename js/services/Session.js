@@ -19,7 +19,7 @@ app.factory('Session', ['$rootScope', '$state', '$timeout', '$cookies',
                 $timeout(function() {
                     obj.cookie.delete('n-auth');
                 }).then(function() {
-//                    $state.go('home');
+                    $state.go('home.suratMasuk');
                 });
             }
         };

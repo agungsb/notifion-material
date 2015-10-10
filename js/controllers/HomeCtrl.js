@@ -1,25 +1,23 @@
-function HomeCtrl($http, $scope, $state, $mdSidenav, $mdUtil, $log, $rootScope, Session) {
-    $scope.user = $rootScope.userInfo;
-    $scope.closeSidenav = function() {
-        $mdSidenav('left').close().then(function() {
-            $log.debug('close LEFT is done');
-        });
-    };
-    $scope.changeState = function(state) {
-        $state.go(state);
-    };
-    $scope.logout = function() {
-        Session.signout();
+function HomeCtrl(Session, menu) {
+
+    var vm = this;
+
+    //functions for menu-link and menu-toggle
+    vm.isOpen = isOpen;
+    vm.toggleOpen = toggleOpen;
+    vm.autoFocusContent = false;
+    vm.menu = menu;
+
+    vm.status = {
+        isFirstOpen: true,
+        isFirstDisabled: false
     };
 
-    $scope.toggleLeft = buildToggler('left', $mdUtil, $mdSidenav, $log);
-}
+    function isOpen(section) {
+        return menu.isSectionSelected(section);
+    }
 
-function buildToggler(navID, $mdUtil, $mdSidenav, $log) {
-    var debounceFn = $mdUtil.debounce(function() {
-        $mdSidenav(navID).toggle().then(function() {
-            $log.debug("toggle: " + navID + " is done");
-        });
-    }, 300);
-    return debounceFn;
+    function toggleOpen(section) {
+        menu.toggleSelectSection(section);
+    }
 }

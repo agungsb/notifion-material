@@ -1,0 +1,27 @@
+<md-toolbar class="md-background" md-theme="app-blue">
+    <toolbar-directive title="Surat Keluar"></toolbar-directive>
+</md-toolbar>
+<md-content>
+    <md-list class="md-padding">
+        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="suratkeluar in suratsKeluar track by ::suratkeluar.id" ng-hide="hideMe[$index]">
+            <div class="md-list-item-text">
+                <h3 ng-bind="::suratkeluar.subject"></h3>
+                <h4 ng-bind="::suratkeluar.hal"></h4>
+                <p ng-bind="::suratkeluar.tanggal"></p>
+                <!--<p ng-bind-html="suratkeluar.isi"></p>-->
+                <span ng-repeat="suratkeluarlampiran in ::suratkeluar.lampiran track by ::ruratkeluarlampiran.file_path">
+                    <a target="_blank" ng-href="http://localhost/notifion-api/{{suratkeluarlampiran.file_path}}">Lampiran ke {{($index + 1)}}</a> &nbsp;
+                </span>
+            </div>
+            <md-button md-theme="app-blue" ng-disabled="true" ng-if="suratkeluar.ditandatangani == 1">
+                <i class="material-icons md-48" style="margin-top: 10%;">&#xE876;</i>
+            </md-button>
+            <md-button md-theme="app-blue" ng-disabled="true" style="color: rgb(244,67,54);" ng-if="suratkeluar.ditandatangani == 0">
+                <i class="material-icons md-48" style="margin-top: 10%;">&#xE88F;</i>
+            </md-button>
+            <md-button md-theme="app-blue" class="md-primary" ng-click="previewSurat($event, suratkeluar.id, suratkeluar.ditandatangani)">
+                <i class="material-icons md-48" style="margin-top: 10%;">&#xE8A0;</i>
+            </md-button>
+        </md-list-item>
+    </md-list>
+</md-content>

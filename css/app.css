@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Agung
 */
 
-.ng-scope.sn { height: 100%; } /* agar sidenav-nya full height */
+.ng-scope.sn { height: 100%; }  /* agar sidenav-nya full height */
 md-sidenav{min-width: 104px;}
 
 .divider-border{

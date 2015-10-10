@@ -1,7 +1,8 @@
 'use strict';
 
 app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
-        var baseUrl = 'http://localhost/notifion-api/';
+//        var baseUrl = 'http://localhost/notifion-api/';
+        var baseUrl = '/api/';
         var obj = {};
 
         obj.loginRequest = function(data) {

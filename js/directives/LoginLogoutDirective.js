@@ -1,11 +1,11 @@
 'use strict';
 
-app.directive('loginDirective', ['$rootScope', function($rootScope) {
+app.directive('loginDirective', [function() {
         return {
             restrict: 'E',
             templateUrl: 'templates/login.html',
-            controller: ['$scope', '$state', 'Request', 'Session', '$mdToast',
-                function($scope, $state, Request, Session, $mdToast) {
+            controller: ['$scope', 'Request', 'Session', '$mdToast', '$state',
+                function($scope, Request, Session, $mdToast, $state) {
                     $scope.submit = function() {
                         $scope.isAuthenticating = true;
                         var data = {
@@ -26,6 +26,7 @@ app.directive('loginDirective', ['$rootScope', function($rootScope) {
                                     'nama_institusi': feedback.nama_institusi,
                                     'login': feedback.status
                                 });
+                                $state.go('home.suratMasuk', {}, {'location': 'replace'})
                             } else {
                                 $mdToast.show(
                                         $mdToast.simple()
@@ -42,5 +43,11 @@ app.directive('loginDirective', ['$rootScope', function($rootScope) {
                         });
                     };
                 }]
+        };
+    }]).directive('logoutDirective', ['Session', function(Session) {
+        return function(scope, element, attr) {
+            element.bind('click', function() {
+                Session.signout();
+            });
         };
     }]);

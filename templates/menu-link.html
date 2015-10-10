@@ -1,0 +1,4 @@
+<md-button aria-label="Section" ng-if="section.allowed" ng-class="{'{{section.icon}}' : true}" ui-sref-active="active" ui-sref="{{section.state}}" ng-click="focusSection()">
+    <span ng-bind="section | humanizeDoc"></span>
+    <span class="md-visually-hidden" ng-if="isSelected()">current page</span>
+</md-button>
