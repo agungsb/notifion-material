@@ -43,7 +43,27 @@ app.factory('menu', [
         sections.push({
             name: 'Tambah User SA',
             state: 'home.tambahUser',
-            type: 'link',
+            type: 'toggle',
+            pages: [{
+                    name: 'Tambah Account',
+                    type: 'link',
+                    state: 'home.suratMasuk',
+                    icon: 'fa fa-inbox',
+                    allowed: true
+                }, {
+                    name: 'Surat Keluar',
+                    state: 'home.suratKeluar',
+                    type: 'link',
+                    icon: 'fa fa-upload',
+                    allowed: true
+                },
+                {
+                    name: 'Surat Koreksi',
+                    state: 'home.suratKoreksi',
+                    type: 'link',
+                    icon: 'fa fa-edit',
+                    allowed: true
+                }],
 //            allowed: $rootScope.userInfo.jenis_user === '2'
             allowed: true
         });

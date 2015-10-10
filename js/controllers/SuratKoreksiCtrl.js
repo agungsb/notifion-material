@@ -27,4 +27,4 @@ var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog',
         }).error(function(error) {
             console.log(error);
         });
-    }]
+    }];
