@@ -32,7 +32,7 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                 });
                 function DialogController($scope, $http, $mdDialog, $sce) {
                     $http({
-                        url: "http://localhost/notifion-api/view/" + id + "/" + $rootScope.session_auth.token,
+                        url: "/api/view/" + id + "/" + $rootScope.session_auth.token,
                         method: "GET",
                         headers: {'Accept': 'application/pdf'},
                         responseType: 'arraybuffer'

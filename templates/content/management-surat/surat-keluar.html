@@ -13,13 +13,16 @@
                     <a target="_blank" ng-href="http://localhost/notifion-api/{{suratkeluarlampiran.file_path}}">Lampiran ke {{($index + 1)}}</a> &nbsp;
                 </span>
             </div>
+            <md-button md-theme="app-blue" class="md-primary" ng-click="acceptSurat(suratkeluar.id)" ng-if="suratkeluar.ditandatangani == 0">
+                <i class="material-icons md-48" style="margin-top: 10%;">&#xE876;</i>
+            </md-button>
+            <md-button md-theme="app-blue" class="md-primary" ng-click="koreksiSurat($event, suratkeluar.id)" ng-if="suratkeluar.ditandatangani == 0">
+                <i class="material-icons md-48 warn-disabled" style="margin-top: 10%;">&#xE5CD;</i>
+            </md-button>
             <md-button md-theme="app-blue" ng-disabled="true" ng-if="suratkeluar.ditandatangani == 1">
                 <i class="material-icons md-48" style="margin-top: 10%;">&#xE876;</i>
             </md-button>
-            <md-button md-theme="app-blue" ng-disabled="true" style="color: rgb(244,67,54);" ng-if="suratkeluar.ditandatangani == 0">
-                <i class="material-icons md-48" style="margin-top: 10%;">&#xE88F;</i>
-            </md-button>
-            <md-button md-theme="app-blue" class="md-primary" ng-click="previewSurat($event, suratkeluar.id, suratkeluar.ditandatangani)">
+            <md-button md-theme="app-blue" class="md-primary" ng-click="previewSurat($event, suratkeluar.id)">
                 <i class="material-icons md-48" style="margin-top: 10%;">&#xE8A0;</i>
             </md-button>
         </md-list-item>

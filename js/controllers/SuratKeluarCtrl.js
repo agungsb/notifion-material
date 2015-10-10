@@ -7,8 +7,21 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
             for (var i = 0; i < feedback.count; i++) {
                 $scope.hideMe[i] = false;
             }
-            ;
-            $scope.previewSurat = function($event, id, status) {
+            $scope.acceptSurat = function(id) {
+                SuratKeluarService.acceptSurat(id);
+            };
+            $scope.koreksiSurat = function($event, id) {
+                SuratKeluarService.koreksiSurat(id);
+                $mdDialog.show({
+                    controller: DialogController,
+                    templateUrl: 'templates/dialogs/pdfDialog.html',
+                    parent: angular.element(document.body),
+                    targetEvent: $event
+                }).then(function() {
+                    console.log('finished');
+                });
+            };
+            $scope.previewSurat = function($event, id) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
                 $mdDialog.show({
@@ -22,7 +35,7 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                 function DialogController($scope, $http, $mdDialog, $sce) {
                     var data = {'id': id, 'token': $rootScope.session_auth.token};
                     $http({
-                        url: "http://localhost/notifion-api/preview",
+                        url: "/api/preview",
                         method: "POST",
                         data: data,
                         headers: {'Accept': 'application/pdf'},
@@ -33,15 +46,8 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                         console.log(fileURL);
                         $scope.content = $sce.trustAsResourceUrl(fileURL);
                     });
-                    $scope.isSigned = status;
                     $scope.closeDialog = function() {
                         $mdDialog.hide();
-                    };
-                    $scope.accSurat = function() {
-                        SuratKeluarService.accSurat(id, $rootScope.session_auth.token);
-                    };
-                    $scope.rejectSurat = function() {
-                        SuratKeluarService.rejectSurat(id, $rootScope.session_auth.token);
                     };
                 }
             };

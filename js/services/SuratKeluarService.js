@@ -1,28 +1,39 @@
 'use strict';
 
-app.service('SuratKeluarService', ['$http', function($http) {
+app.service('SuratKeluarService', ['$http', '$rootScope', '$mdToast', 'Request',
+    function($http, $rootScope, $mdToast, Request) {
         return{
-            accSurat: function(id, token) {
+            acceptSurat: function(id) {
                 var data = {
                     "id_surat": id,
-                    "token": token
-                }
-                $http.put("http://localhost/notifion-api/accSurat", data).success(function(feedback) {
+                    "token": $rootScope.session_auth.token
+                };
+                Request.putRequest("accSurat", data).success(function(feedback) {
                     console.log(feedback);
+                    $mdToast.show(
+                            $mdToast.simple()
+                            .content('Surat telah berhasil didistribusikan')
+                            .position('right')
+                            .hideDelay(1000)
+                            );
                 }).error(function(data) {
                     console.log(data);
                 });
             },
-            rejectSurat: function(id, token) {
+            koreksiSurat: function(id) {
                 var data = {
                     "id_surat": id,
-                    "token": token
-                }
-                $http.put("http://localhost/notifion-api/rejectSurat", data).success(function(feedback) {
+                    "token": $rootScope.session_auth.token
+                };
+                Request.putRequest("rejectSurat", data).success(function(feedback) {
                     console.log(feedback);
+                    $mdToast.simple()
+                            .content('Surat telah dikembalikan untuk dikoreksi')
+                            .position('right')
+                            .hideDelay(1000);
                 }).error(function(data) {
                     console.log(data);
                 });
             }
-        }
+        };
     }]);
