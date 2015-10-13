@@ -1,5 +1,4 @@
-function HomeCtrl(Session, menu) {
-
+function HomeCtrl(menu) {
     var vm = this;
 
     //functions for menu-link and menu-toggle

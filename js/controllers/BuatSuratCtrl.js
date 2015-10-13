@@ -103,7 +103,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             var selectedSurat = $scope.selectedSurat;
 
             Upload.upload({
-                url: 'http://localhost/notifion-api/submitSurat',
+                url: '/api/submitSurat',
                 fields: data,
                 file: {"files[]": files, "isi": selectedSurat}
             }).progress(function(evt) {
@@ -155,7 +155,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             function DialogController($scope, $http, $mdDialog, $sce) {
                 console.log(data);
                 $http({
-                    url: "http://localhost/notifion-api/preview2",
+                    url: "/api/preview2",
                     method: "POST",
                     data: data,
                     headers: {'Accept': 'application/pdf'},

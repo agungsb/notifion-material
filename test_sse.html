@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Getting server updates</h1>
+        <div id="result"></div>
+
+        <script>
+            if (typeof (EventSource) !== "undefined") {
+                var source = new EventSource("http://localhost/notifion-api/sse/123");
+//                var source = new EventSource("http://10.12.12.14:3000/sse");
+                source.onmessage = function(event) {
+                    document.getElementById("result").innerHTML += event.data + "<br>";
+                };
+            } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+            }
+        </script>
+    </body>
+</html>

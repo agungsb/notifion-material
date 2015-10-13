@@ -43,7 +43,8 @@
         <script src="bower_components/textAngular/src/textAngularSetup.js" type="text/javascript"></script>
         <script src="bower_components/md-date-time/dist/md-date-time.js" type="text/javascript"></script>
         <script src="bower_components/ng-file-upload/ng-file-upload.js" type="text/javascript"></script>
-
+        
+        <script src="js/custom.js" type="text/javascript"></script>
         <script src="js/app.js" type="text/javascript"></script>
 
         <script src="js/controllers/HomeCtrl.js" type="text/javascript"></script>
@@ -55,7 +56,6 @@
         <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahAccountCtrl.js" type="text/javascript"></script>
         
-        <script src="js/directives/MainDirective.js" type="text/javascript"></script>
         <script src="js/directives/LoginLogoutDirective.js" type="text/javascript"></script>
         <script src="js/directives/ToolbarDirective.js" type="text/javascript"></script>
         <script src="js/directives/MenuToggleDirective.js" type="text/javascript"></script>
