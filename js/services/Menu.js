@@ -47,12 +47,12 @@ app.factory('menu', [
             pages: [{
                     name: 'Tambah Account',
                     type: 'link',
-                    state: 'home.suratMasuk',
+                    state: 'home.tambahAccount',
                     icon: 'fa fa-inbox',
                     allowed: true
                 }, {
-                    name: 'Surat Keluar',
-                    state: 'home.suratKeluar',
+                    name: 'Tambah Instansi',
+                    state: 'home.tambahInstansi',
                     type: 'link',
                     icon: 'fa fa-upload',
                     allowed: true

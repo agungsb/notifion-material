@@ -54,6 +54,7 @@
         <script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahAccountCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahInstansiCtrl.js" type="text/javascript"></script>
         
         <script src="js/directives/MainDirective.js" type="text/javascript"></script>
         <script src="js/directives/LoginLogoutDirective.js" type="text/javascript"></script>

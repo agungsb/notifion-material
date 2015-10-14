@@ -2,6 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/app.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/index.php</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/Menu.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/Request.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/tambah-account.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahAccountCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahUserCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/buat-surat.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/SuratKeluarService.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/SuratKoreksiCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/surat-koreksi.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/SuratKeluarCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/surat-keluar.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/BuatSuratCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/dialogs/koreksiSuratDialog.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/tambah-user.html</file>
+        </group>
     </open-files>
 </project-private>

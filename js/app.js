@@ -75,10 +75,14 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 
                 .state('home.tambahAccount', {
                     url: "tambah-account",
-                    templateUrl: "templates/content/management-user/tambah_account.html",
+                    templateUrl: "templates/content/management-user/tambah-account.html",
                     controller: TambahAccountCtrl
                 })
-                
+                .state('home.tambahInstansi', {
+                    url: "tambah-instansi",
+                    templateUrl: "templates/content/management-user/tambah-instansi.html",
+                    controller: TambahInstansiCtrl
+                })
                 .state('home.buatSurat', {
                     url: "buat-surat",
                     templateUrl: "templates/content/management-surat/buat-surat.html",
