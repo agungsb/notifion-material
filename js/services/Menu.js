@@ -15,20 +15,26 @@ app.factory('menu', [
                     type: 'link',
                     state: 'home.suratMasuk',
                     icon: 'fa fa-inbox',
-                    allowed: true
+                    allowed: true,
+                    id: 'suratmasuk',
+                    hascounter: true
                 }, {
                     name: 'Surat Keluar',
                     state: 'home.suratKeluar',
                     type: 'link',
                     icon: 'fa fa-upload',
-                    allowed: true
+                    allowed: true,
+                    id: 'suratkeluar',
+                    hascounter: true
                 },
                 {
                     name: 'Surat Koreksi',
                     state: 'home.suratKoreksi',
                     type: 'link',
                     icon: 'fa fa-edit',
-                    allowed: true
+                    allowed: true,
+                    id: 'suratkoreksi',
+                    hascounter: true
                 }],
             allowed: true
         });

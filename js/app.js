@@ -72,7 +72,7 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-user/editBio.html",
                     controller: EditBioCtrl
                 })
-                
+
                 .state('home.tambahAccount', {
                     url: "tambah-account",
                     templateUrl: "templates/content/management-user/tambah-account.html",
@@ -90,8 +90,8 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     controllerAs: 'ctrl'
                 });
     }]);
-app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state', '$templateCache',
-    function($rootScope, $mdSidenav, $log, $http, Session, Request, $timeout, $state, $templateCache) {
+app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state', '$templateCache', '$mdToast',
+    function($rootScope, $mdSidenav, $log, $http, Session, Request, $timeout, $state, $templateCache, $mdToast) {
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             $rootScope.isLogin = false;
             $rootScope.isLogin = Session.isLogin();
@@ -113,6 +113,57 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             });
             if ($rootScope.isLogin) {
                 call_auth_me();
+                if (typeof (EventSource) !== "undefined") {
+                    var dataUnread, dataUnsigned, dataUnreadChecked, dataUnsignedChecked;
+                    var source = new EventSource("http://localhost/notifion-api/sse/" + $rootScope.session_auth.token);
+//                var source = new EventSource("http://10.12.12.14:3000/sse");
+                    source.onmessage = function(event) {
+//                console.log(event);
+//                console.log(JSON.parse(event.data));
+                        var data = JSON.parse(event.data);
+                        if (dataUnread !== data.unread) {
+                            dataUnread = data.unread;
+                            if (dataUnreadChecked) {
+                                dataUnreadChecked = false;
+                                $mdToast.show(
+                                        $mdToast.simple()
+                                        .content("Ada pembaruan di surat masuk")
+                                        .position('right')
+                                        .hideDelay(1000)
+                                        ).then(function() {
+                                    dataUnreadChecked = true;
+                                });
+                            } else {
+                                dataUnreadChecked = true;
+                            }
+                            console.log("masih beda");
+                        }
+                        if (dataUnsigned !== data.unsigned) {
+                            dataUnsigned = data.unsigned;
+                            if (dataUnsignedChecked) {
+                                dataUnsignedChecked = false;
+                                $mdToast.show(
+                                        $mdToast.simple()
+                                        .content("Ada pembaruan di surat keluar")
+                                        .position('right')
+                                        .hideDelay(1000)
+                                        ).then(function() {
+                                    dataUnsignedChecked = true;
+                                });
+                            } else {
+                                dataUnsignedChecked = true;
+                            }
+                            console.log("masih beda");
+                        }
+                        $timeout(function() {
+                            dataUnreadBadgeCounter(data);
+                            dataUnsignedBadgeCounter(data);
+                        });
+                    };
+                } else {
+                    alert("Sorry, your browser does not support server-sent events...");
+//            document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+                }
             }
 
             // Close the sidenav everytime state is changed
