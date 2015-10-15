@@ -1,7 +1,7 @@
 'use strict';
 
-var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast',
-    function($rootScope, $scope, $http, $state, $mdToast) {
+var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Request', 'Session',
+    function($rootScope, $scope, $http, $state, $mdToast, Request, Session) {
         $rootScope.$watch('userInfo', function(newVal, oldVal) {
             if (typeof (newVal) !== 'undefined') {
                 $scope.nama = newVal.nama;
@@ -37,7 +37,7 @@ var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast',
 
             console.log(data);
 
-            $http.post("http://localhost/notifion-api/editBio", data).success(function(feedback) {
+            Request.postRequest('editBio', data).success(function(feedback) {
 //            alert(feedback);
                 console.log(feedback);
                 $scope.isSubmitting = false;
@@ -47,7 +47,7 @@ var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast',
                         .position('right')
                         .hideDelay(1000)
                         ).then(function(response) {
-                    $state.go('home.dashboard');
+                    $state.reload();
                 });
             }).error(function(data) {
                 console.log(data);
