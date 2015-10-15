@@ -1,17 +1,27 @@
 'use strict';
 
-var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Request', 'Session',
-    function($rootScope, $scope, $http, $state, $mdToast, Request, Session) {
+var EditBioCtrl = ['$rootScope', '$scope', '$state', '$mdToast', 'Request', 'Session',
+    function($rootScope, $scope, $state, $mdToast, Request, Session) {
+        $scope.data = {
+            nama: "",
+            nip: "",
+            password: "",
+            gender: "",
+            email1: "",
+            email2: "",
+            nohp1: "",
+            nohp2: ""            
+        };
         $rootScope.$watch('userInfo', function(newVal, oldVal) {
             if (typeof (newVal) !== 'undefined') {
-                $scope.nama = newVal.nama;
-                $scope.email1 = newVal.email1;
-                $scope.email2 = newVal.email2;
-                $scope.nip = newVal.nip;
-                $scope.password = newVal.password;
-                $scope.gender = newVal.gender;
-                $scope.nohp1 = newVal.nohp1;
-                $scope.nohp2 = newVal.nohp2;
+                $scope.data.nama = newVal.nama;
+                $scope.data.nip = newVal.nip;
+                $scope.data.password = newVal.password;
+                $scope.data.gender = newVal.gender;
+                $scope.data.email1 = newVal.email1;
+                $scope.data.email2 = newVal.email2;
+                $scope.data.nohp1 = newVal.nohp1;
+                $scope.data.nohp2 = newVal.nohp2;
             }
         });
 
@@ -28,14 +38,14 @@ var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Reque
             $scope.isSubmitting = true;
             var data = {
                 "token": $rootScope.session_auth.token,
-                "nama": $scope.nama,
-                "password": $scope.password,
-                "nip": $scope.nip,
-                "gender": $scope.gender,
-                "email1": $scope.email1,
-                "email2": $scope.email2,
-                "nohp1": $scope.nohp1,
-                "nohp2": $scope.nohp2
+                "nama": $scope.data.nama,
+                "password": $scope.data.password,
+                "nip": $scope.data.nip,
+                "gender": $scope.data.gender,
+                "email1": $scope.data.email1,
+                "email2": $scope.data.email2,
+                "nohp1": $scope.data.nohp1,
+                "nohp2": $scope.data.nohp2
             };
 
             console.log(data);
