@@ -6,9 +6,12 @@ var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Reque
             if (typeof (newVal) !== 'undefined') {
                 $scope.nama = newVal.nama;
                 $scope.email1 = newVal.email1;
+                $scope.email2 = newVal.email2;
                 $scope.nip = newVal.nip;
                 $scope.password = newVal.password;
                 $scope.gender = newVal.gender;
+                $scope.nohp1 = newVal.nohp1;
+                $scope.nohp2 = newVal.nohp2;
             }
         });
 
@@ -24,7 +27,7 @@ var EditBioCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Reque
         $scope.submit = function() {
             $scope.isSubmitting = true;
             var data = {
-                "token": localStorage.getItem('token'),
+                "token": $rootScope.session_auth.token,
                 "nama": $scope.nama,
                 "password": $scope.password,
                 "nip": $scope.nip,
