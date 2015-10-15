@@ -33,7 +33,7 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
                 method: "GET",
                 options: options
             });
-        }
+        };
         
         obj.postRequest = function(url, data, options) {
             return $http({
