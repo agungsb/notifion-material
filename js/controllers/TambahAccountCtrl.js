@@ -1,11 +1,11 @@
-var TambahAccountCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Request', 'Session', '$mdDialog',
-    function($rootScope, $scope, $http, $state, $mdToast, Request, Session, $mdDialog) {
+var TambahAccountCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdToast', 'Request', 'Session', '$mdDialog',
+    function($rootScope, $scope, Request, $state, $mdToast, Request, Session, $mdDialog) {
 
         $scope.keepString = function(String) {
             return String;
         };
 
-        $http.get("http://localhost/notifion-api/users2").success(function(feedback) {
+        Request.getRequest('users2').success(function(feedback) {
             console.log(feedback);
             if (feedback.result.length === 0) {
                 $scope.tableIsEmpty = true;
@@ -15,7 +15,7 @@ var TambahAccountCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 
             $scope.users = feedback.result;
             $scope.tableReady = true;
             
-            $http.get('http://localhost/notifion-api/institusi').success(function(feedback) {
+            Request.getRequest('institusi').success(function(feedback) {
                 console.log(feedback);
                 if (feedback.result.length === 0) {
                     $scope.tableIsEmpty = true;
@@ -39,7 +39,7 @@ var TambahAccountCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 
 
                 console.log(data);
 
-                $http.post("http://localhost/notifion-api/addUserOp", data).success(function(feedback) {
+                Request.postRequest('/addUserOp', data).success(function(feedback) {
 //            alert(feedback);
                     console.log(feedback);
                     $scope.isSubmitting = false;
@@ -86,7 +86,7 @@ var TambahAccountCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 
                     console.log('finished');
                 });
 
-                function DialogController($scope, $http, $mdDialog, Request, Session, $rootScope) {
+                function DialogController($scope, Request, $mdDialog, Request, Session, $rootScope) {
                     $scope.user = user;
                     $scope.password = $scope.user.password;
                     $scope.id_institusi = $scope.user.id_institusi;

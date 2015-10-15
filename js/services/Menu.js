@@ -14,7 +14,6 @@ app.factory('menu', [
                     name: 'Surat Masuk',
                     type: 'link',
                     state: 'home.suratMasuk',
-                    icon: 'fa fa-inbox',
                     allowed: true,
                     id: 'suratmasuk',
                     hascounter: true
@@ -40,15 +39,7 @@ app.factory('menu', [
         });
 
         sections.push({
-            name: 'Edit Biodata',
-            state: 'home.editBio',
-            type: 'link',
-            allowed: true
-        });
-
-        sections.push({
-            name: 'Tambah User SA',
-            state: 'home.tambahUser',
+            name: 'Management User',
             type: 'toggle',
             pages: [{
                     name: 'Tambah Account',
@@ -64,10 +55,30 @@ app.factory('menu', [
                     allowed: true
                 },
                 {
-                    name: 'Surat Koreksi',
-                    state: 'home.suratKoreksi',
+                    name: 'Tambah Institusi',
+                    state: 'home.tambahInstitusi',
                     type: 'link',
                     icon: 'fa fa-edit',
+                    allowed: true
+                }],
+//            allowed: $rootScope.userInfo.jenis_user === '2'
+            allowed: true
+        });
+        
+        sections.push({
+            name: 'Management Surat',
+            type: 'toggle',
+            pages: [{
+                    name: 'Tambah Kode Unit',
+                    state: 'home.tambahKodeUnit',
+                    type: 'link',
+                    icon: 'fa fa-upload',
+                    allowed: true
+                },{
+                    name: 'Tambah Kode Hal',
+                    state: 'home.tambahKodeHal',
+                    type: 'link',
+                    icon: 'fa fa-upload',
                     allowed: true
                 }],
 //            allowed: $rootScope.userInfo.jenis_user === '2'
@@ -80,6 +91,14 @@ app.factory('menu', [
             type: 'link',
             allowed: true
 //            allowed: $rootScope.userInfo.jenis_user === '2'
+        });
+        
+        
+        sections.push({
+            name: 'Edit Biodata',
+            state: 'home.editBio',
+            type: 'link',
+            allowed: true
         });
 
         var self;

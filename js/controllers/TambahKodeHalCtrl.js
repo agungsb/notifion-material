@@ -1,49 +1,24 @@
-var TambahInstansiCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast', 'Request', 'Session', '$mdDialog',
-    function($rootScope, $scope, $http, $state, $mdToast, Request, Session, $mdDialog) {
+var TambahKodeHalCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdToast', 'Request', 'Session', '$mdDialog',
+    function($rootScope, $scope, Request, $state, $mdToast, Request, Session, $mdDialog) {
 
         $scope.keepString = function(String) {
             return String;
         };
 
-        Request.getRequest('instansi').success(function(feedback) {
+        Request.getRequest('kodeHals').success(function(feedback) {
             console.log(feedback);
-            if (feedback.result_Instansi.length === 0) {
+            if (feedback.result.length === 0) {
                 $scope.tableIsEmpty = true;
             } else {
                 $scope.tableIsEmpty = false;
             }
-            $scope.instansis = feedback.result_Instansi;
+            $scope.kodehals = feedback.result;
             $scope.tableReady = true;
 
-            $scope.submitInstansi = function() {
-                $scope.isSubmitting = true;
-                var data = {
-                    "nama_instansi": $scope.instansi
-                };
-
-                console.log(data);
-
-                Request.postRequest('/addInstansi', data).success(function(feedback) {
-//            alert(feedback);
+            $scope.deleteKodeHal = function(kode_hal, index) {
+                Request.deleteRequest('hapusKodeHal/' + $rootScope.session_auth.token + "/" + kode_hal).success(function(feedback) {
                     console.log(feedback);
-                    $scope.isSubmitting = false;
-                    $mdToast.show(
-                            $mdToast.simple()
-                            .content(feedback.result)
-                            .position('right')
-                            .hideDelay(1000)
-                            ).then(function(response) {
-//                    $state.reload();
-                    });
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-
-            $scope.deleteInstansi = function(id_instansi, index) {
-                Request.deleteRequest('hapusInstansi/' + $rootScope.session_auth.token + "/" + id_instansi).success(function(feedback) {
-                    console.log(feedback);
-                    $scope.instansis.splice(index, 1);
+                    $scope.institusis.splice(index, 1);
                     $mdToast.show(
                             $mdToast.simple()
                             .content(feedback.result)
@@ -58,7 +33,31 @@ var TambahInstansiCtrl = ['$rootScope', '$scope', '$http', '$state', '$mdToast',
 //      alert(account);
             };
 
+            $scope.submitKodeHal = function() {
+                $scope.isSubmitting = true;
+                var data = {
+                    "kode_hal": $scope.kodehal,
+                    "deskripsi": $scope.deskripsi
+                };
 
+                console.log(data);
+
+                Request.postRequest("/addKodeHal", data).success(function(feedback) {
+//            alert(feedback);
+                    console.log(feedback);
+                    $scope.isSubmitting = false;
+                    $mdToast.show(
+                            $mdToast.simple()
+                            .content(feedback.result)
+                            .position('right')
+                            .hideDelay(1000)
+                            ).then(function(response) {
+                        $state.reload();
+                    });
+                }).error(function(data) {
+                    console.log(data);
+                });
+            };
         }).error(function(error) {
             console.log(error);
         });

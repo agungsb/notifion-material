@@ -83,6 +83,23 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-user/tambah-instansi.html",
                     controller: TambahInstansiCtrl
                 })
+                .state('home.tambahInstitusi', {
+                    url: "tambah-institusi",
+                    templateUrl: "templates/content/management-user/tambah-institusi.html",
+                    controller: TambahInstitusiCtrl
+                })
+                
+                .state('home.tambahKodeHal', {
+                    url: "tambah-kode-hal",
+                    templateUrl: "templates/content/management-surat/tambah-hal.html",
+                    controller: TambahKodeHalCtrl
+                })
+                .state('home.tambahKodeUnit', {
+                    url: "tambah-kode-unit",
+                    templateUrl: "templates/content/management-surat/tambah-kode-unit.html",
+                    controller: TambahKodeUnitCtrl
+                })
+                
                 .state('home.buatSurat', {
                     url: "buat-surat",
                     templateUrl: "templates/content/management-surat/buat-surat.html",

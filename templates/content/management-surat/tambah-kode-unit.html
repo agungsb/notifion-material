@@ -1,0 +1,50 @@
+<div layout="column">
+
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <toolbar-directive title="Tambah Kode Unit"></toolbar-directive>
+    </md-toolbar>
+
+    <md-content>
+        <div layout layout-sm="column">
+            <md-input-container flex="33" style="padding: 20px; margin-bottom: -50px;">
+                <h3>Tambah Kode Unit</h3>
+            </md-input-container>
+        </div>
+        <form name="tambahKodeUnit">
+            <div layout layout-sm="column">
+                <!--<md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>-->
+                <md-input-container flex="33" style="padding: 20px;">
+                    <label>Kode unit</label>
+                    <input type="text" name="kodehal" ng-model="kodeunit" required/>
+                </md-input-container>
+                <md-input-container flex="33" style="padding: 20px;">
+                    <label>Deskripsi</label>
+                    <input type="text" name="deskripsi" ng-model="deskripsi" required/>
+                </md-input-container>
+                <md-input-container flex="33" style="padding: 20px;">
+                    <label>institusi</label>
+                    <md-select ng-model="inst" required>
+                        <md-option ng-repeat="institusi in institusis" ng-value="keepString(institusi.id_institusi)">{{institusi.nama_institusi}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-button ng-click="submitKodeUnit()" class="md-raised md-primary md-button" ng-disabled="tambahKodeUnit.$invalid || isSubmitting">Submit</md-button>        
+        </form>
+        <md-list class="md-padding">
+            <h1 style="text-align: center;">List Kode Unit</h1>
+            <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="kodeunit in kodeunits">
+                <div class="md-list-item-text">
+                    <p class="text-lighten-4"><i>Kode Unit</i></p>
+                    <h4>{{kodeunit.kode_unit}}</h4>
+                </div>
+                <div class="md-list-item-text">
+                    <p class="text-lighten-4"><i>Deskripsi</i></p>
+                    <h4>{{kodeunit.deskripsi}}</h4>
+                </div>
+                <md-button md-theme="app-blue" class="md-primary" ng-click="deleteKodeUnit(kodeunit.kodeunit, $index)">
+                    <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
