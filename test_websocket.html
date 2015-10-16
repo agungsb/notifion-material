@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>WebSocket</title>
+    </head>
+    <body>
+        <p>Unread: <span id="unread">0</span></p>
+        <p>Favorites: <span id="favorites">0</span></p>
+        <p id="output"></p>
+        <input id="input"/>
+        <button onClick="sendJsonData()">Send JSON</button>
+        <button onClick="sendStringMessage()">Send String</button>
+        <script>
+            var loc = window.location;
+            var uri = 'ws:';
+
+            if (loc.protocol === 'https:') {
+                uri = 'wss:';
+            }
+            uri += '//' + loc.host;
+            uri += loc.pathname + 'ws';
+
+//                    uri = "ws://127.0.0.1:3000/ws" // Yang dipake, yang ini
+//            uri = "ws://127.0.0.1:3000/wsjson";
+            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
+            ws = new WebSocket(uri);
+
+            ws.onopen = function() {
+                console.log('Connected');
+            };
+
+            ws.onmessage = function(evt) {
+//                console.log(evt);
+//                console.log(JSON.parse(evt.data));
+                var response = JSON.parse(evt.data);
+                if (response.nama === 'tested') {
+                    alert("Ada data baru yang masuk");
+                    var out = document.getElementById('output');
+                    out.innerHTML += evt.data + '<br>';
+                    var unread = document.getElementById('unread');
+                    unread.innerHTML = response.data[0].unread;
+                    var favorites = document.getElementById('favorites');
+                    favorites.innerHTML = response.data[0].favorites;
+                }
+            };
+//            setInterval(function() {
+            //            ws.send('Hello, Server!');
+//                ws.send(JSON.stringify(msg));
+//            }, 1000);
+            sendJsonData = function() {
+                var data = document.getElementById('input');
+                console.log(data);
+                var msg = {"tipe": "suratmasuk", "nama": data.value, "data": [{"unread": 3, "favorites": 1}]};
+                ws.send(JSON.stringify(msg));
+            };
+            sendStringMessage = function() {
+                var data = document.getElementById('input');
+                ws.send('Hello, ' + data.value + '!');
+            };
+        </script>
+    </body>
+</html>
