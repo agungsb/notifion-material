@@ -8,6 +8,10 @@
             <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahPejabatCtrl.js</file>
             <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/EditBioCtrl.js</file>
             <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahAccountCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/HomeCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/Request.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/editBio.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/EditBioCtrl.js</file>
         </group>
     </open-files>
 </project-private>
