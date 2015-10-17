@@ -1,7 +1,7 @@
 var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 'Session', '$mdDialog',
     function($rootScope, $scope, SuratKeluarService, Request, Session, $mdDialog) {
         var init = function() {
-            Request.getSuratKeluarRequest(0, 10).success(function(feedback) {
+            Request.getSuratKeluarRequest(0, 100).success(function(feedback) {
                 console.log(feedback);
                 $scope.suratsIsReady = true;
                 if (feedback.count === 0) {

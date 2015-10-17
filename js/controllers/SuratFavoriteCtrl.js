@@ -1,7 +1,7 @@
 var SuratFavoriteCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'Session', '$mdDialog',
     function SuratFavoriteCtrl($rootScope, $scope, SuratMasukService, Request, Session, $mdDialog) {
         var init = function() {
-            Request.getSuratFavoriteRequest(0, 10).success(function(feedback) {
+            Request.getSuratFavoriteRequest(0, 100).success(function(feedback) {
                 console.log(feedback);
                 $scope.suratsIsReady = true;
                 if (feedback.count === 0) {
