@@ -12,17 +12,20 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
             return $http.get(baseUrl + 'user/' + $rootScope.session_auth.token);
         };
         obj.getSuratMasukRequest = function(offset, limit) {
-            return $http.get(baseUrl + 'surats/' + $rootScope.session_auth.token + '/' + offset + '/' + limit)
+            return $http.get(baseUrl + 'surats/' + $rootScope.session_auth.token + '/' + offset + '/' + limit);
+        };
+        obj.getSuratFavoriteRequest = function(offset, limit) {
+            return $http.get(baseUrl + 'favorites/' + $rootScope.session_auth.token + '/' + offset + '/' + limit);
         };
         obj.getSuratKeluarRequest = function(offset, limit) {
-            return $http.get(baseUrl + 'suratsKeluar/' + $rootScope.session_auth.token + '/' + offset + '/' + limit)
+            return $http.get(baseUrl + 'suratsKeluar/' + $rootScope.session_auth.token + '/' + offset + '/' + limit);
         };
         obj.getSuratDraftRequest = function(offset, limit) {
-            return $http.get(baseUrl + 'suratsDraft/' + $rootScope.session_auth.token + '/' + offset + '/' + limit)
+            return $http.get(baseUrl + 'suratsDraft/' + $rootScope.session_auth.token + '/' + offset + '/' + limit);
         };
         obj.getTujuanRequest = function() {
             return $http.get(baseUrl + 'tujuan');
-        }
+        };
         obj.getPenandatanganRequest = function() {
             return $http.get(baseUrl + 'penandatangan/' + $rootScope.session_auth.token);
         };

@@ -26,6 +26,34 @@ var dataUnreadBadgeCounter = function(source) {
     }
 };
 
+var dataFavoriteBadgeCounter = function(source) {
+    var data = {};
+    data.favorites = source.isFavorites;
+    if (data.favorites < 1) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D3;</i>');
+    } else if (data.favorites < 2) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D0;</i>');
+    } else if (data.favorites < 3) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D1;</i>');
+    } else if (data.favorites < 4) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D2;</i>');
+    } else if (data.favorites < 5) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D4;</i>');
+    } else if (data.favorites < 6) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D5;</i>');
+    } else if (data.favorites < 7) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D5;</i>');
+    } else if (data.favorites < 8) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D7;</i>');
+    } else if (data.favorites < 9) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D8;</i>');
+    } else if (data.favorites < 10) {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D9;</i>');
+    } else {
+        $('#suratfavorite').html('<i class="material-icons">&#xE3DA;</i>');
+    }
+};
+
 var dataUnsignedBadgeCounter = function(source) {
     var data = {};
     data.unsigned = source.isUnsigned;
@@ -54,7 +82,7 @@ var dataUnsignedBadgeCounter = function(source) {
     }
 };
 
-var dataCorrectedBadgeCounter  = function(source) {
+var dataCorrectedBadgeCounter = function(source) {
     var data = {};
     data.corrected = source.isCorrected;
     if (data.corrected < 1) {

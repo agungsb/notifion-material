@@ -12,6 +12,8 @@ app.service('SuratMasukService', ['$rootScope', 'Request', '$mdToast',
                     successMessage = "Berhasil menghapus dari daftar favorite";
                 }
                 Request.putRequest("setFavorite", data).success(function(feedback) {
+                    $rootScope.$emit('reInitSuratFavorite');
+                    dataFavoriteBadgeCounter(feedback);
                     console.log(feedback);
                     $mdToast.show(
                             $mdToast.simple()
@@ -28,5 +30,5 @@ app.service('SuratMasukService', ['$rootScope', 'Request', '$mdToast',
                             );
                 });
             }
-        }
-    }])     
+        };
+    }]);  

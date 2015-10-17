@@ -49,6 +49,7 @@
 
         <script src="js/controllers/HomeCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/SuratMasukCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/SuratFavoriteCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/SuratKeluarCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/SuratKoreksiCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>

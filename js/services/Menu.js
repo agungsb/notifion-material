@@ -15,7 +15,16 @@ app.factory('menu', [
                     allowed: true,
                     id: 'suratmasuk',
                     hascounter: true
-                }, {
+                },
+                {
+                    name: 'Surat Favorite',
+                    type: 'link',
+                    state: 'home.suratFavorite',
+                    allowed: true,
+                    id: 'suratfavorite',
+                    hascounter: true
+                },
+                {
                     name: 'Surat Keluar',
                     state: 'home.suratKeluar',
                     type: 'link',

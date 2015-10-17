@@ -48,6 +48,11 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-surat/surat-masuk.html",
                     controller: SuratMasukCtrl
                 })
+                .state('home.suratFavorite', {
+                    url: "surat-favorite",
+                    templateUrl: "templates/content/management-surat/surat-favorite.html",
+                    controller: SuratFavoriteCtrl
+                })
                 .state('home.suratKeluar', {
                     url: "surat-keluar",
                     templateUrl: "templates/content/management-surat/surat-keluar.html",
@@ -126,7 +131,7 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                             if ($rootScope.session_auth.jenis_user === "2") {
                                 dataCorrectedBadgeCounter(feedback);
                             }
-                            $('#favorites').html(feedback.favorites);
+                            dataFavoriteBadgeCounter(feedback);
                         });
                         $timeout.cancel(setNavbarLists);
                     }, 1000);
@@ -186,25 +191,24 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
 //                console.log(JSON.parse(evt.data));
             var response = JSON.parse(evt.data);
             console.log(response);
+            console.log($rootScope.session_auth.isUnsigned);
             console.log($rootScope.session_auth.account);
             console.log($rootScope.session_auth.id_jabatan);
             var tipe = '';
             console.log($rootScope.session_auth);
-            if ((response.tipe === 'suratmasuk')) {
+            if (response.tipe === 'suratmasuk') {
                 if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
                     tipe = "Ada surat masuk baru";
                     $rootScope.$emit('reInitSuratMasuk');
                     dataUnreadBadgeCounter(response);
                 }
-            }
-            if ((response.tipe === 'suratkeluar')) {
+            } else if (response.tipe === 'suratkeluar') {
                 if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
                     tipe = "Ada surat keluar baru";
                     $rootScope.$emit('reInitSuratKeluar');
                     dataUnsignedBadgeCounter(response);
                 }
-            }
-            if ((response.tipe === 'suratkoreksi')) {
+            } else if (response.tipe === 'suratkoreksi') {
                 if (($rootScope.session_auth.jenis_user === '2') && (response.account === $rootScope.session_auth.id_institusi)) {
                     tipe = "Ada surat koreksi baru";
                     $rootScope.$emit('reInitSuratKoreksi');
@@ -218,10 +222,6 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                     .hideDelay(1000)
                     );
         };
-//            setInterval(function() {
-        //            ws.send('Hello, Server!');
-//                ws.send(JSON.stringify(msg));
-//            }, 1000);
         $rootScope.$on('websocketSend', function(event, args) {
             console.log(args.data);
             var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned, "isCorrected": args.data.isCorrected};

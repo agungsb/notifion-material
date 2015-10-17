@@ -27,7 +27,10 @@ app.directive('loginDirective', [function() {
                                     'nama_institusi': feedback.nama_institusi,
                                     'jenis_user': feedback.jenis_user,
                                     'id_jabatan': feedback.jabatan,
-                                    'login': feedback.status
+                                    'login': feedback.status,
+                                    'isUnreads': feedback.isUnreads,
+                                    'favorites': feedback.favorites,
+                                    'isUnsigned': feedback.isUnsigned
                                 });
 //                                $state.go('home.suratMasuk', {}, {'location': 'replace', 'reload': true});
                                 location.reload();
