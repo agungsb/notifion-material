@@ -18,7 +18,7 @@ app.directive('loginDirective', [function() {
                             console.log(feedback);
                             if (feedback.status) {
                                 // Put cookie
-                                Session.cookie.save('n-auth', {
+                                var payload = {
                                     'token': feedback.token,
                                     'userid': feedback.userid,
                                     'account': feedback.account,
@@ -29,9 +29,13 @@ app.directive('loginDirective', [function() {
                                     'id_jabatan': feedback.jabatan,
                                     'login': feedback.status,
                                     'isUnreads': feedback.isUnreads,
-                                    'favorites': feedback.favorites,
+                                    'isFavorites': feedback.isFavorites,
                                     'isUnsigned': feedback.isUnsigned
-                                });
+                                };
+                                if (feedback.jenis_user === '2') {
+                                    payload.isCorrected = feedback.isCorrected;
+                                }
+                                Session.cookie.save('n-auth', payload);
 //                                $state.go('home.suratMasuk', {}, {'location': 'replace', 'reload': true});
                                 location.reload();
                             } else {
