@@ -6,7 +6,7 @@
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
     <md-list class="md-padding" ng-if="suratsIsReady">
-        <div ng-repeat="surat in surats track by ::surat.id">
+        <div ng-repeat="surat in surats track by ::surat.id | limitTo: 1">
             <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::surat.subject" ng-class="{'primary-disabled': surat.isUnread}"></h3>

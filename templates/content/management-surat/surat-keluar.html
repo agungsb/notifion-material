@@ -3,7 +3,7 @@
 </md-toolbar>
 <md-content>
     <md-list class="md-padding">
-        <div ng-repeat="suratkeluar in suratsKeluar track by ::suratkeluar.id">
+        <div ng-repeat="suratkeluar in suratsKeluar track by ::suratkeluar.id | limitTo: 1">
             <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::suratkeluar.subject"></h3>
