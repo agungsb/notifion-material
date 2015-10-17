@@ -7,6 +7,14 @@
             <file>file:/C:/xampp/htdocs/notifion-material/test_websocket.html</file>
             <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/BuatSuratCtrl.js</file>
             <file>file:/C:/xampp/htdocs/notifion-material/js/custom.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/Menu.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahPejabatCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/EditBioCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/TambahAccountCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/HomeCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/Request.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-user/editBio.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/EditBioCtrl.js</file>
         </group>
     </open-files>
 </project-private>

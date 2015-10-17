@@ -38,7 +38,7 @@
 //                console.log(evt);
 //                console.log(JSON.parse(evt.data));
                 var response = JSON.parse(evt.data);
-                if (response.account === 'tested') {
+                if (response.nama === 'tested') {
                     alert("Ada data baru yang masuk");
                     var out = document.getElementById('output');
                     out.innerHTML += evt.data + '<br>';
