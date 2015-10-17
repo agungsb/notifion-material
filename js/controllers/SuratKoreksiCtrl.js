@@ -4,11 +4,7 @@ var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog', '$rootScope',
         var init = function() {
             Request.getSuratDraftRequest(0, 10).success(function(feedback) {
                 console.log(feedback);
-                $scope.hideMe = [];
                 $scope.suratsDraft = feedback.result;
-                for (var i = 0; i < feedback.count; i++) {
-                    $scope.hideMe[i] = false;
-                }
                 $scope.editSurat = editDialog;
                 function editDialog($event, id) {
                     $mdDialog.show({

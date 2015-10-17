@@ -3,16 +3,20 @@
 </md-toolbar>
 <md-content>
     <md-list class="md-padding">
-        <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="suratdraft in suratsDraft track by ::suratdraft.id" ng-hide="hideMe[$index]">
-            <div class="md-list-item-text">
-                <h3 ng-bind="::suratdraft.subject"></h3>
-                <h4 ng-bind="::suratdraft.hal"></h4>
-                <p ng-bind="::suratdraft.tanggal"></p>
-                <p ng-bind-html="suratdraft.koreksi"></p> <!-- bind html karna ada tag html-->
-            </div>
-            <md-button md-theme="app-blue" class="md-primary" ng-click="editSurat($event, suratdraft.id)">
-                <i class="material-icons md-48" style="margin-top: 10%;">&#xE254;</i>
-            </md-button>
-        </md-list-item>
+        <div ng-repeat="suratdraft in suratsDraft track by ::suratdraft.id">
+            <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}">
+                <div class="md-list-item-text">
+                    <h3 ng-bind="::suratdraft.subject"></h3>
+                    <h4 ng-bind="::suratdraft.hal"></h4>
+                    <p ng-bind="::suratdraft.tanggal"></p>
+                    <p class="warn-disabled">Catatan koreksi:</p>
+                    <p ng-bind-html="suratdraft.koreksi"></p> <!-- bind html karna ada tag html-->
+                </div>
+                <md-button md-theme="app-blue" class="md-primary" ng-click="editSurat($event, suratdraft.id)">
+                    <i class="material-icons md-48" style="margin-top: 10%;">&#xE254;</i>
+                </md-button>
+            </md-list-item>
+            <md-divider ng-if="!$last"></md-divider>
+        </div>
     </md-list>
 </md-content>
