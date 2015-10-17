@@ -23,10 +23,14 @@ app.directive('loginDirective', [function() {
                                     'userid': feedback.userid,
                                     'account': feedback.account,
                                     'nama': feedback.nama,
+                                    'id_institusi': feedback.institusi,
                                     'nama_institusi': feedback.nama_institusi,
+                                    'jenis_user': feedback.jenis_user,
+                                    'id_jabatan': feedback.jabatan,
                                     'login': feedback.status
                                 });
-                                $state.go('home.suratMasuk', {}, {'location': 'replace'})
+//                                $state.go('home.suratMasuk', {}, {'location': 'replace', 'reload': true});
+                                location.reload();
                             } else {
                                 $mdToast.show(
                                         $mdToast.simple()

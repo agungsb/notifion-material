@@ -6,7 +6,7 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
             } else {
                 $scope.surats[index].isFavorite = !$scope.surats[index].isFavorite;
             }
-            SuratMasukService.setFavorite(Session.get('token'), suratId, $scope.surats[index].isFavorite);
+            SuratMasukService.setFavorite(suratId, $scope.surats[index].isFavorite);
         };
         Request.getSuratMasukRequest(0, 10).success(function(feedback) {
             console.log(feedback);

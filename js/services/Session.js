@@ -1,7 +1,7 @@
 'use strict';
 
-app.factory('Session', ['$rootScope', '$state', '$timeout', '$cookies',
-    function($rootScope, $state, $timeout, $cookies) {
+app.factory('Session', ['$state', '$timeout', '$cookies',
+    function($state, $timeout, $cookies) {
         var obj = {'cookie': {}};
 
         obj.isLogin = function() {
@@ -19,7 +19,8 @@ app.factory('Session', ['$rootScope', '$state', '$timeout', '$cookies',
                 $timeout(function() {
                     obj.cookie.delete('n-auth');
                 }).then(function() {
-                    $state.go('home.suratMasuk');
+                    location.reload();
+//                    $state.go('home.suratMasuk', {}, {'location': 'replace', 'reload': true});
                 });
             }
         };

@@ -119,12 +119,17 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                 Request.getUserInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
                     console.log(feedback);
                     $rootScope.userInfo = feedback.data;
-                    var updateBadgeCounter = $timeout(function() {
-                        dataUnreadBadgeCounter(feedback);
-                        dataUnsignedBadgeCounter(feedback);
-                        $('#favorites').html(feedback.favorites);
-                        $timeout.cancel(updateBadgeCounter);
-                    }, 100);
+                    var setNavbarLists = $timeout(function() {
+                        $rootScope.$apply(function() {
+                            dataUnreadBadgeCounter(feedback);
+                            dataUnsignedBadgeCounter(feedback);
+                            if ($rootScope.session_auth.jenis_user === "2") {
+                                dataCorrectedBadgeCounter(feedback);
+                            }
+                            $('#favorites').html(feedback.favorites);
+                        });
+                        $timeout.cancel(setNavbarLists);
+                    }, 1000);
                     $rootScope.userInfoIsReady = true;
                 }).error(function(error) {
                     console.log(error);
@@ -174,8 +179,6 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
 
         ws.onopen = function() {
             console.log('Connected');
-            var conn = document.getElementById('connect');
-            conn.innerHTML = "Connected";
         };
 
         ws.onmessage = function(evt) {
@@ -185,22 +188,35 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             console.log(response);
             console.log($rootScope.session_auth.account);
             console.log($rootScope.session_auth.id_jabatan);
-            if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
-                var tipe = '';
-                if (response.tipe === 'suratmasuk') {
+            var tipe = '';
+            console.log($rootScope.session_auth);
+            if ((response.tipe === 'suratmasuk')) {
+                if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
                     tipe = "Ada surat masuk baru";
+                    $rootScope.$emit('reInitSuratMasuk');
                     dataUnreadBadgeCounter(response);
-                } else if (response.tipe === 'suratkeluar') {
+                }
+            }
+            if ((response.tipe === 'suratkeluar')) {
+                if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
                     tipe = "Ada surat keluar baru";
+                    $rootScope.$emit('reInitSuratKeluar');
                     dataUnsignedBadgeCounter(response);
                 }
-                $mdToast.show(
-                        $mdToast.simple()
-                        .content(tipe)
-                        .position('right')
-                        .hideDelay(1000)
-                        );
             }
+            if ((response.tipe === 'suratkoreksi')) {
+                if (($rootScope.session_auth.jenis_user === '2') && (response.account === $rootScope.session_auth.id_institusi)) {
+                    tipe = "Ada surat koreksi baru";
+                    $rootScope.$emit('reInitSuratKoreksi');
+                    dataCorrectedBadgeCounter(response);
+                }
+            }
+            $mdToast.show(
+                    $mdToast.simple()
+                    .content(tipe)
+                    .position('right')
+                    .hideDelay(1000)
+                    );
         };
 //            setInterval(function() {
         //            ws.send('Hello, Server!');
@@ -208,7 +224,7 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
 //            }, 1000);
         $rootScope.$on('websocketSend', function(event, args) {
             console.log(args.data);
-            var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned};
+            var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned, "isCorrected": args.data.isCorrected};
             ws.send(JSON.stringify(msg));
         });
     }]);

@@ -31,6 +31,7 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
             return $http({
                 url: baseUrl + url,
                 method: "GET",
+                cache: false,
                 options: options
             });
         };
@@ -40,6 +41,7 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
                 url: baseUrl + url,
                 method: "POST",
                 data: data,
+                cache: false,
                 options: options
             });
         };
@@ -49,6 +51,7 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
                 url: baseUrl + url,
                 method: "PUT",
                 data: data,
+                cache: false,
                 options: options
             });
         };
@@ -57,6 +60,7 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
             return $http({
                 url: baseUrl + url,
                 method: "DELETE",
+                cache: false,
                 options: options
             });
         };
