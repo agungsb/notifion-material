@@ -38,7 +38,7 @@ var TambahKodeUnitCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdToast
                             .position('right')
                             .hideDelay(1000)
                             ).then(function(response) {
-//                    $state.reload();
+                    $state.reload();
                     });
                 }).error(function(error) {
                     console.log(error);

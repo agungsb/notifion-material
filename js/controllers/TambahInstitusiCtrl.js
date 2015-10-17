@@ -28,6 +28,24 @@ var TambahInstitusiCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdToas
                 console.log("error");
             });
 
+            $scope.deleteInstitusi = function(id_institusi, index) {
+                Request.deleteRequest('hapusInstitusi/' + $rootScope.session_auth.token + "/" + id_institusi).success(function(feedback) {
+                    console.log(feedback);
+                    $scope.institusis.splice(index, 1);
+                    $mdToast.show(
+                            $mdToast.simple()
+                            .content(feedback.result)
+                            .position('right')
+                            .hideDelay(1000)
+                            ).then(function(response) {
+//                    $state.reload();
+                    });
+                }).error(function(error) {
+                    console.log(error);
+                });
+//      alert(account);
+            };
+
             $scope.submitInstitusi = function() {
                 $scope.isSubmitting = true;
                 var data = {

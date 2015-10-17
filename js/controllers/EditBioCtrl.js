@@ -10,7 +10,7 @@ var EditBioCtrl = ['$rootScope', '$scope', '$state', '$mdToast', 'Request', 'Ses
             email1: "",
             email2: "",
             nohp1: "",
-            nohp2: ""            
+            nohp2: ""
         };
         $rootScope.$watch('userInfo', function(newVal, oldVal) {
             if (typeof (newVal) !== 'undefined') {
@@ -60,7 +60,13 @@ var EditBioCtrl = ['$rootScope', '$scope', '$state', '$mdToast', 'Request', 'Ses
                         .position('right')
                         .hideDelay(1000)
                         ).then(function(response) {
-                    $state.reload();
+                    $scope.data.nama = data.nama;
+                    $scope.data.password = data.nama;
+                    $scope.data.gender = data.gender;
+                    $scope.data.email1 = data.email1;
+                    $scope.data.email2 = data.email2;
+                    $scope.data.nohp1 = data.nohp1;
+                    $scope.data.nohp2 = data.nohp2;
                 });
             }).error(function(data) {
                 console.log(data);

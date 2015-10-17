@@ -74,8 +74,8 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 })
 
                 .state('home.tambahAccount', {
-                    url: "tambah-account",
-                    templateUrl: "templates/content/management-user/tambah-account.html",
+                    url: "tambah-user",
+                    templateUrl: "templates/content/management-user/tambah-user.html",
                     controller: TambahAccountCtrl
                 })
                 .state('home.tambahInstansi', {

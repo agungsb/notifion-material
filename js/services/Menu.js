@@ -33,25 +33,27 @@ app.factory('menu', [
                     id: 'suratkoreksi',
                     hascounter: true
                 }],
-            allowed: true
+            allowed: $rootScope.session_auth.jenis_user !== '1'
         });
 
         sections.push({
             name: 'Management User',
             type: 'toggle',
             pages: [{
-                    name: 'Tambah Account',
+                    name: 'Tambah User',
                     type: 'link',
                     state: 'home.tambahAccount',
                     icon: 'fa fa-inbox',
                     allowed: true
-                }, {
-                    name: 'Tambah Instansi',
-                    state: 'home.tambahInstansi',
-                    type: 'link',
-                    icon: 'fa fa-upload',
-                    allowed: true
-                },
+                }
+//                , {
+//                    name: 'Tambah Instansi',
+//                    state: 'home.tambahInstansi',
+//                    type: 'link',
+//                    icon: 'fa fa-upload',
+//                    allowed: true
+//                }
+                ,
                 {
                     name: 'Tambah Institusi',
                     state: 'home.tambahInstitusi',
@@ -59,7 +61,7 @@ app.factory('menu', [
                     icon: 'fa fa-edit',
                     allowed: true
                 }],
-            allowed: $rootScope.session_auth.jenis_user === '2'
+            allowed: $rootScope.session_auth.jenis_user === '1'
 //            allowed: true
         });
 
@@ -79,7 +81,7 @@ app.factory('menu', [
                     icon: 'fa fa-upload',
                     allowed: true
                 }],
-            allowed: $rootScope.session_auth.jenis_user === '2'
+            allowed: $rootScope.session_auth.jenis_user === '1'
 //            allowed: true
         });
 
