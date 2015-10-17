@@ -3,11 +3,15 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
         var init = function() {
             Request.getSuratKeluarRequest(0, 10).success(function(feedback) {
                 console.log(feedback);
-                $scope.hideMe = [];
-                $scope.suratsKeluar = feedback.result;
-                for (var i = 0; i < feedback.count; i++) {
-                    $scope.hideMe[i] = false;
+                $scope.suratsIsReady = true;
+                if (feedback.count === 0) {
+                    $scope.tableIsEmpty = true;
+                } else {
+                    $scope.tableIsEmpty = false;
                 }
+                $scope.suratsKeluar = feedback.result;
+                $scope.tableReady = true;
+                
                 $scope.acceptSurat = function(id) {
                     SuratKeluarService.acceptSurat(id);
                 };

@@ -7,7 +7,7 @@
     </div>
     <md-list class="md-padding" ng-if="suratsIsReady">
         <div ng-repeat="surat in surats track by ::surat.id">
-            <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}">
+            <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::surat.subject" ng-class="{'primary-disabled': surat.isUnread}"></h3>
                     <h4 ng-bind="::surat.hal"></h4>

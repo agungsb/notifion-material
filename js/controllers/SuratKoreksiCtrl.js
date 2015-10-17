@@ -4,6 +4,13 @@ var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog', '$rootScope',
         var init = function() {
             Request.getSuratDraftRequest(0, 10).success(function(feedback) {
                 console.log(feedback);
+                $scope.suratsIsReady = true;
+                if (feedback.count === 0) {
+                    $scope.tableIsEmpty = true;
+                } else {
+                    $scope.tableIsEmpty = false;
+                }
+                $scope.tableReady = true;
                 $scope.suratsDraft = feedback.result;
                 $scope.editSurat = editDialog;
                 function editDialog($event, id) {

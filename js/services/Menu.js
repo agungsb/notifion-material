@@ -59,8 +59,8 @@ app.factory('menu', [
                     icon: 'fa fa-edit',
                     allowed: true
                 }],
-//            allowed: $rootScope.userInfo.jenis_user === '2'
-            allowed: true
+            allowed: $rootScope.session_auth.jenis_user === '2'
+//            allowed: true
         });
 
         sections.push({
@@ -79,16 +79,15 @@ app.factory('menu', [
                     icon: 'fa fa-upload',
                     allowed: true
                 }],
-//            allowed: $rootScope.session_auth.jenis_user === '2'
-            allowed: true
+            allowed: $rootScope.session_auth.jenis_user === '2'
+//            allowed: true
         });
 
         sections.push({
             name: 'Buat Surat',
             state: 'home.buatSurat',
             type: 'link',
-            allowed: true
-//            allowed: $rootScope.session_auth.jenis_user === '2'
+            allowed: $rootScope.session_auth.jenis_user === '2'
         });
 
 

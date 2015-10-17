@@ -2,9 +2,12 @@
     <toolbar-directive title="Surat Keluar"></toolbar-directive>
 </md-toolbar>
 <md-content>
-    <md-list class="md-padding">
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!suratsIsReady">
+        <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <md-list class="md-padding" ng-if="suratsIsReady">
         <div ng-repeat="suratkeluar in suratsKeluar track by ::suratkeluar.id">
-            <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}">
+            <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::suratkeluar.subject"></h3>
                     <h4 ng-bind="::suratkeluar.hal"></h4>
