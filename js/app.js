@@ -192,39 +192,54 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             var response = JSON.parse(evt.data);
             console.log(response);
             console.log($rootScope.session_auth.isUnsigned);
-            console.log($rootScope.session_auth.account);
-            console.log($rootScope.session_auth.id_jabatan);
-            var tipe = '';
+//            console.log($rootScope.session_auth.account);
+//            console.log($rootScope.session_auth.id_jabatan);
             console.log($rootScope.session_auth);
             if (response.tipe === 'suratmasuk') {
                 if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
-                    tipe = "Ada surat masuk baru";
                     $rootScope.$emit('reInitSuratMasuk');
-                    dataUnreadBadgeCounter(response);
+                    $rootScope.session_auth.isUnreads++;
+                    console.log($rootScope.session_auth);
+                    dataUnreadBadgeCounter($rootScope.session_auth);
+                    $mdToast.show(
+                            $mdToast.simple()
+                            .content("Ada surat masuk baru")
+                            .position('right')
+                            .hideDelay(1000)
+                            );
                 }
             } else if (response.tipe === 'suratkeluar') {
                 if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
-                    tipe = "Ada surat keluar baru";
                     $rootScope.$emit('reInitSuratKeluar');
-                    dataUnsignedBadgeCounter(response);
+                    $rootScope.session_auth.isUnsigned += 1;
+                    console.log($rootScope.session_auth.isUnsigned);
+                    alert($rootScope.session_auth.isUnsigned);
+                    dataUnsignedBadgeCounter($rootScope.session_auth);
+                    $mdToast.show(
+                            $mdToast.simple()
+                            .content("Ada surat keluar baru")
+                            .position('right')
+                            .hideDelay(1000)
+                            );
                 }
             } else if (response.tipe === 'suratkoreksi') {
                 if (($rootScope.session_auth.jenis_user === '2') && (response.account === $rootScope.session_auth.id_institusi)) {
-                    tipe = "Ada surat koreksi baru";
                     $rootScope.$emit('reInitSuratKoreksi');
-                    dataCorrectedBadgeCounter(response);
+                    $rootScope.session_auth.isCorrected += 1;
+                    dataCorrectedBadgeCounter($rootScope.session_auth);
+                    $mdToast.show(
+                            $mdToast.simple()
+                            .content("Ada surat koreksi baru")
+                            .position('right')
+                            .hideDelay(1000)
+                            );
                 }
             }
-            $mdToast.show(
-                    $mdToast.simple()
-                    .content(tipe)
-                    .position('right')
-                    .hideDelay(1000)
-                    );
         };
         $rootScope.$on('websocketSend', function(event, args) {
             console.log(args.data);
-            var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned, "isCorrected": args.data.isCorrected};
+//            var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned, "isCorrected": args.data.isCorrected};
+            var msg = {"tipe": args.tipe, "account": args.data.account};
             ws.send(JSON.stringify(msg));
         });
     }]);

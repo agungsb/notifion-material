@@ -14,7 +14,7 @@ var dataUnreadBadgeCounter = function(source) {
     } else if (data.unread < 6) {
         $('#suratmasuk').html('<i class="material-icons">&#xE3D5;</i>');
     } else if (data.unread < 7) {
-        $('#suratmasuk').html('<i class="material-icons">&#xE3D5;</i>');
+        $('#suratmasuk').html('<i class="material-icons">&#xE3D6</i>');
     } else if (data.unread < 8) {
         $('#suratmasuk').html('<i class="material-icons">&#xE3D7;</i>');
     } else if (data.unread < 9) {
@@ -42,7 +42,7 @@ var dataFavoriteBadgeCounter = function(source) {
     } else if (data.favorites < 6) {
         $('#suratfavorite').html('<i class="material-icons">&#xE3D5;</i>');
     } else if (data.favorites < 7) {
-        $('#suratfavorite').html('<i class="material-icons">&#xE3D5;</i>');
+        $('#suratfavorite').html('<i class="material-icons">&#xE3D6;</i>');
     } else if (data.favorites < 8) {
         $('#suratfavorite').html('<i class="material-icons">&#xE3D7;</i>');
     } else if (data.favorites < 9) {
@@ -70,7 +70,7 @@ var dataUnsignedBadgeCounter = function(source) {
     } else if (data.unsigned < 6) {
         $('#suratkeluar').html('<i class="material-icons">&#xE3D5;</i>');
     } else if (data.unsigned < 7) {
-        $('#suratkeluar').html('<i class="material-icons">&#xE3D5;</i>');
+        $('#suratkeluar').html('<i class="material-icons">&#xE3D6;</i>');
     } else if (data.unsigned < 8) {
         $('#suratkeluar').html('<i class="material-icons">&#xE3D7;</i>');
     } else if (data.unsigned < 9) {
@@ -98,7 +98,7 @@ var dataCorrectedBadgeCounter = function(source) {
     } else if (data.corrected < 6) {
         $('#suratkoreksi').html('<i class="material-icons">&#xE3D5;</i>');
     } else if (data.corrected < 7) {
-        $('#suratkoreksi').html('<i class="material-icons">&#xE3D5;</i>');
+        $('#suratkoreksi').html('<i class="material-icons">&#xE3D6;</i>');
     } else if (data.corrected < 8) {
         $('#suratkoreksi').html('<i class="material-icons">&#xE3D7;</i>');
     } else if (data.corrected < 9) {
