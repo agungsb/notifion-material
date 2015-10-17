@@ -88,7 +88,7 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-user/tambah-institusi.html",
                     controller: TambahInstitusiCtrl
                 })
-                
+
                 .state('home.tambahKodeHal', {
                     url: "tambah-kode-hal",
                     templateUrl: "templates/content/management-surat/tambah-hal.html",
@@ -99,7 +99,7 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-surat/tambah-kode-unit.html",
                     controller: TambahKodeUnitCtrl
                 })
-                
+
                 .state('home.buatSurat', {
                     url: "buat-surat",
                     templateUrl: "templates/content/management-surat/buat-surat.html",
@@ -118,8 +118,13 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                 console.log($rootScope.session_auth);
                 Request.getUserInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
                     console.log(feedback);
-                    $rootScope.userInfo = feedback;
-                    console.log($rootScope.userInfo);
+                    $rootScope.userInfo = feedback.data;
+                    var updateBadgeCounter = $timeout(function() {
+                        dataUnreadBadgeCounter(feedback);
+                        dataUnsignedBadgeCounter(feedback);
+                        $('#favorites').html(feedback.favorites);
+                        $timeout.cancel(updateBadgeCounter);
+                    }, 100);
                     $rootScope.userInfoIsReady = true;
                 }).error(function(error) {
                     console.log(error);
@@ -130,57 +135,6 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             });
             if ($rootScope.isLogin) {
                 call_auth_me();
-                if (typeof (EventSource) !== "undefined") {
-                    var dataUnread, dataUnsigned, dataUnreadChecked, dataUnsignedChecked;
-                    var source = new EventSource("http://localhost/notifion-api/sse/" + $rootScope.session_auth.token);
-//                var source = new EventSource("http://10.12.12.14:3000/sse");
-                    source.onmessage = function(event) {
-//                console.log(event);
-//                console.log(JSON.parse(event.data));
-                        var data = JSON.parse(event.data);
-                        if (dataUnread !== data.unread) {
-                            dataUnread = data.unread;
-                            if (dataUnreadChecked) {
-                                dataUnreadChecked = false;
-                                $mdToast.show(
-                                        $mdToast.simple()
-                                        .content("Ada pembaruan di surat masuk")
-                                        .position('right')
-                                        .hideDelay(1000)
-                                        ).then(function() {
-                                    dataUnreadChecked = true;
-                                });
-                            } else {
-                                dataUnreadChecked = true;
-                            }
-                            console.log("masih beda");
-                        }
-                        if (dataUnsigned !== data.unsigned) {
-                            dataUnsigned = data.unsigned;
-                            if (dataUnsignedChecked) {
-                                dataUnsignedChecked = false;
-                                $mdToast.show(
-                                        $mdToast.simple()
-                                        .content("Ada pembaruan di surat keluar")
-                                        .position('right')
-                                        .hideDelay(1000)
-                                        ).then(function() {
-                                    dataUnsignedChecked = true;
-                                });
-                            } else {
-                                dataUnsignedChecked = true;
-                            }
-                            console.log("masih beda");
-                        }
-                        $timeout(function() {
-                            dataUnreadBadgeCounter(data);
-                            dataUnsignedBadgeCounter(data);
-                        });
-                    };
-                } else {
-                    alert("Sorry, your browser does not support server-sent events...");
-//            document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
-                }
             }
 
             // Close the sidenav everytime state is changed
@@ -203,32 +157,60 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             return current;
         };
         callAtTimeout();
-//        $templateCache.put('templates/menu-link.html',
-//                '<md-button ng-class="{\'{{section.icon}}\' : true}" ui-sref-active="active" \n' +
-//                '  ui-sref="{{section.state}}" ng-click="focusSection()">\n' +
-//                '  {{section | humanizeDoc}}\n' +
-//                '  <span  class="md-visually-hidden "\n' +
-//                '    ng-if="isSelected()">\n' +
-//                '    current page\n' +
-//                '  </span>\n' +
-//                '</md-button>\n' +
-//                '');
-//        $templateCache.put('partials/menu-toggle.html',
-//                '<md-button class="md-button-toggle"\n' +
-//                '  ng-click="toggle()"\n' +
-//                '  aria-controls="docs-menu-{{section.name | nospace}}"\n' +
-//                '  flex layout="row"\n' +
-//                '  aria-expanded="{{isOpen()}}">\n' +
-//                '  {{section.name}}\n' +
-//                '  <span aria-hidden="true" class=" pull-right fa fa-chevron-down md-toggle-icon"\n' +
-//                '  ng-class="{\'toggled\' : isOpen()}"></span>\n' +
-//                '</md-button>\n' +
-//                '<ul ng-show="isOpen()" id="docs-menu-{{section.name | nospace}}" class="menu-toggle-list">\n' +
-//                '  <li ng-repeat="page in section.pages">\n' +
-//                '    <menu-link section="page"></menu-link>\n' +
-//                '  </li>\n' +
-//                '</ul>\n' +
-//                '');
+
+        var loc = window.location;
+        var uri = 'ws:';
+
+        if (loc.protocol === 'https:') {
+            uri = 'wss:';
+        }
+        uri += '//' + loc.host;
+        uri += loc.pathname + 'ws';
+
+//            uri = "ws://127.0.0.1:3000/ws" // Yang dipake, yang ini
+        uri = "ws://localhost:3000/wsjsonmultiple";
+//            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
+        var ws = new WebSocket(uri);
+
+        ws.onopen = function() {
+            console.log('Connected');
+            var conn = document.getElementById('connect');
+            conn.innerHTML = "Connected";
+        };
+
+        ws.onmessage = function(evt) {
+//                console.log(evt);
+//                console.log(JSON.parse(evt.data));
+            var response = JSON.parse(evt.data);
+            console.log(response);
+            console.log($rootScope.session_auth.account);
+            console.log($rootScope.session_auth.id_jabatan);
+            if ((response.account === $rootScope.session_auth.account) || (response.account === $rootScope.userInfo.id_jabatan)) {
+                var tipe = '';
+                if (response.tipe === 'suratmasuk') {
+                    tipe = "Ada surat masuk baru";
+                    dataUnreadBadgeCounter(response);
+                } else if (response.tipe === 'suratkeluar') {
+                    tipe = "Ada surat keluar baru";
+                    dataUnsignedBadgeCounter(response);
+                }
+                $mdToast.show(
+                        $mdToast.simple()
+                        .content(tipe)
+                        .position('right')
+                        .hideDelay(1000)
+                        );
+            }
+        };
+//            setInterval(function() {
+        //            ws.send('Hello, Server!');
+//                ws.send(JSON.stringify(msg));
+//            }, 1000);
+        $rootScope.$on('websocketSend', function(event, args) {
+            console.log(args.data);
+            var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned};
+            ws.send(JSON.stringify(msg));
+        });
     }]);
 app.filter('nospace', function() {//take all whitespace out of string
     return function(value) {

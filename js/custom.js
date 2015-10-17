@@ -1,4 +1,6 @@
-var dataUnreadBadgeCounter = function(data) {
+var dataUnreadBadgeCounter = function(source) {
+    var data = {};
+    data.unread = source.isUnreads;
     if (data.unread < 1) {
         $('#suratmasuk').html('<i class="material-icons">&#xE3D3;</i>');
     } else if (data.unread < 2) {
@@ -24,7 +26,9 @@ var dataUnreadBadgeCounter = function(data) {
     }
 };
 
-var dataUnsignedBadgeCounter = function(data) {
+var dataUnsignedBadgeCounter = function(source) {
+    var data = {};
+    data.unsigned = source.isUnsigned;
     if (data.unsigned < 1) {
         $('#suratkeluar').html('<i class="material-icons">&#xE3D3;</i>');
     } else if (data.unsigned < 2) {

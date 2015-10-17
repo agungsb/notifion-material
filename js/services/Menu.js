@@ -31,7 +31,7 @@ app.factory('menu', [
                     state: 'home.suratKoreksi',
                     type: 'link',
                     icon: 'fa fa-edit',
-                    allowed: true,
+                    allowed: $rootScope.userInfo.jenis_user === '2',
                     id: 'suratkoreksi',
                     hascounter: true
                 }],

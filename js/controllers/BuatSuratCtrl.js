@@ -119,6 +119,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                         .position('right')
                         .hideDelay(1000)
                         ).then(function() {
+                    $rootScope.$emit('websocketSend', {'tipe': 'suratkeluar', 'data': data});
 //                $state.reload();
                 });
             }).error(function(data) {

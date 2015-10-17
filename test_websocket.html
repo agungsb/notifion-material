@@ -5,7 +5,9 @@
         <title>WebSocket</title>
     </head>
     <body>
+        <p id="connect"></p>
         <p>Unread: <span id="unread">0</span></p>
+        <p>Unsigned: <span id="unsigned">0</span></p>
         <p>Favorites: <span id="favorites">0</span></p>
         <p id="output"></p>
         <input id="input"/>
@@ -21,27 +23,31 @@
             uri += '//' + loc.host;
             uri += loc.pathname + 'ws';
 
-//                    uri = "ws://127.0.0.1:3000/ws" // Yang dipake, yang ini
-//            uri = "ws://127.0.0.1:3000/wsjson";
-            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
+//            uri = "ws://127.0.0.1:3000/ws" // Yang dipake, yang ini
+            uri = "ws://localhost:3000/wsjsonmultiple";
+//            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
             ws = new WebSocket(uri);
 
             ws.onopen = function() {
                 console.log('Connected');
+                var conn = document.getElementById('connect');
+                conn.innerHTML = "Connected";
             };
 
             ws.onmessage = function(evt) {
 //                console.log(evt);
 //                console.log(JSON.parse(evt.data));
                 var response = JSON.parse(evt.data);
-                if (response.nama === 'test') {
+                if (response.account === 'tested') {
                     alert("Ada data baru yang masuk");
                     var out = document.getElementById('output');
                     out.innerHTML += evt.data + '<br>';
                     var unread = document.getElementById('unread');
-                    unread.innerHTML = response.data[0].unread;
+                    unread.innerHTML = response.isUnreads;
+                    var unsigned = document.getElementById('unsigned');
+                    unsigned.innerHTML = response.isUnsigned;
                     var favorites = document.getElementById('favorites');
-                    favorites.innerHTML = response.data[0].favorites;
+                    favorites.innerHTML = response.favorites;
                 }
             };
 //            setInterval(function() {
@@ -51,7 +57,7 @@
             sendJsonData = function() {
                 var data = document.getElementById('input');
                 console.log(data);
-                var msg = {"tipe": "suratmasuk", "nama": data.value, "data": [{"unread": 3, "favorites": 1}]};
+                var msg = {"tipe": "suratmasuk", "account": data.value, "isUnreads": 0, "favorites": 0, "isUnsigned": 1};
                 ws.send(JSON.stringify(msg));
             };
             sendStringMessage = function() {
