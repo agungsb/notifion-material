@@ -1,7 +1,7 @@
 var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 'Session', '$mdDialog',
     function($rootScope, $scope, SuratKeluarService, Request, Session, $mdDialog) {
         var init = function() {
-            Request.getSuratKeluarRequest(0, 10).success(function(feedback) {
+            Request.getSuratKeluarRequest(0, 100).success(function(feedback) {
                 console.log(feedback);
                 $scope.suratsIsReady = true;
                 if (feedback.count === 0) {
@@ -35,6 +35,8 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                     }
                 };
                 $scope.previewSurat = function($event, id) {
+                    console.log($scope);
+                    alert($scope.isUploaded);
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
                     $mdDialog.show({

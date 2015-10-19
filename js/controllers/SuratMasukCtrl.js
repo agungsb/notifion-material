@@ -12,7 +12,7 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                 $scope.surats = feedback.result;
                 $scope.tableReady = true;
 //            scope untuk view surat
-                $scope.viewSurat = function($event, id) {
+                $scope.viewSurat = function($event, id, source) {
 //                var url = "http://localhost/notifion-api/view/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
                     $mdDialog.show({
@@ -24,8 +24,14 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                         console.log('finished');
                     });
                     function DialogController($scope, $http, $mdDialog, $sce) {
+                        var sourceUrl = "";
+                        if (source.isUploaded) {
+                            sourceUrl = "/api/" + source.file_path;
+                        } else {
+                            sourceUrl = "/api/view/" + id + "/" + $rootScope.session_auth.token;
+                        }
                         $http({
-                            url: "/api/view/" + id + "/" + $rootScope.session_auth.token,
+                            url: sourceUrl,
                             method: "GET",
                             headers: {'Accept': 'application/pdf'},
                             responseType: 'arraybuffer'
