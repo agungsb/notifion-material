@@ -1,7 +1,7 @@
 var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'Session', '$mdDialog',
     function SuratMasukCtrl($rootScope, $scope, SuratMasukService, Request, Session, $mdDialog) {
         var init = function() {
-            Request.getSuratMasukRequest(0, 10).success(function(feedback) {
+            Request.getSuratMasukRequest(0, 100).success(function(feedback) {
                 console.log(feedback);
                 $scope.suratsIsReady = true;
                 if (feedback.count === 0) {
