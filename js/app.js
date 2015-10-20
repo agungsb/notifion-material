@@ -67,11 +67,11 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     url: "list-user",
                     templateUrl: "templates/content/management-user/list-user.html"
                 })
-                .state('home.tambahUser', {
-                    url: "tambah-user",
-                    templateUrl: "templates/content/management-user/tambah-user.html",
-                    controller: TambahUserCtrl
-                })
+//                .state('home.tambahUser', {
+//                    url: "tambah-user",
+//                    templateUrl: "templates/content/management-user/tambah-user.html",
+//                    controller: TambahUserCtrl
+//                })
                 .state('home.editBio', {
                     url: "edit-bio",
                     templateUrl: "templates/content/management-user/editBio.html",

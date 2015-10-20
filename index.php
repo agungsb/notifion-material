@@ -53,7 +53,7 @@
         <script src="js/controllers/SuratKeluarCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/SuratKoreksiCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>
-        <script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>
+        <!--<script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>-->
         <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahAccountCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahInstansiCtrl.js" type="text/javascript"></script>
