@@ -160,3 +160,11 @@ md-tabs .md-tab.md-active, md-tabs .md-tab.md-focused{
 .primary-disabled{
     color: rgb(33,150,243) !important;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.nowrap{
+    white-space: nowrap;
+}
