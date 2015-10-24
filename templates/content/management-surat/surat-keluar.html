@@ -6,10 +6,25 @@
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
     <md-list class="md-padding" ng-if="suratsIsReady">
-        <div ng-repeat="suratkeluar in suratsKeluar track by ::suratkeluar.id">
+        <div layout="row">
+            <md-input-container flex>
+                <label>Subject Surat...</label>
+                <input type="text" ng-model="search.subject"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Nomor Surat...</label>
+                <input type="text" ng-model="search.no_surat"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Hal Surat...</label>
+                <input type="text" ng-model="search.hal"/>
+            </md-input-container>
+        </div>
+        <div ng-repeat="suratkeluar in suratsKeluar| filter:search:strict track by ::suratkeluar.id">
             <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::suratkeluar.subject"></h3>
+                    <h4 ng-bind="::suratkeluar.no_surat"></h4>
                     <h4 ng-bind="::suratkeluar.hal"></h4>
                     <p ng-bind="::suratkeluar.tanggal"></p>
                     <!--<p ng-bind-html="suratkeluar.isi"></p>-->

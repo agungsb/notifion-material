@@ -6,10 +6,25 @@
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
     <md-list class="md-padding" ng-if="suratsIsReady">
-        <div ng-repeat="suratdraft in suratsDraft track by ::suratdraft.id">
+        <div layout="row">
+            <md-input-container flex>
+                <label>Subject Surat...</label>
+                <input type="text" ng-model="search.subject"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Nomor Surat...</label>
+                <input type="text" ng-model="search.no_surat"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Hal Surat...</label>
+                <input type="text" ng-model="search.hal"/>
+            </md-input-container>
+        </div>
+        <div ng-repeat="suratdraft in suratsDraft| filter:search:strict track by ::suratdraft.id">
             <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::suratdraft.subject"></h3>
+                    <h4 ng-bind="::suratdraft.no_surat"></h4>
                     <h4 ng-bind="::suratdraft.hal"></h4>
                     <p ng-bind="::suratdraft.tanggal"></p>
                     <p class="warn-disabled">Catatan koreksi:</p>
