@@ -64,11 +64,16 @@
         <script src="js/controllers/TambahKodeUnitCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahUserPejabatCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahJabatanCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahInstitusiCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahKodeHalCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahKodeUnitCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahUserInsCtrl.js" type="text/javascript"></script>
         
         <script src="js/directives/LoginLogoutDirective.js" type="text/javascript"></script>
         <script src="js/directives/ToolbarDirective.js" type="text/javascript"></script>
         <script src="js/directives/MenuToggleDirective.js" type="text/javascript"></script>
         <script src="js/directives/MenuLinkDirective.js" type="text/javascript"></script>
+        <script src="js/directives/Miscellaneous.js" type="text/javascript"></script>
 
         <script src="js/services/Menu.js" type="text/javascript"></script>
         <script src="js/services/Session.js" type="text/javascript"></script>

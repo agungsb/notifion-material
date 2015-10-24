@@ -161,6 +161,10 @@ md-tabs .md-tab.md-active, md-tabs .md-tab.md-focused{
     color: rgb(33,150,243) !important;
 }
 
+.disabled-disabled{
+    color: rgba(0,0,0,0.26) !important;
+}
+
 .cursor-pointer{
     cursor: pointer;
 }

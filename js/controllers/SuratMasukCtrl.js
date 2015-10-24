@@ -25,7 +25,6 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                     });
                     function DialogController($scope, $http, $mdDialog, $sce) {
                         console.log(source);
-                        alert(source.uploadedFilePath);
                         var sourceUrl = "";
                         if (source.isUploaded) {
                             sourceUrl = "/api/" + source.uploadedFilepath;
