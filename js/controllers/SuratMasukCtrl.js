@@ -63,6 +63,9 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                     }
                     SuratMasukService.setFavorite(suratId, $scope.surats[index].isFavorite);
                 };
+                $scope.loadMore = function(){
+                    alert("Load more");
+                };
             }).error(function(error) {
                 console.log(error);
             });

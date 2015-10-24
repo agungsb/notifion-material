@@ -1,7 +1,7 @@
 <md-toolbar class="md-background" md-theme="app-blue">
     <toolbar-directive title="Surat Masuk"></toolbar-directive>
 </md-toolbar>
-<md-content>
+<md-content infinite-scroll="loadMore()" infinite-scroll-distance="3">
     <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!suratsIsReady">
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
@@ -28,8 +28,8 @@
             <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}" layout="column">
                 <div flex>
                     <div flex layout="row">
-                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="!surat.isFavorite">star_border</i>
-                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="surat.isFavorite">star_black</i>
+                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="!surat.isFavorite" ng-click="setFavorite($index, surat.id)">star_border</i>
+                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="surat.isFavorite" ng-click="setFavorite($index, surat.id)">star_black</i>
                         <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-click="viewSurat($event, surat)">&#xE8A0;</i>
                     </div>
                 </div>

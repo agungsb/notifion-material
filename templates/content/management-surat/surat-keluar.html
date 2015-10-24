@@ -1,7 +1,7 @@
 <md-toolbar class="md-background" md-theme="app-blue">
     <toolbar-directive title="Surat Keluar"></toolbar-directive>
 </md-toolbar>
-<md-content>
+<md-content infinite-scroll="loadMore()" infinite-scroll-distance="3">
     <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!suratsIsReady">
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
