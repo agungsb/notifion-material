@@ -29,6 +29,10 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
         obj.getPenandatanganRequest = function() {
             return $http.get(baseUrl + 'penandatangan/' + $rootScope.session_auth.token);
         };
+        
+        obj.getPejabatsInsRequest = function() {
+            return $http.get(baseUrl + 'pejabatsIns/' + $rootScope.session_auth.token);
+        };
 
         obj.getRequest = function(url, options) {
             return $http({

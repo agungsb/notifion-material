@@ -5,7 +5,7 @@ var TambahUserInsCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdToast'
             return String;
         };
 
-        Request.getRequest('pejabatsIns').success(function(feedback) {
+        Request.getPejabatsInsRequest().success(function(feedback) {
             console.log(feedback);
             if (feedback.length === 0) {
                 $scope.tableIsEmpty = true;

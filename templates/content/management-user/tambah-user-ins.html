@@ -5,20 +5,18 @@
     <md-content>
         <form name="tambahUserLembaga">
             <div layout layout-sm="column">
-                <!--<md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>-->
-                <!--                            <md-input-container flex="33" style="padding: 20px;">
-                                                <label>Account</label>
-                                                <input type="text" name="account" ng-model="account" required/>
-                                            </md-input-container>-->
+                <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
+                <md-input-container flex="33" style="padding: 20px;">
+                    <label>Account</label>
+                    <input type="text" name="account" ng-model="account" required/>
+                </md-input-container>
                 <md-input-container flex="33" style="padding: 20px;">
                     <label>Password</label>
                     <input type="password" name="password" ng-model="password" required/>
                 </md-input-container>
                 <md-input-container flex="33" style="padding: 20px;">
-                    <label>Institusi</label>
-                    <md-select ng-model="ins" required>
-                        <md-option ng-repeat="institusi in institusis" ng-value="keepString(institusi.id_institusi)">{{institusi.nama_institusi}}</md-option>
-                    </md-select>
+                    <label>Jabatan</label>
+                    <input type="text" name="jabatan" ng-model="jabatan" required/>
                 </md-input-container>
             </div>
             <md-button ng-click="submitOP()" class="md-raised md-primary md-button" ng-disabled="tambahUserLembaga.$invalid || isSubmitting">Submit</md-button>        
