@@ -25,7 +25,6 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                     });
                     function DialogController($scope, $http, $mdDialog, $sce) {
                         console.log(source);
-                        alert(source.uploadedFilePath);
                         var sourceUrl = "";
                         if (source.isUploaded) {
                             sourceUrl = "/api/" + source.uploadedFilepath;
@@ -62,9 +61,6 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                         $scope.surats[index].isFavorite = !$scope.surats[index].isFavorite;
                     }
                     SuratMasukService.setFavorite(suratId, $scope.surats[index].isFavorite);
-                };
-                $scope.loadMore = function(){
-                    alert("Load more");
                 };
             }).error(function(error) {
                 console.log(error);

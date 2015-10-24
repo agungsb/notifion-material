@@ -77,9 +77,6 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                             $mdDialog.hide();
                         };
                     }
-                    $scope.loadMore = function() {
-                        alert("Load more");
-                    };
                 };
             }).error(function(error) {
                 console.log(error);

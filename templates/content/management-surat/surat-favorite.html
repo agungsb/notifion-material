@@ -24,9 +24,18 @@
                 <input type="text" ng-model="search.hal"/>
             </md-input-container>
         </div>
-        <div ng-repeat="surat in surats| filter:search:strict track by ::surat.id">
-            <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}">
-                <div class="md-list-item-text">
+        <div ng-repeat="surat in surats | filter:search:strict track by ::surat.id">
+            <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}" layout="row">
+                <div flex-sm="30" flex-gt-sm="10" layout="column">
+                    <div flex>
+                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="!surat.isFavorite" ng-click="setFavorite($index, surat.id)">star_border</i>
+                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="surat.isFavorite" ng-click="setFavorite($index, surat.id)">star_black</i>
+                    </div>
+                    <div flex>
+                        <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-click="viewSurat($event, surat)">&#xE8A0;</i>
+                    </div>
+                </div>
+                <div flex flex-offset="10" class="md-list-item-text nowrap">
                     <h3 ng-bind="::surat.subject" ng-class="{'primary-disabled': surat.isUnread}"></h3>
                     <h4 ng-bind="::surat.no_surat"></h4>
                     <h4 ng-bind="::surat.hal"></h4>
@@ -35,13 +44,6 @@
                     <p ng-bind="::surat.role"></p>
                     <!--<p ng-bind-html="surat.isi"></p>-->
                 </div>
-                <md-button md-theme="app-blue" class="md-primary" ng-click="setFavorite($index, surat.id)" aria-label="isFavorite">
-                    <i class="material-icons md-48" ng-if="!surat.isFavorite" style="margin-top: 10%;">star_border</i>
-                    <i class="material-icons md-48" ng-if="surat.isFavorite" style="margin-top: 10%;">star_black</i>
-                </md-button>
-                <md-button md-theme="app-blue" class="md-primary" ng-click="viewSurat($event, surat.id)">
-                    <i class="material-icons md-48" style="margin-top: 10%;">&#xE8A0;</i>
-                </md-button>
             </md-list-item>
             <md-divider ng-if="!$last"></md-divider>
         </div>

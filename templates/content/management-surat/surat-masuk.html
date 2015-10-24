@@ -1,7 +1,7 @@
 <md-toolbar class="md-background" md-theme="app-blue">
     <toolbar-directive title="Surat Masuk"></toolbar-directive>
 </md-toolbar>
-<md-content infinite-scroll="loadMore()" infinite-scroll-distance="3">
+<md-content>
     <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!suratsIsReady">
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
@@ -25,15 +25,17 @@
             </md-input-container>
         </div>
         <div ng-repeat="surat in surats| filter:search:strict track by ::surat.id">
-            <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}" layout="column">
-                <div flex>
-                    <div flex layout="row">
+            <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}" layout="row">
+                <div flex-sm="30" flex-gt-sm="10" layout="column">
+                    <div flex>
                         <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="!surat.isFavorite" ng-click="setFavorite($index, surat.id)">star_border</i>
                         <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-if="surat.isFavorite" ng-click="setFavorite($index, surat.id)">star_black</i>
+                    </div>
+                    <div flex>
                         <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-click="viewSurat($event, surat)">&#xE8A0;</i>
                     </div>
                 </div>
-                <div flex class="md-list-item-text nowrap">
+                <div flex flex-offset="10" class="md-list-item-text nowrap">
                     <h3 ng-bind="::surat.subject" ng-class="{'primary-disabled': surat.isUnread}"></h3>
                     <h4 ng-bind="::surat.no_surat"></h4>
                     <h4 ng-bind="::surat.pengirim"></h4>
