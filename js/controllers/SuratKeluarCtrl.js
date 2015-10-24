@@ -11,7 +11,7 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                 }
                 $scope.suratsKeluar = feedback.result;
                 $scope.tableReady = true;
-                
+
                 $scope.acceptSurat = function(id) {
                     SuratKeluarService.acceptSurat(id);
                 };
@@ -34,9 +34,7 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                         };
                     }
                 };
-                $scope.previewSurat = function($event, id) {
-                    console.log($scope);
-                    alert($scope.isUploaded);
+                $scope.previewSurat = function($event, source) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
                     $mdDialog.show({
@@ -48,14 +46,28 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                         console.log('finished');
                     });
                     function DialogController($scope, $http, $mdDialog, $sce) {
-                        var data = {'id': id, 'token': $rootScope.session_auth.token};
-                        $http({
-                            url: "/api/preview",
-                            method: "POST",
-                            data: data,
-                            headers: {'Accept': 'application/pdf'},
-                            responseType: 'arraybuffer'
-                        }).success(function(feedback) {
+                        console.log(source);
+                        var sourceUrl = "";
+                        var request = {};
+                        if (source.isUploaded) {
+                            sourceUrl = "/api/" + source.uploadedFilePath;
+                            request = {
+                                url: sourceUrl,
+                                method: "GET",
+                                headers: {'Accept': 'application/pdf'},
+                                responseType: 'arraybuffer'
+                            };
+                        } else {
+                            var data = {'id': source.id, 'token': $rootScope.session_auth.token};
+                            request = {
+                                url: "/api/preview",
+                                method: "POST",
+                                data: data,
+                                headers: {'Accept': 'application/pdf'},
+                                responseType: 'arraybuffer'
+                            };
+                        }
+                        $http(request).success(function(feedback) {
                             var file = new Blob([feedback], {type: 'application/pdf'});
                             var fileURL = URL.createObjectURL(file);
                             console.log(fileURL);

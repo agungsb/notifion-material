@@ -15,6 +15,7 @@
     "angular-aria": "~1.4.5",
     "md-date-time": "~0.0.14",
     "angular-animate": "~1.4.5",
-    "ng-file-upload-shim": "~7.3.9"
+    "ng-file-upload-shim": "~7.3.9",
+    "ngInfiniteScroll": "~1.2.1"
   }
 }

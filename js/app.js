@@ -1,6 +1,6 @@
 'use strict';
 var app = angular.module('notifionApp',
-        ['ui.router', 'ngMaterial', 'textAngular', 'ngCookies', 'mdDateTime', 'ngFileUpload']);
+        ['ui.router', 'ngMaterial', 'textAngular', 'ngCookies', 'mdDateTime', 'ngFileUpload', 'infinite-scroll']);
 app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
     function($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
