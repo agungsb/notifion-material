@@ -99,10 +99,17 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-surat/tambah-hal.html",
                     controller: TambahKodeHalCtrl
                 })
+                
                 .state('home.tambahKodeUnit', {
                     url: "tambah-kode-unit",
                     templateUrl: "templates/content/management-surat/tambah-kode-unit.html",
                     controller: TambahKodeUnitCtrl
+                })
+                
+                .state('home.tambahUserIns', {
+                    url: "tambah-user-ins",
+                    templateUrl: "templates/content/management-user/tambah-user-ins.html",
+                    controller: TambahUserInsCtrl
                 })
 
                 .state('home.buatSurat', {

@@ -93,6 +93,33 @@ app.factory('menu', [
             allowed: $rootScope.session_auth.jenis_user === '1'
 //            allowed: true
         });
+        
+        sections.push({
+            name: 'Management User',
+            type: 'toggle',
+            pages: [{
+                    name: 'Tambah User',
+                    state: 'home.tambahUserIns',
+                    type: 'link',
+                    icon: 'fa fa-upload',
+                    allowed: true
+                }, {
+                    name: 'Tambah Jabatan',
+                    state: 'home.tambahKodeHal',
+                    type: 'link',
+                    icon: 'fa fa-upload',
+                    allowed: true
+                },
+                {
+                    name: 'Tambah Pejabat',
+                    state: 'home.tambahKodeHal',
+                    type: 'link',
+                    icon: 'fa fa-upload',
+                    allowed: true
+                }],
+            allowed: $rootScope.session_auth.jenis_user === '2'
+//            allowed: true
+        });
 
         sections.push({
             name: 'Buat Surat',
@@ -108,6 +135,8 @@ app.factory('menu', [
             type: 'link',
             allowed: true
         });
+
+        
 
         var self;
 

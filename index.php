@@ -65,6 +65,7 @@
         <script src="js/controllers/TambahInstitusiCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahKodeHalCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahKodeUnitCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahUserInsCtrl.js" type="text/javascript"></script>
 
         <script src="js/services/Menu.js" type="text/javascript"></script>
         <script src="js/services/Session.js" type="text/javascript"></script>
