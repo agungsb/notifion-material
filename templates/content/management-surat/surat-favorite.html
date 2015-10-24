@@ -6,11 +6,31 @@
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
     <md-list class="md-padding" ng-if="suratsIsReady">
-        <div ng-repeat="surat in surats track by ::surat.id">
+        <div layout="row">
+            <md-input-container flex>
+                <label>Subject Surat...</label>
+                <input type="text" ng-model="search.subject"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Nomor Surat...</label>
+                <input type="text" ng-model="search.no_surat"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Pengirim Surat...</label>
+                <input type="text" ng-model="search.pengirim"/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Hal Surat...</label>
+                <input type="text" ng-model="search.hal"/>
+            </md-input-container>
+        </div>
+        <div ng-repeat="surat in surats| filter:search:strict track by ::surat.id">
             <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}">
                 <div class="md-list-item-text">
                     <h3 ng-bind="::surat.subject" ng-class="{'primary-disabled': surat.isUnread}"></h3>
+                    <h4 ng-bind="::surat.no_surat"></h4>
                     <h4 ng-bind="::surat.hal"></h4>
+                    <h4 ng-bind="::surat.pengirim"></h4>
                     <p ng-bind="::surat.tanggal"></p>
                     <p ng-bind="::surat.role"></p>
                     <!--<p ng-bind-html="surat.isi"></p>-->

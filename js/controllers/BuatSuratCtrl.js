@@ -103,7 +103,8 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             var selectedSurat = $scope.selectedSurat;
 
             Upload.upload({
-                url: '/api/submitSurat',
+//                url: '/api/submitSurat',
+                url: 'http://localhost/notifion-api/submitSurat',
                 fields: data,
                 file: {"files[]": files, "isi": selectedSurat}
             }).progress(function(evt) {
