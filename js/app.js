@@ -83,6 +83,13 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-user/tambah-user.html",
                     controller: TambahAccountCtrl
                 })
+                
+                .state('home.tambahUserBiasa', {
+                    url: "tambah-user-ord",
+                    templateUrl: "templates/content/management-user/tambah-user-ord.html",
+                    controller: TambahAccountOrdCtrl
+                })
+                
                 .state('home.tambahInstansi', {
                     url: "tambah-instansi",
                     templateUrl: "templates/content/management-user/tambah-instansi.html",
@@ -106,10 +113,16 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     controller: TambahKodeUnitCtrl
                 })
                 
-                .state('home.tambahUserIns', {
-                    url: "tambah-user-ins",
-                    templateUrl: "templates/content/management-user/tambah-user-ins.html",
-                    controller: TambahUserInsCtrl
+                .state('home.tambahPejabat', {
+                    url: "tambah-pejabat",
+                    templateUrl: "templates/content/management-user/tambah-pejabat.html",
+                    controller: TambahUserPejabatCtrl
+                }) 
+                        
+                .state('home.tambahJabatan', {
+                    url: "tambah-jabatan",
+                    templateUrl: "templates/content/management-user/buat-jabatan.html",
+                    controller: TambahJabatanCtrl
                 })
 
                 .state('home.buatSurat', {

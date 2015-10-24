@@ -33,6 +33,10 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
         obj.getPejabatsInsRequest = function() {
             return $http.get(baseUrl + 'pejabatsIns/' + $rootScope.session_auth.token);
         };
+        
+        obj.getJabatansInsRequest = function() {
+            return $http.get(baseUrl + 'jabatansIns/' + $rootScope.session_auth.token);
+        };
 
         obj.getRequest = function(url, options) {
             return $http({

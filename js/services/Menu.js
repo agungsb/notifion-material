@@ -29,7 +29,7 @@ app.factory('menu', [
                     state: 'home.suratKeluar',
                     type: 'link',
                     icon: 'fa fa-upload',
-                    allowed: true,
+                    allowed: $rootScope.session_auth.jenis_user === '3',
                     id: 'suratkeluar',
                     hascounter: true
                 },
@@ -50,6 +50,12 @@ app.factory('menu', [
             type: 'toggle',
             pages: [{
                     name: 'Tambah User',
+                    state: 'home.tambahUserBiasa',
+                    type: 'link',
+                    icon: 'fa fa-upload',
+                    allowed: true
+                }, {
+                    name: 'Tambah User Operator',
                     type: 'link',
                     state: 'home.tambahAccount',
                     icon: 'fa fa-inbox',
@@ -93,26 +99,20 @@ app.factory('menu', [
             allowed: $rootScope.session_auth.jenis_user === '1'
 //            allowed: true
         });
-        
+
         sections.push({
             name: 'Management User',
             type: 'toggle',
             pages: [{
-                    name: 'Tambah User',
-                    state: 'home.tambahUserIns',
-                    type: 'link',
-                    icon: 'fa fa-upload',
-                    allowed: true
-                }, {
-                    name: 'Tambah Jabatan',
-                    state: 'home.tambahKodeHal',
+                    name: 'Set Pejabat',
+                    state: 'home.tambahPejabat',
                     type: 'link',
                     icon: 'fa fa-upload',
                     allowed: true
                 },
                 {
-                    name: 'Tambah Pejabat',
-                    state: 'home.tambahKodeHal',
+                    name: 'Buat Jabatan',
+                    state: 'home.tambahJabatan',
                     type: 'link',
                     icon: 'fa fa-upload',
                     allowed: true
@@ -136,7 +136,7 @@ app.factory('menu', [
             allowed: true
         });
 
-        
+
 
         var self;
 

@@ -3,9 +3,9 @@
         <toolbar-directive title="Tambah User"></toolbar-directive>
     </md-toolbar>
     <md-content>
-        <form name="tambahUserLembaga">
+        <form name="tambahUserBiasa">
             <div layout layout-sm="column">
-                <md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>
+                <!--<md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>-->
                 <md-input-container flex="33" style="padding: 20px;">
                     <label>Account</label>
                     <input type="text" name="account" ng-model="account" required/>
@@ -14,27 +14,19 @@
                     <label>Password</label>
                     <input type="password" name="password" ng-model="password" required/>
                 </md-input-container>
-                <md-input-container flex="33" style="padding: 20px;">
-                    <label>Jabatan</label>
-                    <input type="text" name="jabatan" ng-model="jabatan" required/>
-                </md-input-container>
             </div>
-            <md-button ng-click="submitOP()" class="md-raised md-primary md-button" ng-disabled="tambahUserLembaga.$invalid || isSubmitting">Submit</md-button>        
+            <md-button ng-click="submitBiasa()" class="md-raised md-primary md-button" ng-disabled="tambahUserBiasa.$invalid || isSubmitting">Submit</md-button>        
         </form>
         <md-list class="md-padding">
             <h1 style="text-align: center;">List User</h1>
-            <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="pejabat in pejabats track by pejabat.account">
+            <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users track by user.account">
                 <div class="md-list-item-text">
                     <p class="text-lighten-4"><i>Account</i></p>
-                    <h4>{{pejabat.account}}</h4>
+                    <h4>{{user.account}}</h4>
                 </div>
                 <div class="md-list-item-text">
-                    <p class="text-lighten-4"><i>Nama</i></p>
-                    <h4>{{pejabat.nama}}</h4>
-                </div>
-                <div class="md-list-item-text">
-                    <p class="text-lighten-4"><i>Jabatan</i></p>
-                    <h4>{{pejabat.jabatan}}</h4>
+                    <p class="text-lighten-4"><i>Password</i></p>
+                    <h4>{{user.password}}</h4>
                 </div>
                 <!--                            <md-button md-theme="app-blue" class="md-primary" ng-click="editOP(institusis, user, $index)">
                                                 <i class="material-icons md-48" style="margin-top: 10%;">&#xE254;</i>
@@ -42,7 +34,7 @@
                                                     Edit
                                                 </md-tooltip>
                                             </md-button>-->
-                <md-button md-theme="app-blue" class="md-primary" ng-click="deleteOP(pejabat.account, $index)">
+                <md-button md-theme="app-blue" class="md-primary" ng-click="deleteBiasa(user.account, $index)">
                     <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
                     <md-tooltip>
                         Delete

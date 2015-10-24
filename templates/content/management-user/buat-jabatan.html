@@ -1,0 +1,31 @@
+<div layout="column">
+
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <toolbar-directive title="Tambah Jabatan"></toolbar-directive>
+    </md-toolbar>
+    
+        <md-content>
+            <form name="tambahjabatan">
+                <div layout layout-sm="column">
+                    <!--<md-progress-linear md-mode="query" ng-if="isSubmitting"></md-progress-linear>-->
+                    <md-input-container flex="33" style="padding: 20px;">
+                        <label>Jabatan</label>
+                        <input type="text" name="jabatan" ng-model="jabatan" required/>
+                    </md-input-container>
+                </div>
+                <md-button ng-click="submitJabatan()" class="md-raised md-primary md-button" ng-disabled="tambahjabatan.$invalid || isSubmitting">Submit</md-button>        
+            </form>
+            <md-list class="md-padding">
+                <h1 style="text-align: center;">List Jabatan</h1>
+                <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="jabatan in jabatans">
+                    <div class="md-list-item-text">
+                        <p class="text-lighten-4"><i>Jabatan</i></p>
+                        <h4>{{jabatan.jabatan}}</h4>
+                    </div>
+                    <md-button md-theme="app-blue" class="md-primary" ng-click="deleteJabatan(jabatan.jabatan, $index)">
+                        <i class="material-icons md-48" style="margin-top: 10%;">&#xE15C;</i>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-content>
+</div>
