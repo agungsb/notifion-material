@@ -67,7 +67,7 @@
         <script src="js/controllers/TambahInstitusiCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahKodeHalCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahKodeUnitCtrl.js" type="text/javascript"></script>
-        <script src="js/controllers/TambahUserInsCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/TambahPejabatCtrl.js" type="text/javascript"></script>
         
         <script src="js/directives/LoginLogoutDirective.js" type="text/javascript"></script>
         <script src="js/directives/ToolbarDirective.js" type="text/javascript"></script>
