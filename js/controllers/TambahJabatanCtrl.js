@@ -25,7 +25,7 @@ var TambahJabatanCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdToast'
 
                 console.log(data);
 
-                Request.postRequest('/addJabatan', data).success(function(feedback) {
+                Request.postRequest('addJabatan', data).success(function(feedback) {
 //            alert(feedback);
                     console.log(feedback);
                     $scope.isSubmitting = false;
