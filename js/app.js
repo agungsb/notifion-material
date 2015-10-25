@@ -63,6 +63,29 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-surat/surat-koreksi.html",
                     controller: SuratKoreksiCtrl
                 })
+                .state('home.editSurat', {
+                    url: "edit-surat/:noSurat",
+                    templateUrl: "templates/content/management-surat/edit-surat.html",
+                    resolve: {
+                        promiseObj: ['$rootScope', 'Request', '$stateParams', '$state',
+                            function($rootScope, Request, $stateParams, $state) {
+                                var data = {
+                                    "no_surat": decodeURIComponent($stateParams.noSurat),
+                                    "token": $rootScope.session_auth.token
+                                };
+                                return Request.postRequest('authSurat', data);
+                            }]
+                    },
+                    controller: EditSuratCtrl,
+                    controllerAs: 'ctrl',
+                    onEnter: ['promiseObj', '$state',
+                        function(promiseObj, $state) {
+                            console.log(promiseObj.data);
+                            if (!promiseObj.data.result) {
+                                $state.go('home.suratMasuk', {}, {location: 'replace'});
+                            }
+                        }]
+                })
                 .state('home.listUser', {
                     url: "list-user",
                     templateUrl: "templates/content/management-user/list-user.html"
@@ -83,13 +106,13 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-user/tambah-user.html",
                     controller: TambahAccountCtrl
                 })
-                
+
                 .state('home.tambahUserBiasa', {
                     url: "tambah-user-ord",
                     templateUrl: "templates/content/management-user/tambah-user-ord.html",
                     controller: TambahAccountOrdCtrl
                 })
-                
+
                 .state('home.tambahInstansi', {
                     url: "tambah-instansi",
                     templateUrl: "templates/content/management-user/tambah-instansi.html",
@@ -106,19 +129,19 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-surat/tambah-hal.html",
                     controller: TambahKodeHalCtrl
                 })
-                
+
                 .state('home.tambahKodeUnit', {
                     url: "tambah-kode-unit",
                     templateUrl: "templates/content/management-surat/tambah-kode-unit.html",
                     controller: TambahKodeUnitCtrl
                 })
-                
+
                 .state('home.tambahPejabat', {
                     url: "tambah-pejabat",
                     templateUrl: "templates/content/management-user/tambah-pejabat.html",
                     controller: TambahUserPejabatCtrl
-                }) 
-                        
+                })
+
                 .state('home.tambahJabatan', {
                     url: "tambah-jabatan",
                     templateUrl: "templates/content/management-user/buat-jabatan.html",

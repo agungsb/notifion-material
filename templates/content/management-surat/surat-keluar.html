@@ -27,9 +27,9 @@
                         <i class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-click="previewSurat($event, suratkeluar)">&#xE8A0;</i>
                     </div>
                     <div flex>
-                        <i class="primary-disabled material-icons md-48" ng-click="acceptSurat(suratkeluar.id)" ng-if="suratkeluar.ditandatangani === 0">&#xE876;</i>
-                        <i class="warn-disabled material-icons md-48" ng-click="koreksiSurat($event, suratkeluar.id)" ng-if="suratkeluar.ditandatangani === 0">&#xE5CD;</i>
-                        <i class="disabled-disabled material-icons md-48" ng-disabled="true" ng-if="suratkeluar.ditandatangani == 1">&#xE876;</i>
+                        <i class="primary-disabled cursor-pointer material-icons md-48" ng-click="acceptSurat(suratkeluar.id)" ng-if="suratkeluar.ditandatangani === 0">&#xE876;</i>
+                        <i class="warn-disabled cursor-pointer material-icons md-48" ng-click="koreksiSurat($event, suratkeluar.id)" ng-if="suratkeluar.ditandatangani === 0">&#xE5CD;</i>
+                        <i class="disabled-disabled cursor-pointer material-icons md-48" ng-disabled="true" ng-if="suratkeluar.ditandatangani == 1">&#xE876;</i>
                     </div>
                 </div>
                 <div flex flex-offset="10" class="md-list-item-text" layout="column">
@@ -38,10 +38,9 @@
                     <h4 flex ng-bind="::suratkeluar.hal"></h4>
                     <p flex ng-bind="::suratkeluar.tanggal"></p>
                     <!--<p ng-bind-html="suratkeluar.isi"></p>-->
-                    <span ng-if="suratkeluar.lampiran>0" flex layout="row" ng-repeat="suratkeluarlampiran in ::suratkeluar.lampiran track by ::suratkeluarlampiran.file_path">
-                        <a flex target="_blank" ng-href="http://localhost/notifion-api/{{suratkeluarlampiran.file_path}}">Lampiran ke {{($index + 1)}}</a> &nbsp;
+                    <span ng-if="suratkeluar.file_lampiran.length > 0" flex ng-repeat="suratkeluarlampiran in ::suratkeluar.file_lampiran track by ::suratkeluarlampiran.file_path">
+                        <a target="_blank" ng-href="http://localhost/notifion-api/{{suratkeluarlampiran.file_path}}">Lampiran ke {{($index + 1)}}</a> &nbsp;
                     </span>
-                    
                 </div>
             </md-list-item>
             <md-divider ng-if="!$last"></md-divider>

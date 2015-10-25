@@ -1,7 +1,7 @@
 'use strict';
 
-app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request',
-    function($state, $rootScope, $mdToast, Request) {
+app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request', '$mdDialog',
+    function($state, $rootScope, $mdToast, Request, $mdDialog) {
         return{
             acceptSurat: function(id) {
                 var data = {
@@ -37,6 +37,8 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                         if (feedback.result === 'Success') {
                             $rootScope.$emit('websocketSend', {'tipe': 'suratkoreksi', 'data': feedback});
                         }
+                    }).then(function() {
+                        $mdDialog.hide();
                         $state.reload();
                     });
                 }).error(function(data) {
@@ -44,7 +46,7 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                     $mdToast.simple()
                             .content('Mohon maaf, telah terjadi kesalahan dalam memproses permintaan anda.')
                             .position('right')
-                            .hideDelay(1000)
+                            .hideDelay(1000);
                 });
             }
         };

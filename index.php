@@ -24,7 +24,7 @@
     <body>
 
         <div ui-view class="sn"></div>
-        
+
         <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
 
         <!--<script src="bower_components/angular/angular.js"></script>-->
@@ -44,7 +44,7 @@
         <script src="bower_components/md-date-time/dist/md-date-time.js" type="text/javascript"></script>
         <script src="bower_components/ng-file-upload/ng-file-upload.js" type="text/javascript"></script>
         <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js" type="text/javascript"></script>
-        
+
         <script src="js/custom.js" type="text/javascript"></script>
         <script src="js/app.js" type="text/javascript"></script>
 
@@ -53,6 +53,7 @@
         <script src="js/controllers/SuratFavoriteCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/SuratKeluarCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/SuratKoreksiCtrl.js" type="text/javascript"></script>
+        <script src="js/controllers/EditSuratCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/BuatSuratCtrl.js" type="text/javascript"></script>
         <!--<script src="js/controllers/TambahUserCtrl.js" type="text/javascript"></script>-->
         <script src="js/controllers/EditBioCtrl.js" type="text/javascript"></script>
@@ -68,7 +69,7 @@
         <script src="js/controllers/TambahKodeHalCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahKodeUnitCtrl.js" type="text/javascript"></script>
         <script src="js/controllers/TambahPejabatCtrl.js" type="text/javascript"></script>
-        
+
         <script src="js/directives/LoginLogoutDirective.js" type="text/javascript"></script>
         <script src="js/directives/ToolbarDirective.js" type="text/javascript"></script>
         <script src="js/directives/MenuToggleDirective.js" type="text/javascript"></script>

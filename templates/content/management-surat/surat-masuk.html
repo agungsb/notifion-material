@@ -43,6 +43,9 @@
                     <p ng-bind="::surat.tanggal"></p>
                     <p ng-bind="::surat.role"></p>
                     <!--<p ng-bind-html="surat.isi"></p>-->
+                    <span ng-if="surat.file_lampiran.length > 0" flex layout="row" ng-repeat="suratkeluarlampiran in ::surat.file_lampiran track by ::suratkeluarlampiran.file_path">
+                        <a flex target="_blank" ng-href="http://localhost/notifion-api/{{suratkeluarlampiran.file_path}}">Lampiran ke {{($index + 1)}}</a> &nbsp;
+                    </span>
                 </div>
             </md-list-item>
             <md-divider ng-if="!$last"></md-divider>

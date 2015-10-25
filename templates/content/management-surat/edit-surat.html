@@ -1,0 +1,107 @@
+<div layout="column">
+    <md-toolbar class="md-background" md-theme="app-blue">
+        <toolbar-directive title="Edit Surat"></toolbar-directive>
+    </md-toolbar>
+    <md-content layout-padding>
+        <form name="submitSurat">
+            <div layout layout-sm="row">
+                <md-input-container flex>
+                    <label>Subject</label>
+                    <input type="text" name="subject" ng-model="subject" required/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Kode Hal</label>
+                    <md-select aria-label="md-button" ng-model="hal" required>
+                        <md-option ng-repeat="kodehal in kodehals" value="{{kodehal.kode_hal}}">{{kodehal.deskripsi}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-button aria-label="md-button" class="md-raised md-background" ngf-drop="" ngf-select="" ng-model="files" ngf-allow-dir="true" ngf-accept="'application/pdf'">
+                <md-icon class="material-icons">&#xE2BC;</md-icon>
+            </md-button>
+            <div layout="row" layout-wrap>
+                <md-card ng-repeat="fileList in filesList track by $index" flex="20">
+                    <div class="md-actions" layout="row" layout-align="top center">
+                        <md-button aria-label="md-button" class="md-raised md-warn" ng-click="removeFile($index)">
+                            <md-icon class="material-icons">&#xE5CD;</md-icon>
+                        </md-button>
+                    </div>
+                    <img ng-src="img/acrobat.png" class="md-card-image" alt="Washed Out">
+                    <md-card-content>
+                        <p class="md-title" ng-bind="fileList.name"></p>
+                        <p class="text-lighten-4" ng-bind="roundFileSize(fileList.size)"></p>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <md-contact-chips
+                name="tujuan"
+                ng-model="ctrl.contactsTujuan" 
+                md-contacts="ctrl.querySearchTujuan($query)" 
+                md-contact-name="name" 
+                md-contact-image="image" 
+                md-contact-email="keterangan" 
+                md-require-match="true" 
+                filter-selected="ctrl.filterSelectedTujuan"
+                md-highlight-flags="i"
+                md-no-cache="true"
+                placeholder="Tujuan" required>
+            </md-contact-chips>
+            <md-contact-chips 
+                name="penandatangan"
+                ng-model="ctrl.contactsPenandatangan" 
+                md-contacts="ctrl.querySearchPenandatangan($query)" 
+                md-contact-name="name" 
+                md-contact-image="image" 
+                md-contact-email="keterangan" 
+                md-require-match="true" 
+                filter-selected="ctrl.filterSelectedPenandatangan" 
+                placeholder="Penandatangan">
+            </md-contact-chips>
+            <md-contact-chips 
+                name="tembusan"
+                ng-model="ctrl.contactsTembusan" 
+                md-contacts="ctrl.querySearchTembusan($query)" 
+                md-contact-name="name" 
+                md-contact-image="image" 
+                md-contact-email="keterangan" 
+                md-require-match="true" 
+                filter-selected="ctrl.filterSelectedTembusan" 
+                placeholder="Tembusan">
+            </md-contact-chips>
+        </form>
+        <br/>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Tulis Surat" ng-click="tabUploadSurat = false">
+                <md-content>
+                    <text-angular ng-model="isisurat" class="materialize-textarea" required></text-angular>
+                    <md-button aria-label="md-button" class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="submitSurat.$invalid || submitSurat.tujuan.$modelValue.length === 0
+                                || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
+                    <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat()">Preview</md-button>
+                </md-content>
+            </md-tab>
+            <md-tab label="Upload Surat" ng-click="tabUploadSurat = true">
+                <md-content>
+                    <md-button aria-label="md-button" class="md-raised md-background" ngf-drop="" ngf-select="" ng-model="uploadSurat" ngf-allow-dir="true" ngf-accept="'application/pdf'">
+                        <md-icon class="material-icons">&#xE2C6;</md-icon>
+                    </md-button>
+                    <div layout="row" layout-wrap ng-if="uploadSuratIsReady">
+                        <md-card flex="20">
+                            <div class="md-actions" layout="row" layout-align="top center">
+                                <md-button aria-label="md-button" class="md-raised md-warn" ng-click="removeUploadSurat()">
+                                    <md-icon class="material-icons">&#xE5CD;</md-icon>
+                                </md-button>
+                            </div>
+                            <img ng-src="img/acrobat.png" class="md-card-image" alt="Washed Out">
+                            <md-card-content>
+                                <p class="md-title" ng-bind="selectedSurat.name"></p>
+                                <p class="text-lighten-4" ng-bind="roundFileSize(selectedSurat.size)"></p>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                    <md-button aria-label="md-button" ng-if="uploadSuratIsReady" class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="submitSurat.$invalid || submitSurat.tujuan.$modelValue.length === 0
+                                || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>

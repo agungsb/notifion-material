@@ -1,5 +1,5 @@
-var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog', '$rootScope',
-    function($scope, Request, $mdDialog, $rootScope) {
+var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog', '$rootScope', '$state',
+    function($scope, Request, $mdDialog, $rootScope, $state) {
 
         var init = function() {
             Request.getSuratDraftRequest(0, 100).success(function(feedback) {
@@ -12,23 +12,9 @@ var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog', '$rootScope',
                 }
                 $scope.tableReady = true;
                 $scope.suratsDraft = feedback.result;
-                $scope.editSurat = editDialog;
-                function editDialog($event, id) {
-                    $mdDialog.show({
-                        controller: DialogController,
-                        templateUrl: 'templates/dialogs/editDialog.html',
-                        parent: angular.element(document.body),
-                        targetEvent: $event
-                    }).then(function() {
-                        console.log('finished');
-                    });
-
-                    function DialogController($scope, $http, $mdDialog, $sce) {
-                        $scope.closeDialog = function() {
-                            $mdDialog.hide();
-                        };
-                    }
-                }
+                $scope.editSurat = function(source) {
+                    $state.go('home.editSurat', {'noSurat': encodeURIComponent(source.no_surat)});
+                };
                 $scope.previewSurat = function($event, source) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
