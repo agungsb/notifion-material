@@ -76,15 +76,23 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         $scope.$watch('isisurat', function(newVal, oldVal) {
             if (typeof (newVal) !== 'undefined') {
                 $scope.isi = newVal;
-//            console.log(newVal);
-//            $scope.isi = newVal.replace('style=', "oala");
-//            $scope.isi = $scope.isi.replace(' style=\"color: rgba(0, 0, 0, 0.870588);float: none;background-color: rgb(255, 255, 255);\"', "");
                 $scope.isi = newVal.replace(/color\: rgba\(0\, 0\, 0\, 0.870588\)\;|float\: none\;|background\-color\: rgb\(255\, 255\, 255\)\;|<br\/>/gi, "");
                 console.log($scope.isi);
             }
         });
 
         $scope.submit = function() {
+            var files = $scope.filesList;
+
+            var selectedSurat = {};
+            var isi = "";
+            if ($scope.tabUploadSurat === true) {
+                isi = "";
+                selectedSurat = $scope.selectedSurat;
+            } else {
+                isi = $scope.isi;
+                selectedSurat = {};
+            }
             var data = {
                 "token": $rootScope.session_auth.token,
                 "subject": $scope.subject,
@@ -94,13 +102,10 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 "penandatangan": self.contactsPenandatangan,
                 "nosurat": $scope.nosurat,
                 "hal": $scope.hal,
-                "isi": $scope.isi,
+                "isi": isi,
                 "tembusan": self.contactsTembusan,
                 "is_uploaded": $scope.tabUploadSurat
             };
-
-            var files = $scope.filesList;
-            var selectedSurat = $scope.selectedSurat;
 
             Upload.upload({
                 url: '/api/submitSurat',

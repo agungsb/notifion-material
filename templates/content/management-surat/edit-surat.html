@@ -16,8 +16,21 @@
                     </md-select>
                 </md-input-container>
             </div>
+            <div layout="row" layout-wrap>
+                <md-card ng-repeat="oldLampiran in file_lampiran track by $index" flex="20">
+                    <div class="md-actions" layout="row" layout-align="top center">
+                        <md-button aria-label="md-button" class="md-raised md-warn" ng-click="removeOldFile($index)">
+                            <md-icon class="material-icons">&#xE5CD;</md-icon>
+                        </md-button>
+                    </div>
+                    <img ng-src="img/acrobat.png" class="md-card-image" alt="Washed Out">
+                    <md-card-content>
+                        <p class="md-title" style="word-wrap: break-word" ng-bind="getFileName(oldLampiran.file_path)"></p>
+                    </md-card-content>
+                </md-card>
+            </div>
             <md-button aria-label="md-button" class="md-raised md-background" ngf-drop="" ngf-select="" ng-model="files" ngf-allow-dir="true" ngf-accept="'application/pdf'">
-                <md-icon class="material-icons">&#xE2BC;</md-icon>
+                <md-icon class="material-icons">&#xE2BC;</md-icon> Lampiran Baru
             </md-button>
             <div layout="row" layout-wrap>
                 <md-card ng-repeat="fileList in filesList track by $index" flex="20">

@@ -81,23 +81,36 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         });
 
         $scope.submit = function() {
+            var files = $scope.filesList;
+
+            var selectedSurat = {};
+            var isi = "";
+            if ($scope.tabUploadSurat === true) {
+                isi = "";
+                selectedSurat = $scope.selectedSurat;
+            } else {
+                isi = $scope.isi;
+                selectedSurat = {};
+            }
+
             var data = {
                 "token": $rootScope.session_auth.token,
                 "subject": $scope.subject,
                 "lampiran": $scope.filesList.length,
-                "tanggal_surat": $scope.tanggalsurat,
+                "tanggal_surat": $scope.tanggal_surat,
                 "tujuan": self.contactsTujuan,
                 "penandatangan": self.contactsPenandatangan,
-                "nosurat": $scope.nosurat,
+                "nosurat": $scope.no_surat,
                 "hal": $scope.hal,
-                "isi": $scope.isi,
+                "isi": isi,
                 "tembusan": self.contactsTembusan,
                 "is_uploaded": $scope.tabUploadSurat
             };
 
-            var files = $scope.filesList;
-            var selectedSurat = $scope.selectedSurat;
-
+            console.log(data);
+            console.log(files);
+            console.log(selectedSurat);
+            return;
             Upload.upload({
                 url: '/api/submitSurat',
 //                url: 'http://localhost/notifion-api/submitSurat',
@@ -271,6 +284,17 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         $scope.removeFile = function(index) {
             $scope.filesList.splice(index, 1);
             console.log($scope.filesList);
+        };
+
+        $scope.removeOldFile = function(index) {
+            $scope.file_lampiran.splice(index, 1);
+            alert("Hapus datanya dari database dengan no.surat " + $scope.data.no_surat);
+        };
+
+        $scope.getFileName = function(path) {
+            var str = path;
+            var res = str.split('/');
+            return res[res.length - 1];
         };
 
     }];
