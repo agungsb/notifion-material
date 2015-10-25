@@ -151,7 +151,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 "lampiran": $scope.filesList.length,
                 "hal": $scope.hal,
                 "isi": $scope.isi,
-                "tembusan": self.scontactsTembusan
+                "tembusan": self.contactsTembusan
             };
 
             function DialogController($scope, $http, $mdDialog, $sce) {
