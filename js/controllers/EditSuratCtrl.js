@@ -115,6 +115,8 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             console.log(data);
             console.log(files);
             console.log(selectedSurat);
+            console.log($scope.file_lampiran);
+            console.log(lampiran);
             return;
 
             Upload.upload({
@@ -164,7 +166,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 "tujuan": self.contactsTujuan,
                 "penandatangan": self.contactsPenandatangan,
                 "nosurat": $scope.data.no_surat,
-                "lampiran": $scope.filesList.length,
+                "lampiran": lampiran,
                 "hal": $scope.hal,
                 "isi": $scope.isi,
                 "tembusan": self.contactsTembusan
@@ -173,7 +175,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             function DialogController($scope, $http, $mdDialog, $sce) {
                 console.log(data);
                 $http({
-                    url: "/api/preview2",
+                    url: "/api/previewKoreksi",
                     method: "POST",
                     data: data,
                     headers: {'Accept': 'application/pdf'},
