@@ -67,6 +67,7 @@ var SuratKeluarCtrl = ['$rootScope', '$scope', 'SuratKeluarService', 'Request', 
                                 responseType: 'arraybuffer'
                             };
                         }
+                        console.log(request);
                         $http(request).success(function(feedback) {
                             var file = new Blob([feedback], {type: 'application/pdf'});
                             var fileURL = URL.createObjectURL(file);

@@ -96,14 +96,16 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 selectedSurat = {};
             }
 
+            var lampiran = $scope.file_lampiran.length + $scope.filesList.length;
+
             var data = {
                 "token": $rootScope.session_auth.token,
                 "subject": $scope.subject,
-                "lampiran": $scope.filesList.length,
-                "tanggal_surat": $scope.tanggal_surat,
+                "lampiran": lampiran,
+                "tanggal_surat": $scope.data.tanggal_surat,
                 "tujuan": self.contactsTujuan,
                 "penandatangan": self.contactsPenandatangan,
-                "nosurat": $scope.no_surat,
+                "nosurat": $scope.data.no_surat,
                 "hal": $scope.hal,
                 "isi": isi,
                 "tembusan": self.contactsTembusan,
@@ -152,6 +154,8 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             }).then(function() {
                 console.log('finished');
             });
+
+            var lampiran = $scope.file_lampiran.length + $scope.filesList.length;
 
             var data = {
                 "token": $rootScope.session_auth.token,
