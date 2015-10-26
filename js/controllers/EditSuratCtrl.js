@@ -6,6 +6,8 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         $scope.subject = $scope.data.subject_surat;
         $scope.isisurat = $scope.data.isi;
         $scope.hal = $scope.data.kode_hal;
+        $scope.no_surat = $scope.data.no_surat;
+        $scope.tanggal_surat = $scope.data.tanggal_surat;
 
         var self = this;
 
@@ -63,6 +65,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
 
             Request.getRequest('specificUserInfo/' + $scope.data.penandatangan).success(function(feedback) {
                 console.log(feedback);
+                console.log($scope.data.penandatangan);
                 self.contactsPenandatangan.push(feedback.result);
             });
 
@@ -111,8 +114,9 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             console.log(files);
             console.log(selectedSurat);
             return;
+
             Upload.upload({
-                url: '/api/submitSurat',
+                url: '/api/submitEdit',
 //                url: 'http://localhost/notifion-api/submitSurat',
                 fields: data,
                 file: {"files[]": files, "isi": selectedSurat}
@@ -152,10 +156,10 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             var data = {
                 "token": $rootScope.session_auth.token,
                 "subject": $scope.subject,
-                "tanggal_surat": $scope.tanggalsurat,
+                "tanggal_surat": $scope.data.tanggal_surat,
                 "tujuan": self.contactsTujuan,
                 "penandatangan": self.contactsPenandatangan,
-                "nosurat": $scope.nosurat,
+                "nosurat": $scope.data.no_surat,
                 "lampiran": $scope.filesList.length,
                 "hal": $scope.hal,
                 "isi": $scope.isi,
