@@ -109,7 +109,10 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 "hal": $scope.hal,
                 "isi": isi,
                 "tembusan": self.contactsTembusan,
-                "is_uploaded": $scope.tabUploadSurat
+                "is_uploaded": $scope.tabUploadSurat,
+                "totalNewAttachments": $scope.filesList.length, // Total banyaknya lampiran baru yang ingin ditambahkan
+                "totalRemovedOldAttachments": $scope.removedOldAttachments.length, // Total banyaknya lampiran lama yang ingin dihapus
+                "removedOldAttachments": $scope.removedOldAttachments // Object yang berisi informasi dari lampiran-lampiran lama yang ingin dihapus
             };
 
             console.log(data);
@@ -117,7 +120,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             console.log(selectedSurat);
             console.log($scope.file_lampiran);
             console.log(lampiran);
-            return;
+//            return;
 
             Upload.upload({
                 url: '/api/submitEdit',
@@ -296,9 +299,10 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             console.log($scope.filesList);
         };
 
+        $scope.removedOldAttachments = [];
         $scope.removeOldFile = function(index) {
+            $scope.removedOldAttachments.push($scope.file_lampiran[index]);
             $scope.file_lampiran.splice(index, 1);
-            alert("Hapus datanya dari database dengan no.surat " + $scope.data.no_surat);
         };
 
         $scope.getFileName = function(path) {
