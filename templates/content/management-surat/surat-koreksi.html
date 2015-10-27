@@ -23,9 +23,9 @@
         <div ng-repeat="suratdraft in suratsDraft| filter:search:strict track by ::suratdraft.id">
             <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" layout="row">
                 <div flex-sm="30" flex-gt-sm="10" layout="column">
-                    <div flex>
+<!--                    <div flex>
                         <i flex class="primary-disabled cursor-pointer md-raised material-icons md-48" ng-click="previewSurat($event, suratdraft)">&#xE8A0;</i>
-                    </div>
+                    </div>-->
                     <div flex>
                         <i flex class="primary-disabled cursor-pointer material-icons md-48" ng-click="editSurat(suratdraft)">&#xE254;</i>
                     </div>

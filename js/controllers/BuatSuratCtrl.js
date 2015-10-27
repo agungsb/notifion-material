@@ -162,7 +162,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             function DialogController($scope, $http, $mdDialog, $sce) {
                 console.log(data);
                 $http({
-                    url: "/api/preview2",
+                    url: "/api/previewBuat",
                     method: "POST",
                     data: data,
                     headers: {'Accept': 'application/pdf'},
@@ -226,7 +226,8 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                     name: c,
                     keterangan: arrList[index].keterangan,
                     identifier: arrList[index].identifier,
-                    image: 'http://lorempixel.com/50/50/people?' + index
+//                    image: 'http://lorempixel.com/50/50/people?' + index
+                    image: 'http://localhost/notifion-material/img/user-male.png'
                 };
                 contact._lowername = contact.name.toLowerCase();
                 contact.nama = arrList[index].nama;
