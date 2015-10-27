@@ -89,7 +89,7 @@
                     <text-angular ng-model="isisurat" class="materialize-textarea" required></text-angular>
                     <md-button aria-label="md-button" class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="submitSurat.$invalid || submitSurat.tujuan.$modelValue.length === 0
                                 || submitSurat.penandatangan.$modelValue.length === 0">Submit</md-button>
-                    <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat()">Preview</md-button>
+                    <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat($event)">Preview</md-button>
                 </md-content>
             </md-tab>
             <md-tab label="Upload Surat" ng-click="tabUploadSurat = true">

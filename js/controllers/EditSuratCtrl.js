@@ -148,7 +148,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         };
 
         /* Scope Preview Surat */
-        $scope.previewSurat = function($event, id, status) {
+        $scope.previewSurat = function($event) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
             $mdDialog.show({
@@ -189,7 +189,6 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                     console.log(fileURL);
                     $scope.content = $sce.trustAsResourceUrl(fileURL);
                 });
-                $scope.isSigned = status;
                 $scope.closeDialog = function() {
                     $mdDialog.hide();
                 };
