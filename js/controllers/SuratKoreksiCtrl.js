@@ -13,7 +13,7 @@ var SuratKoreksiCtrl = ['$scope', 'Request', '$mdDialog', '$rootScope', '$state'
                 $scope.tableReady = true;
                 $scope.suratsDraft = feedback.result;
                 $scope.editSurat = function(source) {
-                    $state.go('home.editSurat', {'noSurat': encodeURIComponent(source.no_surat)});
+                    $state.go('home.editSurat', {'r': encodeURIComponent(source.no_surat)});
                 };
                 $scope.previewSurat = function($event, source) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
