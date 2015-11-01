@@ -64,27 +64,30 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     controller: SuratKoreksiCtrl
                 })
                 .state('home.editSurat', {
-                    url: "edit-surat/:noSurat",
+                    url: "edit-surat/:r",
+//                    templateUrl: "templates/content/management-surat/edit-surat.html",
+//                    resolve: {
+//                        promiseObj: ['$rootScope', 'Request', '$stateParams', '$state',
+//                            function($rootScope, Request, $stateParams, $state) {
+//                                var data = {
+//                                    "no_surat": decodeURIComponent($stateParams.r),
+//                                    "token": $rootScope.session_auth.token
+//                                };
+//                                return Request.postRequest('authSurat', data);
+//                            }]
+//                    },
+//                    controller: EditSuratCtrl,
+
                     templateUrl: "templates/content/management-surat/edit-surat.html",
-                    resolve: {
-                        promiseObj: ['$rootScope', 'Request', '$stateParams', '$state',
-                            function($rootScope, Request, $stateParams, $state) {
-                                var data = {
-                                    "no_surat": decodeURIComponent($stateParams.noSurat),
-                                    "token": $rootScope.session_auth.token
-                                };
-                                return Request.postRequest('authSurat', data);
-                            }]
-                    },
-                    controller: EditSuratCtrl,
+                    controller: BuatSuratCtrl,
                     controllerAs: 'ctrl',
-                    onEnter: ['promiseObj', '$state',
-                        function(promiseObj, $state) {
-                            console.log(promiseObj.data);
-                            if (!promiseObj.data.result) {
-                                $state.go('home.suratMasuk', {}, {location: 'replace'});
-                            }
-                        }]
+//                    onEnter: ['promiseObj', '$state',
+//                        function(promiseObj, $state) {
+//                            console.log(promiseObj.data);
+//                            if (!promiseObj.data.result) {
+//                                $state.go('home.suratMasuk', {}, {location: 'replace'});
+//                            }
+//                        }]
                 })
                 .state('home.listUser', {
                     url: "list-user",
