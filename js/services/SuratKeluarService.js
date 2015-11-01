@@ -15,7 +15,9 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                             .content('Surat telah berhasil didistribusikan')
                             .position('right')
                             .hideDelay(1000)
-                            );
+                            ).then(function() {
+                        $state.reload();
+                    });
                 }).error(function(data) {
                     console.log(data);
                 });

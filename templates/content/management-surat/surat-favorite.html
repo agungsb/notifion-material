@@ -6,6 +6,7 @@
         <md-progress-circular class="md-app-blue-theme" md-mode="indeterminate"></md-progress-circular>
     </div>
     <md-list class="md-padding" ng-if="suratsIsReady">
+        <span>Pencarian Surat</span>
         <div layout="row">
             <md-input-container flex>
                 <label>Subject Surat...</label>
@@ -24,7 +25,7 @@
                 <input type="text" ng-model="search.hal"/>
             </md-input-container>
         </div>
-        <div ng-repeat="surat in surats | filter:search:strict track by ::surat.id">
+        <div ng-repeat="surat in surats| filter:search:strict track by ::surat.id">
             <md-list-item class="md-3-line" ng-class="{'divider-border': !$last}" layout="row">
                 <div flex-sm="30" flex-gt-sm="10" layout="column">
                     <div flex>
