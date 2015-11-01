@@ -241,7 +241,8 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                     name: c,
                     keterangan: arrList[index].keterangan,
                     identifier: arrList[index].identifier,
-                    image: 'http://lorempixel.com/50/50/people?' + index
+//                    image: 'http://lorempixel.com/50/50/people?' + index
+                    image: 'http://localhost/notifion-material/img/user-male.png'
                 };
                 contact._lowername = contact.name.toLowerCase();
                 contact.nama = arrList[index].nama;
