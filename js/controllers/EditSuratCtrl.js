@@ -1,19 +1,30 @@
-var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast', 'promiseObj',
-    function($mdDialog, $rootScope, $scope, Upload, Request, $mdToast, promiseObj) {
-        $scope.data = promiseObj.data.data;
-        $scope.file_lampiran = promiseObj.data.file_lampiran;
+var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast', '$stateParams', '$state',
+    function ($mdDialog, $rootScope, $scope, Upload, Request, $mdToast, $stateParams, $state) {
+        var data = {
+            "no_surat": decodeURIComponent($stateParams.r),
+            "token": $rootScope.session_auth.token
+        };
+        Request.postRequest('authSurat', data).success(function (feedback) {
+            console.log(feedback);
+            if (feedback.result) {
+                $scope.data = feedback.data;
+                $scope.file_lampiran = feedback.file_lampiran;
 
-        $scope.subject = $scope.data.subject_surat;
-        $scope.isisurat = $scope.data.isi;
-        $scope.hal = $scope.data.kode_hal;
-        $scope.no_surat = $scope.data.no_surat;
-        $scope.tanggal_surat = $scope.data.tanggal_surat;
+                $scope.subject = $scope.data.subject_surat;
+                $scope.isisurat = $scope.data.isi;
+                $scope.hal = $scope.data.kode_hal;
+                $scope.no_surat = $scope.data.no_surat;
+                $scope.tanggal_surat = $scope.data.tanggal_surat;
+            } else {
+                $state.go('home.suratMasuk', {}, {location: 'replace'});
+            }
+        });
 
         var self = this;
 
         $scope.filesList = []; // Inisialisasi scope filesList untuk attachment
 
-        Request.getTujuanRequest().success(function(feedback) {
+        Request.getTujuanRequest().success(function (feedback) {
             console.log(feedback);
             $scope.results = feedback;
 
@@ -28,7 +39,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             var tujuans = str.split("@+id/");
             for (var i = 0; i < tujuans.length; i++) {
                 if (tujuans[i] !== '') {
-                    Request.getRequest('specificUserInfo/' + tujuans[i]).success(function(feedback) {
+                    Request.getRequest('specificUserInfo/' + tujuans[i]).success(function (feedback) {
                         self.contactsTujuan.push(feedback.result);
                     });
                 }
@@ -40,7 +51,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             var tembusans = str.split("@+id/");
             for (var i = 0; i < tembusans.length; i++) {
                 if (tembusans[i] !== '') {
-                    Request.getRequest('specificUserInfo/' + tembusans[i]).success(function(feedback) {
+                    Request.getRequest('specificUserInfo/' + tembusans[i]).success(function (feedback) {
                         self.contactsTembusan.push(feedback.result);
                     });
                 }
@@ -49,11 +60,11 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             self.filterSelectedTujuan = true;
             self.filterSelectedTembusan = true;
 
-        }).error(function(data) {
+        }).error(function (data) {
             console.log(data);
         });
 
-        Request.getPenandatanganRequest().success(function(feedback) {
+        Request.getPenandatanganRequest().success(function (feedback) {
             console.log(feedback);
             $scope.results = feedback;
 
@@ -63,7 +74,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
 
             self.contactsPenandatangan = [];
 
-            Request.getRequest('specificUserInfo/' + $scope.data.penandatangan).success(function(feedback) {
+            Request.getRequest('specificUserInfo/' + $scope.data.penandatangan).success(function (feedback) {
                 console.log(feedback);
                 console.log($scope.data.penandatangan);
                 self.contactsPenandatangan.push(feedback.result);
@@ -71,11 +82,11 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
 
             self.filterSelectedPenandatangan = true;
 
-        }).error(function(data) {
+        }).error(function (data) {
             console.log(data);
         });
 
-        $scope.$watch('isisurat', function(newVal, oldVal) {
+        $scope.$watch('isisurat', function (newVal, oldVal) {
             if (typeof (newVal) !== 'undefined') {
                 $scope.isi = newVal;
                 $scope.isi = newVal.replace(/color\: rgba\(0\, 0\, 0\, 0.870588\)\;|float\: none\;|background\-color\: rgb\(255\, 255\, 255\)\;|<br\/>/gi, "");
@@ -83,7 +94,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             }
         });
 
-        $scope.submit = function() {
+        $scope.submit = function () {
             var files = $scope.filesList;
 
             var selectedSurat = {};
@@ -127,11 +138,11 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
 //                url: 'http://localhost/notifion-api/submitSurat',
                 fields: data,
                 file: {"files[]": files, "isi": selectedSurat}
-            }).progress(function(evt) {
+            }).progress(function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 $scope.log = 'progress: ' + progressPercentage + '% ' +
                         evt.config.file.name + '\n' + $scope.log;
-            }).success(function(data, status, headers, config) {
+            }).success(function (data, status, headers, config) {
                 console.log(data);
                 $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
                 $mdToast.show(
@@ -139,16 +150,16 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                         .content('Berhasil submit surat')
                         .position('right')
                         .hideDelay(1000)
-                        ).then(function() {
+                        ).then(function () {
                     $rootScope.$emit('websocketSend', {'tipe': 'suratkeluar', 'data': data});
                 });
-            }).error(function(data) {
+            }).error(function (data) {
                 console.log(data);
             });
         };
 
         /* Scope Preview Surat */
-        $scope.previewSurat = function($event) {
+        $scope.previewSurat = function ($event) {
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
             $mdDialog.show({
@@ -156,7 +167,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 templateUrl: 'templates/dialogs/pdfDialog.html',
                 parent: angular.element(document.body),
                 targetEvent: $event
-            }).then(function() {
+            }).then(function () {
                 console.log('finished');
             });
 
@@ -183,13 +194,13 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                     data: data,
                     headers: {'Accept': 'application/pdf'},
                     responseType: 'arraybuffer'
-                }).success(function(feedback) {
+                }).success(function (feedback) {
                     var file = new Blob([feedback], {type: 'application/pdf'});
                     var fileURL = URL.createObjectURL(file);
                     console.log(fileURL);
                     $scope.content = $sce.trustAsResourceUrl(fileURL);
                 });
-                $scope.closeDialog = function() {
+                $scope.closeDialog = function () {
                     $mdDialog.hide();
                 };
             }
@@ -236,7 +247,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 contacts.push(arrList[i].deskripsi);
             }
 
-            return contacts.map(function(c, index) {
+            return contacts.map(function (c, index) {
                 var contact = {
                     name: c,
                     keterangan: arrList[index].keterangan,
@@ -255,16 +266,16 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         $scope.tabUploadSurat = false; // Inisialisasi awal, tab bukan berada di tabUploadSurat, melainkan di tabTulisSurat
 
         /* kode hal */
-        Request.getRequest('kodeHals', {}).success(function(feedback) {
+        Request.getRequest('kodeHals', {}).success(function (feedback) {
             console.log(feedback);
             $scope.kodehals = feedback.result;
-        }).error(function() {
+        }).error(function () {
             console.log("error");
         });
 
         $scope.filesList = [];
 
-        $scope.$watch('files', function(newVal) {
+        $scope.$watch('files', function (newVal) {
             if (typeof (newVal) !== 'undefined') {
                 if (newVal !== null) {
                     if (newVal.type === "application/pdf") {
@@ -276,12 +287,12 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
 
         $scope.uploadSurat = null;
         $scope.selectedSurat = {};
-        $scope.$watch('uploadSurat', function(newVal) {
+        $scope.$watch('uploadSurat', function (newVal) {
             console.log(newVal);
             if ((newVal) !== null) {
                 $scope.uploadSuratIsReady = true;
                 $scope.selectedSurat = newVal;
-                $scope.removeUploadSurat = function() {
+                $scope.removeUploadSurat = function () {
                     $scope.uploadSuratIsReady = false;
                     $scope.selectedSurat = null;
                     console.log($scope.selectedSurat);
@@ -289,26 +300,25 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
             }
         });
 
-        $scope.roundFileSize = function(size) {
+        $scope.roundFileSize = function (size) {
             var result = size / 1024 / 1024;
             return result.toFixed(2) + " Mb";
         };
 
-        $scope.removeFile = function(index) {
+        $scope.removeFile = function (index) {
             $scope.filesList.splice(index, 1);
             console.log($scope.filesList);
         };
 
         $scope.removedOldAttachments = [];
-        $scope.removeOldFile = function(index) {
+        $scope.removeOldFile = function (index) {
             $scope.removedOldAttachments.push($scope.file_lampiran[index]);
             $scope.file_lampiran.splice(index, 1);
         };
 
-        $scope.getFileName = function(path) {
+        $scope.getFileName = function (path) {
             var str = path;
             var res = str.split('/');
             return res[res.length - 1];
         };
-
     }];

@@ -2,7 +2,7 @@
 var app = angular.module('notifionApp',
         ['ui.router', 'ngMaterial', 'textAngular', 'ngCookies', 'mdDateTime', 'ngFileUpload', 'infinite-scroll']);
 app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
-    function($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    function ($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         $mdThemingProvider.theme('app-blue')
                 .primaryPalette('blue')
@@ -23,12 +23,12 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
         // Now set up the states
         $stateProvider
                 .state('home', {
-                    url: "/",
+                    url: "",
                     abstract: true,
                     templateUrl: "templates/home.html",
                     controller: HomeCtrl,
                     controllerAs: 'vm',
-                    onEnter: ['$rootScope', '$state', function($rootScope, $state) {
+                    onEnter: ['$rootScope', '$state', function ($rootScope, $state) {
                             if (!$rootScope.isLogin) {
                                 $state.go('login');
                             }
@@ -37,60 +37,48 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 .state('login', {
                     url: "/login",
                     template: '<login-directive class="fade-animation"></login-directive>',
-                    onEnter: ['$rootScope', '$state', function($rootScope, $state) {
+                    onEnter: ['$rootScope', '$state', function ($rootScope, $state) {
                             if ($rootScope.isLogin) {
                                 $state.go('home.suratMasuk');
                             }
                         }]
                 })
                 .state('home.suratMasuk', {
-                    url: "",
+                    url: "/",
                     templateUrl: "templates/content/management-surat/surat-masuk.html",
                     controller: SuratMasukCtrl
                 })
                 .state('home.suratFavorite', {
-                    url: "surat-favorite",
+                    url: "/surat-favorite",
                     templateUrl: "templates/content/management-surat/surat-favorite.html",
                     controller: SuratFavoriteCtrl
                 })
                 .state('home.suratKeluar', {
-                    url: "surat-keluar",
+                    url: "/surat-keluar",
                     templateUrl: "templates/content/management-surat/surat-keluar.html",
                     controller: SuratKeluarCtrl
                 })
                 .state('home.suratKoreksi', {
-                    url: "surat-koreksi",
+                    url: "/surat-koreksi",
                     templateUrl: "templates/content/management-surat/surat-koreksi.html",
                     controller: SuratKoreksiCtrl
                 })
                 .state('home.editSurat', {
-                    url: "edit-surat/:r",
-//                    templateUrl: "templates/content/management-surat/edit-surat.html",
-//                    resolve: {
-//                        promiseObj: ['$rootScope', 'Request', '$stateParams', '$state',
-//                            function($rootScope, Request, $stateParams, $state) {
-//                                var data = {
-//                                    "no_surat": decodeURIComponent($stateParams.r),
-//                                    "token": $rootScope.session_auth.token
-//                                };
-//                                return Request.postRequest('authSurat', data);
-//                            }]
-//                    },
-//                    controller: EditSuratCtrl,
-
+                    url: "/edit-surat",
+                    template: "<h2>Edit Surat dong</h2><div ui-view></div>",
+                    abstract: true,
+                    onEnter: ['$rootScope', function($rootScope){
+//                            alert($rootScope.isLogin);
+                    }]
+                })
+                .state('home.editSurat.edit', {
+                    url: "/:r",
                     templateUrl: "templates/content/management-surat/edit-surat.html",
-                    controller: BuatSuratCtrl,
-                    controllerAs: 'ctrl',
-//                    onEnter: ['promiseObj', '$state',
-//                        function(promiseObj, $state) {
-//                            console.log(promiseObj.data);
-//                            if (!promiseObj.data.result) {
-//                                $state.go('home.suratMasuk', {}, {location: 'replace'});
-//                            }
-//                        }]
+                    controller: EditSuratCtrl,
+                    controllerAs: 'ctrl'
                 })
                 .state('home.listUser', {
-                    url: "list-user",
+                    url: "/list-user",
                     templateUrl: "templates/content/management-user/list-user.html"
                 })
 //                .state('home.tambahUser', {
@@ -99,79 +87,79 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
 //                    controller: TambahUserCtrl
 //                })
                 .state('home.editBio', {
-                    url: "edit-bio",
+                    url: "/edit-bio",
                     templateUrl: "templates/content/management-user/editBio.html",
                     controller: EditBioCtrl
                 })
 
                 .state('home.tambahAccount', {
-                    url: "tambah-user",
+                    url: "/tambah-user",
                     templateUrl: "templates/content/management-user/tambah-user.html",
                     controller: TambahAccountCtrl
                 })
 
                 .state('home.tambahUserBiasa', {
-                    url: "tambah-user-ord",
+                    url: "/tambah-user-ord",
                     templateUrl: "templates/content/management-user/tambah-user-ord.html",
                     controller: TambahAccountOrdCtrl
                 })
 
                 .state('home.tambahInstansi', {
-                    url: "tambah-instansi",
+                    url: "/tambah-instansi",
                     templateUrl: "templates/content/management-user/tambah-instansi.html",
                     controller: TambahInstansiCtrl
                 })
                 .state('home.tambahInstitusi', {
-                    url: "tambah-institusi",
+                    url: "/tambah-institusi",
                     templateUrl: "templates/content/management-user/tambah-institusi.html",
                     controller: TambahInstitusiCtrl
                 })
 
                 .state('home.tambahKodeHal', {
-                    url: "tambah-kode-hal",
+                    url: "/tambah-kode-hal",
                     templateUrl: "templates/content/management-surat/tambah-hal.html",
                     controller: TambahKodeHalCtrl
                 })
 
                 .state('home.tambahKodeUnit', {
-                    url: "tambah-kode-unit",
+                    url: "/tambah-kode-unit",
                     templateUrl: "templates/content/management-surat/tambah-kode-unit.html",
                     controller: TambahKodeUnitCtrl
                 })
 
                 .state('home.tambahPejabat', {
-                    url: "tambah-pejabat",
+                    url: "/tambah-pejabat",
                     templateUrl: "templates/content/management-user/tambah-pejabat.html",
                     controller: TambahUserPejabatCtrl
                 })
 
                 .state('home.tambahJabatan', {
-                    url: "tambah-jabatan",
+                    url: "/tambah-jabatan",
                     templateUrl: "templates/content/management-user/buat-jabatan.html",
                     controller: TambahJabatanCtrl
                 })
 
                 .state('home.buatSurat', {
-                    url: "buat-surat",
+                    url: "/buat-surat",
                     templateUrl: "templates/content/management-surat/buat-surat.html",
                     controller: BuatSuratCtrl,
                     controllerAs: 'ctrl'
                 });
     }]);
 app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state', '$templateCache', '$mdToast',
-    function($rootScope, $mdSidenav, $log, $http, Session, Request, $timeout, $state, $templateCache, $mdToast) {
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    function ($rootScope, $mdSidenav, $log, $http, Session, Request, $timeout, $state, $templateCache, $mdToast) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.isLogin = false;
             $rootScope.isLogin = Session.isLogin();
             console.log($rootScope.isLogin);
-            var call_auth_me = function() {
+            var call_auth_me = function () {
                 $rootScope.session_auth = Session.cookie.get('n-auth');
                 console.log($rootScope.session_auth);
-                Request.getUserInfoRequest(Session.cookie.get('n-auth')).success(function(feedback) {
+                Request.getUserInfoRequest(Session.cookie.get('n-auth')).success(function (feedback) {
                     console.log(feedback);
                     $rootScope.userInfo = feedback.data;
-                    var setNavbarLists = $timeout(function() {
-                        $rootScope.$apply(function() {
+                    var setNavbarLists = $timeout(function () {
+                        $rootScope.$apply(function () {
                             dataUnreadBadgeCounter(feedback);
                             dataUnsignedBadgeCounter(feedback);
                             if ($rootScope.session_auth.jenis_user === "2") {
@@ -182,11 +170,11 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                         $timeout.cancel(setNavbarLists);
                     }, 1000);
                     $rootScope.userInfoIsReady = true;
-                }).error(function(error) {
+                }).error(function (error) {
                     console.log(error);
                 });
             };
-            $rootScope.$on('reCallAuth', function(event) {
+            $rootScope.$on('reCallAuth', function (event) {
                 call_auth_me();
             });
             if ($rootScope.isLogin) {
@@ -194,19 +182,19 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
             }
 
             // Close the sidenav everytime state is changed
-            $mdSidenav('left').close().then(function() {
+            $mdSidenav('left').close().then(function () {
                 $log.debug('close LEFT is done');
             });
         });
         var current = Session.isLogin();
-        var callAtTimeout = function() {
+        var callAtTimeout = function () {
             if (current !== Session.isLogin()) {
                 current = Session.isLogin();
 //                console.log(current);
                 $state.reload();
                 $rootScope.isLogin = current;
             }
-            var cat = $timeout(function() {
+            var cat = $timeout(function () {
                 callAtTimeout();
                 $timeout.cancel(cat);
             }, 1500);
@@ -228,11 +216,11 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
 //            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
         var ws = new WebSocket(uri);
 
-        ws.onopen = function() {
+        ws.onopen = function () {
             console.log('Connected');
         };
 
-        ws.onmessage = function(evt) {
+        ws.onmessage = function (evt) {
 //                console.log(evt);
 //                console.log(JSON.parse(evt.data));
             var response = JSON.parse(evt.data);
@@ -282,23 +270,23 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                 }
             }
         };
-        $rootScope.$on('websocketSend', function(event, args) {
+        $rootScope.$on('websocketSend', function (event, args) {
             console.log(args.data);
 //            var msg = {"tipe": args.tipe, "account": args.data.account, "isUnreads": args.data.isUnreads, "favorites": args.data.favorites, "isUnsigned": args.data.isUnsigned, "isCorrected": args.data.isCorrected};
             var msg = {"tipe": args.tipe, "account": args.data.account};
             ws.send(JSON.stringify(msg));
         });
     }]);
-app.filter('nospace', function() {//take all whitespace out of string
-    return function(value) {
+app.filter('nospace', function () {//take all whitespace out of string
+    return function (value) {
         return (!value) ? '' : value.replace(/ /g, '');
     };
-}).filter('humanizeDoc', function() {//replace uppercase to regular case
-    return function(doc) {
+}).filter('humanizeDoc', function () {//replace uppercase to regular case
+    return function (doc) {
         if (!doc)
             return;
         if (doc.type === 'directive') {
-            return doc.name.replace(/([A-Z])/g, function($1) {
+            return doc.name.replace(/([A-Z])/g, function ($1) {
                 return '-' + $1.toLowerCase();
             });
         }
