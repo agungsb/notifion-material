@@ -19,7 +19,8 @@ app.factory('Session', ['$state', '$timeout', '$cookies',
                 $timeout(function() {
                     obj.cookie.delete('n-auth');
                 }).then(function() {
-                    location.reload();
+                    $state.go('login');
+//                    location.reload();
 //                    $state.go('home.suratMasuk', {}, {'location': 'replace', 'reload': true});
                 });
             }

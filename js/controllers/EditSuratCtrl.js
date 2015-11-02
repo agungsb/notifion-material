@@ -1,24 +1,13 @@
-var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast', '$stateParams', '$state',
-    function ($mdDialog, $rootScope, $scope, Upload, Request, $mdToast, $stateParams, $state) {
-        var data = {
-            "no_surat": decodeURIComponent($stateParams.r),
-            "token": $rootScope.session_auth.token
-        };
-        Request.postRequest('authSurat', data).success(function (feedback) {
-            console.log(feedback);
-            if (feedback.result) {
-                $scope.data = feedback.data;
-                $scope.file_lampiran = feedback.file_lampiran;
+var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast', 'promiseObj',
+    function ($mdDialog, $rootScope, $scope, Upload, Request, $mdToast, promiseObj) {
+        $scope.data = promiseObj.data.data;
+        $scope.file_lampiran = promiseObj.data.file_lampiran;
 
-                $scope.subject = $scope.data.subject_surat;
-                $scope.isisurat = $scope.data.isi;
-                $scope.hal = $scope.data.kode_hal;
-                $scope.no_surat = $scope.data.no_surat;
-                $scope.tanggal_surat = $scope.data.tanggal_surat;
-            } else {
-                $state.go('home.suratMasuk', {}, {location: 'replace'});
-            }
-        });
+        $scope.subject = $scope.data.subject_surat;
+        $scope.isisurat = $scope.data.isi;
+        $scope.hal = $scope.data.kode_hal;
+        $scope.no_surat = $scope.data.no_surat;
+        $scope.tanggal_surat = $scope.data.tanggal_surat;
 
         var self = this;
 

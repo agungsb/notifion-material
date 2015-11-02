@@ -65,17 +65,34 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 })
                 .state('home.editSurat', {
                     url: "/edit-surat",
-                    template: "<h2>Edit Surat dong</h2><div ui-view></div>",
-                    abstract: true,
-                    onEnter: ['$rootScope', function($rootScope){
-//                            alert($rootScope.isLogin);
-                    }]
+                    template: "<div ui-view></div>",
+                    abstract: true
                 })
                 .state('home.editSurat.edit', {
                     url: "/:r",
                     templateUrl: "templates/content/management-surat/edit-surat.html",
+                    resolve: {
+                        promiseObj: ['$rootScope', 'Request', '$stateParams',
+                            function ($rootScope, Request, $stateParams) {
+                                if ($rootScope.isLogin) {
+                                    var data = {
+                                        "no_surat": decodeURIComponent($stateParams.r),
+                                        "token": $rootScope.session_auth.token
+                                    };
+                                    return Request.postRequest('authSurat', data);
+                                } else {
+                                    return {data: {result: false}};
+                                }
+                            }]
+                    },
                     controller: EditSuratCtrl,
-                    controllerAs: 'ctrl'
+                    controllerAs: 'ctrl',
+                    onEnter: ['promiseObj', '$state', '$rootScope',
+                        function (promiseObj, $state, $rootScope) {
+                            if (!promiseObj.data.result) {
+                                $state.go('home.suratMasuk', {}, {location: 'replace'});
+                            }
+                        }]
                 })
                 .state('home.listUser', {
                     url: "/list-user",
@@ -149,6 +166,8 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
 app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state', '$templateCache', '$mdToast',
     function ($rootScope, $mdSidenav, $log, $http, Session, Request, $timeout, $state, $templateCache, $mdToast) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            console.log(fromState);
+            console.log(toState);
             $rootScope.isLogin = false;
             $rootScope.isLogin = Session.isLogin();
             console.log($rootScope.isLogin);
