@@ -37,6 +37,10 @@ app.factory('Request', ['$rootScope', '$http', function($rootScope, $http) {
         obj.getJabatansInsRequest = function() {
             return $http.get(baseUrl + 'jabatansIns/' + $rootScope.session_auth.token);
         };
+        
+        obj.getJabatansInsSetRequest = function() {
+            return $http.get(baseUrl + 'getJabatanBaru/' + $rootScope.session_auth.token);
+        };
 
         obj.getRequest = function(url, options) {
             return $http({

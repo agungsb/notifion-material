@@ -1,7 +1,7 @@
 'use strict';
 
-var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast',
-    function($mdDialog, $rootScope, $scope, Upload, Request, $mdToast) {
+var BuatSuratCtrl = ['$mdDialog', '$rootScope','$state', '$scope', 'Upload', 'Request', '$mdToast',
+    function($mdDialog, $rootScope, $state, $scope, Upload, Request, $mdToast) {
         var self = this;
 
         $scope.subject = "Test Subject";

@@ -29,7 +29,7 @@ var TambahUserPejabatCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdTo
                 console.log(error);
             });
 
-            Request.getJabatansInsRequest().success(function(feedback) {
+            Request.getJabatansInsSetRequest().success(function(feedback) {
                 console.log(feedback);
                 if (feedback.result.length === 0) {
                     $scope.tableIsEmpty = true;
@@ -74,8 +74,8 @@ var TambahUserPejabatCtrl = ['$rootScope', '$scope', 'Request', '$state', '$mdTo
                 });
             };
             
-            $scope.deletePejabat = function(account, index) {
-                Request.deleteRequest('hapusPejabat/' + $rootScope.session_auth.token + "/" + account).success(function(feedback) {
+            $scope.deletePejabat = function(account, jabatan, index) {
+                Request.deleteRequest('hapusPejabat/' + $rootScope.session_auth.token + "/" + account + "/" + jabatan).success(function(feedback) {
                     console.log(feedback);
                     $scope.pejabats.splice(index, 1);
                     $mdToast.show(
