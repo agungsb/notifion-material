@@ -227,6 +227,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope','$state', '$scope', 'Upload', 'Re
                     keterangan: arrList[index].keterangan,
                     identifier: arrList[index].identifier,
                     email: arrList[index].email1,
+                    nohp: arrList[index].nohp1,
 //                    image: 'http://lorempixel.com/50/50/people?' + index
                     image: 'http://localhost/notifion-material/img/user-male.png'
                 };
