@@ -136,7 +136,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
                 $mdToast.show(
                         $mdToast.simple()
-                        .content('Berhasil submit surat')
+                        .content(data.result)
                         .position('right')
                         .hideDelay(1000)
                         ).then(function () {

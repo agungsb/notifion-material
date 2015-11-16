@@ -12,10 +12,10 @@ app.directive('loginDirective', [function() {
                             'account': $scope.account,
                             'password': $scope.password
                         };
-                        console.log(data);
+//                        console.log(data);
                         Request.postRequest('login', data, {}).success(function(feedback) {
-                            console.log(data);
-                            console.log(feedback);
+//                            console.log(data);
+//                            console.log(feedback);
                             if (feedback.status) {
                                 // Put cookie
                                 var payload = {
@@ -23,6 +23,8 @@ app.directive('loginDirective', [function() {
                                     'userid': feedback.userid,
                                     'account': feedback.account,
                                     'nama': feedback.nama,
+                                    'nohp': feedback.nohp,
+                                    'email': feedback.email,
                                     'id_institusi': feedback.institusi,
                                     'nama_institusi': feedback.nama_institusi,
                                     'jenis_user': feedback.jenis_user,

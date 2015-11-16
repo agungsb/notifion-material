@@ -12,11 +12,11 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                     console.log(feedback);
                     $mdToast.show(
                             $mdToast.simple()
-                            .content('Surat telah berhasil didistribusikan')
+                            .content(feedback.result)
                             .position('right')
                             .hideDelay(1000)
                             ).then(function() {
-                        $state.reload();
+//                        $state.reload();
                     });
                 }).error(function(data) {
                     console.log(data);
