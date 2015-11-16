@@ -83,7 +83,7 @@
             </md-contact-chips>
         </form>
         <br/>
-        <md-tabs md-dynamic-height md-border-bottom>
+        <md-tabs md-dynamic-height md-border-bottom md-selected="selectedTabIndex">
             <md-tab label="Tulis Surat" ng-click="tabUploadSurat = false">
                 <md-content>
                     <text-angular ng-model="isisurat" class="materialize-textarea" required></text-angular>
@@ -92,12 +92,12 @@
                     <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="previewSurat($event)">Preview</md-button>
                 </md-content>
             </md-tab>
-            <md-tab label="Upload Surat" ng-click="tabUploadSurat = true">
+            <md-tab label="Upload Surat" ng-click="tabUploadSurat = true" md-selected="!tabUploadSurat">
                 <md-content>
                     <md-button aria-label="md-button" class="md-raised md-background" ngf-drop="" ngf-select="" ng-model="uploadSurat" ngf-allow-dir="true" ngf-accept="'application/pdf'">
                         <md-icon class="material-icons">&#xE2C6;</md-icon>
                     </md-button>
-                    <div layout="row" layout-wrap ng-if="uploadSuratIsReady">
+                    <div layout="row" layout-wrap>
                         <md-card flex="20">
                             <div class="md-actions" layout="row" layout-align="top center">
                                 <md-button aria-label="md-button" class="md-raised md-warn" ng-click="removeUploadSurat()">
@@ -106,8 +106,8 @@
                             </div>
                             <img ng-src="img/acrobat.png" class="md-card-image" alt="Washed Out">
                             <md-card-content>
-                                <p class="md-title" ng-bind="selectedSurat.name"></p>
-                                <p class="text-lighten-4" ng-bind="roundFileSize(selectedSurat.size)"></p>
+                                <p class="md-title" ng-bind="selectedSurat.name" style="word-wrap: break-word"></p>
+                                <p class="text-lighten-4" ng-if="selectedSurat.size !== 'undefined'" ng-bind="roundFileSize(selectedSurat.size)"></p>
                             </md-card-content>
                         </md-card>
                     </div>

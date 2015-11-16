@@ -171,4 +171,6 @@ md-tabs .md-tab.md-active, md-tabs .md-tab.md-focused{
 
 .nowrap{
     white-space: nowrap;
+    word-wrap: break-word;
 }
+
