@@ -1,6 +1,6 @@
 <div layout="column">
     <md-toolbar class="md-background" md-theme="app-blue">
-        <toolbar-directive title="Tambah User"></toolbar-directive>
+        <toolbar-directive title="Tambah Account"></toolbar-directive>
     </md-toolbar>
     <md-content>
         <form name="tambahUserBiasa">
@@ -18,7 +18,7 @@
             <md-button ng-click="submitBiasa()" class="md-raised md-primary md-button" ng-disabled="tambahUserBiasa.$invalid || isSubmitting">Submit</md-button>        
         </form>
         <md-list class="md-padding">
-            <h1 style="text-align: center;">List User</h1>
+            <h1 style="text-align: center;">List Account</h1>
             <md-list-item class="md-3-line animate-hide" ng-class="{'divider-border': !$last}" ng-repeat="user in users track by user.account">
                 <div class="md-list-item-text">
                     <p class="text-lighten-4"><i>Account</i></p>

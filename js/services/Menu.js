@@ -49,13 +49,13 @@ app.factory('menu', [
             name: 'Management User',
             type: 'toggle',
             pages: [{
-                    name: 'Tambah User',
+                    name: 'Tambah Account',
                     state: 'home.tambahUserBiasa',
                     type: 'link',
                     icon: 'fa fa-upload',
                     allowed: true
                 }, {
-                    name: 'Tambah User Operator',
+                    name: 'Tambah Account Operator',
                     type: 'link',
                     state: 'home.tambahAccount',
                     icon: 'fa fa-inbox',
