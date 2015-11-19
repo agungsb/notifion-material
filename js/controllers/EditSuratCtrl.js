@@ -1,5 +1,6 @@
 var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast', 'promiseObj',
     function ($mdDialog, $rootScope, $scope, Upload, Request, $mdToast, promiseObj) {
+        console.log(promiseObj.data.data);
         $scope.data = promiseObj.data.data;
         $scope.file_lampiran = promiseObj.data.file_lampiran;
 
@@ -109,7 +110,8 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 "hal": $scope.hal,
                 "isi": isi,
                 "tembusan": self.contactsTembusan,
-                "is_uploaded": $scope.tabUploadSurat,
+                "was_uploaded": $scope.is_uploaded, // Apakah sebelumnya merupakan hasil upload?
+                "is_uploaded": $scope.tabUploadSurat, // Apakah sekarang merupakan hasil upload?
                 "totalNewAttachments": $scope.filesList.length, // Total banyaknya lampiran baru yang ingin ditambahkan
                 "totalRemovedOldAttachments": $scope.removedOldAttachments.length, // Total banyaknya lampiran lama yang ingin dihapus
                 "removedOldAttachments": $scope.removedOldAttachments // Object yang berisi informasi dari lampiran-lampiran lama yang ingin dihapus
@@ -252,8 +254,13 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         }
 
         /* Posisi tab apakah di 'Tulis Surat' atau 'Upload Surat' */
-        $scope.tabUploadSurat = false; // Inisialisasi awal, tab bukan berada di tabUploadSurat, melainkan di tabTulisSurat
-
+        if ($scope.data.is_uploaded) {
+            $scope.selectedTabIndex = 1;
+            $scope.tabUploadSurat = true; // Inisialisasi awal, tab bukan berada di tabUploadSurat, melainkan di tabTulisSurat
+        } else {
+            $scope.selectedTabIndex = 0;
+            $scope.tabUploadSurat = false;
+        }
         /* kode hal */
         Request.getRequest('kodeHals', {}).success(function (feedback) {
             console.log(feedback);
@@ -275,10 +282,11 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         });
 
         $scope.uploadSurat = null;
-        $scope.selectedSurat = {};
+        $scope.selectedSurat = {"name": $scope.data.file_path, "size": "undefined"};
         $scope.$watch('uploadSurat', function (newVal) {
             console.log(newVal);
             if ((newVal) !== null) {
+                $scope.selectedSurat = {};
                 $scope.uploadSuratIsReady = true;
                 $scope.selectedSurat = newVal;
                 $scope.removeUploadSurat = function () {
