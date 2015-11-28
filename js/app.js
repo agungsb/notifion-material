@@ -46,23 +46,54 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                 .state('home.suratMasuk', {
                     url: "/",
                     templateUrl: "templates/content/management-surat/surat-masuk.html",
-                    controller: SuratMasukCtrl
+                    controller: SuratMasukCtrl,
+                    onEnter: ['$rootScope', '$state', function($rootScope, $state){
+//                            console.log($rootScope.session_auth);
+//                            alert($rootScope.session_auth);
+                            if($rootScope.session_auth.jenis_user == 1){
+                                $state.go('home.tambahUserBiasa', {}, {location: false});
+                            }
+                    }]
                 })
                 .state('home.suratFavorite', {
                     url: "/surat-favorite",
                     templateUrl: "templates/content/management-surat/surat-favorite.html",
-                    controller: SuratFavoriteCtrl
+                    controller: SuratFavoriteCtrl,
+                    onEnter: ['$rootScope', '$state', function($rootScope, $state){
+//                            console.log($rootScope.session_auth);
+//                            alert($rootScope.session_auth);
+                            if($rootScope.session_auth.jenis_user == 1){
+                                $state.go('home.404', {}, {location: false});
+                            }
+                    }]
                 })
+                
                 .state('home.suratKeluar', {
                     url: "/surat-keluar",
                     templateUrl: "templates/content/management-surat/surat-keluar.html",
-                    controller: SuratKeluarCtrl
+                    controller: SuratKeluarCtrl,
+                    onEnter: ['$rootScope', '$state', function($rootScope, $state){
+//                            console.log($rootScope.session_auth);
+//                            alert($rootScope.session_auth);
+                            if($rootScope.session_auth.jenis_user == 1){
+                                $state.go('home.404', {}, {location: false});
+                            }
+                    }]
                 })
+                
                 .state('home.suratKoreksi', {
                     url: "/surat-koreksi",
                     templateUrl: "templates/content/management-surat/surat-koreksi.html",
-                    controller: SuratKoreksiCtrl
+                    controller: SuratKoreksiCtrl,
+                    onEnter: ['$rootScope', '$state', function($rootScope, $state){
+//                            console.log($rootScope.session_auth);
+//                            alert($rootScope.session_auth);
+                            if($rootScope.session_auth.jenis_user == 1){
+                                $state.go('home.404', {}, {location: false});
+                            }
+                    }]
                 })
+                
                 .state('home.editSurat', {
                     url: "/edit-surat",
                     template: "<div ui-view></div>",
@@ -161,6 +192,12 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     templateUrl: "templates/content/management-surat/buat-surat.html",
                     controller: BuatSuratCtrl,
                     controllerAs: 'ctrl'
+                })
+        
+                
+                .state('home.404', {
+                    url: "/",
+                    templateUrl: "templates/content/404.html"
                 });
     }]);
 app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$timeout', '$state', '$templateCache', '$mdToast',

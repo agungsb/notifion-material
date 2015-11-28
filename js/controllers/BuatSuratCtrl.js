@@ -1,6 +1,6 @@
 'use strict';
 
-var BuatSuratCtrl = ['$mdDialog', '$rootScope','$state', '$scope', 'Upload', 'Request', '$mdToast',
+var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$state', '$scope', 'Upload', 'Request', '$mdToast',
     function($mdDialog, $rootScope, $state, $scope, Upload, Request, $mdToast) {
         var self = this;
 
@@ -81,7 +81,12 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope','$state', '$scope', 'Upload', 'Re
             }
         });
 
-        $scope.submit = function() {
+        $scope.submit = function($event) {
+            $mdDialog.show({
+                templateUrl: 'templates/dialogs/loaderDialog.html',
+                parent: angular.element(document.body),
+                targetEvent: $event
+            });
             var files = $scope.filesList;
 
             var selectedSurat = {};
@@ -119,6 +124,7 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope','$state', '$scope', 'Upload', 'Re
             }).success(function(data, status, headers, config) {
                 console.log(data);
                 $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                $mdDialog.hide();
                 $mdToast.show(
                         $mdToast.simple()
                         .content(data.result)
@@ -126,10 +132,11 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope','$state', '$scope', 'Upload', 'Re
                         .hideDelay(1000)
                         ).then(function() {
                     $rootScope.$emit('websocketSend', {'tipe': 'suratkeluar', 'data': data});
-//                $state.reload();
+                $state.reload();
                 });
             }).error(function(data) {
                 console.log(data);
+                $mdDialog.hide();
             });
         };
 

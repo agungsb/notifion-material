@@ -13,7 +13,7 @@
     <md-content md-theme="app-blue" layout-padding>
         <form name="koreksiForm">
             <text-angular required ng-model="pesan" class="materialize-textarea" required></text-angular>
-            <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="submit()" ng-disabled="koreksiForm.$invalid">Submit</md-button>
+            <md-button class="md-raised md-primary" md-theme="app-blue" ng-click="submit($event)" ng-disabled="koreksiForm.$invalid">Submit</md-button>
         </form>
     </md-content>
 </md-dialog>

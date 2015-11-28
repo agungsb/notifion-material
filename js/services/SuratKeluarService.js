@@ -16,20 +16,26 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                             .position('right')
                             .hideDelay(1000)
                             ).then(function() {
-//                        $state.reload();
+                        $state.reload();
                     });
                 }).error(function(data) {
                     console.log(data);
                 });
             },
-            koreksiSurat: function(id, pesan) {
+            koreksiSurat: function(id, pesan, $event) {
                 var data = {
                     "id_surat": id,
                     "token": $rootScope.session_auth.token,
                     "pesan": pesan
                 };
+                $mdDialog.show({
+                    templateUrl: 'templates/dialogs/loaderDialog.html',
+                    parent: angular.element(document.body),
+                    targetEvent: $event
+                });
                 Request.putRequest("koreksiSurat", data).success(function(feedback) {
                     console.log(feedback);
+                    $mdDialog.hide();
                     $mdToast.show(
                             $mdToast.simple()
                             .content('Surat telah dikembalikan untuk dikoreksi')
@@ -40,11 +46,11 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                             $rootScope.$emit('websocketSend', {'tipe': 'suratkoreksi', 'data': feedback});
                         }
                     }).then(function() {
-                        $mdDialog.hide();
                         $state.reload();
                     });
                 }).error(function(data) {
                     console.log(data);
+                    $mdDialog.hide();
                     $mdToast.simple()
                             .content('Mohon maaf, telah terjadi kesalahan dalam memproses permintaan anda.')
                             .position('right')
