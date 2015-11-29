@@ -27,7 +27,7 @@ var SuratMasukCtrl = ['$rootScope', '$scope', 'SuratMasukService', 'Request', 'S
                         console.log(source);
                         var sourceUrl = "";
                         if (source.isUploaded) {
-                            sourceUrl = "/api/" + source.uploadedFilepath;
+                            sourceUrl = "/api/" + source.uploadedFilePath;
                         } else {
                             sourceUrl = "/api/view/" + source.id + "/" + $rootScope.session_auth.token;
                         }

@@ -1,0 +1,27 @@
+{"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50Ijoib3BlcmF0b3JfcHVzdGlrb20iLCJuYW1hIjoiT3BlcmF0b3IgUHVzdGlrb20iLCJpZF9qYWJhdGFuIjoiMDAzMDAwMDAwIiwiaWRfaW5zdGl0dXNpIjoiMDAzMDAwIiwibmFtYV9pbnN0aXR1c2kiOiJQVVNUSUtPTSIsImplbmlzX3VzZXIiOiIyIiwibm9ocCI6IjA4Mzg3MTAxMjAzOSIsImVtYWlsIjoiZmlyZGF1c2libnV1QGdtYWlsLmNvbSIsInZhbGlkIjp0cnVlfQ.qw0ZfM-CHMgnJL-10HqXBnZjviq0gliKmPt215Xy8BE",
+                "subject": "Test Subject",
+                "lampiran": 0,
+                "tujuan": [{
+				"_lowername": "hamidillah ajie",
+				"email": "",
+				"identifier": "hamidillah_ajie",
+				"image": "http://localhost/notifion-material/img/user-male.png",
+				"keterangan": "Dosen/Karyawan",
+				"name": "Hamidillah Ajie"
+		}],
+                "penandatangan": [{
+				"_lowername": "kepala upt pusat komputer",
+				"email": "firdausibnu@hotmail.com",
+				"identifier": "003000001",
+				"image": "http://localhost/notifion-material/img/user-male.png",
+				"keterangan": "PUSTIKOM",
+				"nama": "M. Ficky Duskarnaen",
+				"name": "Kepala UPT Pusat Komputer",
+				"nip": "0123",
+				"nohp": "081299430058"
+		}],
+                "hal": "AK",
+                "isi": "<p>halo</p>",
+                "tembusan": [],
+                "is_uploaded": false
+}

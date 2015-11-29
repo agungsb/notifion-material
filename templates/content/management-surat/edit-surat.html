@@ -97,7 +97,7 @@
                     <md-button aria-label="md-button" class="md-raised md-background" ngf-drop="" ngf-select="" ng-model="uploadSurat" ngf-allow-dir="true" ngf-accept="'application/pdf'">
                         <md-icon class="material-icons">&#xE2C6;</md-icon>
                     </md-button>
-                    <div layout="row" layout-wrap>
+                    <div layout="row" layout-wrap ng-if="data.is_uploaded == 'true'">
                         <md-card flex="20">
                             <img ng-src="img/acrobat.png" class="md-card-image" alt="Washed Out">
                             <md-card-content>

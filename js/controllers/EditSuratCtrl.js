@@ -1,5 +1,5 @@
-var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '$mdToast', 'promiseObj',
-    function($mdDialog, $rootScope, $scope, Upload, Request, $mdToast, promiseObj) {
+var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', '$state', 'Upload', 'Request', '$mdToast', 'promiseObj',
+    function($mdDialog, $rootScope, $scope, $state, Upload, Request, $mdToast, promiseObj) {
         console.log(promiseObj.data.data);
         $scope.data = promiseObj.data.data;
         $scope.file_lampiran = promiseObj.data.file_lampiran;
@@ -120,7 +120,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                 "totalNewAttachments": $scope.filesList.length, // Total banyaknya lampiran baru yang ingin ditambahkan
                 "totalRemovedOldAttachments": $scope.removedOldAttachments.length, // Total banyaknya lampiran lama yang ingin dihapus
                 "removedOldAttachments": $scope.removedOldAttachments, // Object yang berisi informasi dari lampiran-lampiran lama yang ingin dihapus
-                "OldFileUploaded": $scope.data.file_path
+                "OldFileUploaded": promiseObj.data.file_path
             };
 
             console.log(data);
@@ -150,7 +150,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
                         .hideDelay(1000)
                         ).then(function() {
                     $rootScope.$emit('websocketSend', {'tipe': 'suratkeluar', 'data': data});
-                    $state.reload();
+                    $state.go('home.suratKoreksi', {}, {});
                 });
             }).error(function(data) {
                 console.log(data);
@@ -163,8 +163,8 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
 //                var url = "http://localhost/notifion-api/preview/" + id + "/" + localStorage.getItem('token');
 //                $window.open(url, '_blank');
             $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'templates/dialogs/pdfDialog.html',
+                controller: DialogController, 
+               templateUrl: 'templates/dialogs/pdfDialog.html',
                 parent: angular.element(document.body),
                 targetEvent: $event
             }).then(function() {
@@ -263,10 +263,10 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         }
 
         /* Posisi tab apakah di 'Tulis Surat' atau 'Upload Surat' */
-        if ($scope.data.is_uploaded) {
+        if ($scope.data.is_uploaded == "true") {
             $scope.selectedTabIndex = 1;
             $scope.tabUploadSurat = true; // Inisialisasi awal, tab bukan berada di tabUploadSurat, melainkan di tabTulisSurat
-        } else {
+        } else if($scope.data.is_uploaded == "false"){
             $scope.selectedTabIndex = 0;
             $scope.tabUploadSurat = false;
         }
@@ -291,7 +291,7 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         });
 
         $scope.uploadSurat = null;
-        $scope.selectedSurat = {"name": $scope.data.file_path, "size": "undefined"};
+        $scope.selectedSurat = {"name": promiseObj.data.file_path, "size": "undefined"};
         $scope.$watch('uploadSurat', function(newVal) {
             console.log(newVal);
             if ((newVal) !== null) {
@@ -323,8 +323,10 @@ var EditSuratCtrl = ['$mdDialog', '$rootScope', '$scope', 'Upload', 'Request', '
         };
 
         $scope.getFileName = function(path) {
-            var str = path;
-            var res = str.split('/');
-            return res[res.length - 1];
+            if (typeof (path) !== 'undefined') {
+                var str = path;
+                var res = str.split('/');
+                return res[res.length - 1];
+            }
         };
     }];

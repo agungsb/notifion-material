@@ -111,6 +111,9 @@ var BuatSuratCtrl = ['$mdDialog', '$rootScope', '$state', '$scope', 'Upload', 'R
                 "tembusan": self.contactsTembusan,
                 "is_uploaded": $scope.tabUploadSurat
             };
+            
+            console.log(data);
+//            return;
 
             Upload.upload({
                 url: '/api/submitSurat',

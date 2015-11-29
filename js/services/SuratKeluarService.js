@@ -3,13 +3,19 @@
 app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request', '$mdDialog',
     function($state, $rootScope, $mdToast, Request, $mdDialog) {
         return{
-            acceptSurat: function(id) {
+            acceptSurat: function(id, $event) {
                 var data = {
                     "id_surat": id,
                     "token": $rootScope.session_auth.token
                 };
+                 $mdDialog.show({
+                    templateUrl: 'templates/dialogs/loaderDialog.html',
+                    parent: angular.element(document.body),
+                    targetEvent: $event
+                });
                 Request.putRequest("accSurat", data).success(function(feedback) {
                     console.log(feedback);
+                    $mdDialog.hide();
                     $mdToast.show(
                             $mdToast.simple()
                             .content(feedback.result)
@@ -20,8 +26,11 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                     });
                 }).error(function(data) {
                     console.log(data);
+                    $mdDialog.hide();
                 });
             },
+            
+            
             koreksiSurat: function(id, pesan, $event) {
                 var data = {
                     "id_surat": id,

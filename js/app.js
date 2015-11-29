@@ -120,8 +120,9 @@ app.config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$loca
                     controllerAs: 'ctrl',
                     onEnter: ['promiseObj', '$state', '$rootScope',
                         function (promiseObj, $state, $rootScope) {
+                            console.log(promiseObj);
                             if (!promiseObj.data.result) {
-                                $state.go('home.suratMasuk', {}, {location: 'replace'});
+                                $state.go('home.suratMasuk', {}, {});
                             }
                         }]
                 })

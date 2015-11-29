@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/surat-koreksi.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/app.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/services/SuratKeluarService.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/EditSuratCtrl.js</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/edit-surat.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/templates/content/management-surat/surat-keluar.html</file>
+            <file>file:/C:/xampp/htdocs/notifion-material/js/controllers/BuatSuratCtrl.js</file>
         </group>
     </open-files>
 </project-private>
