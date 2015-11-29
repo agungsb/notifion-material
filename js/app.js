@@ -269,8 +269,8 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
         uri += loc.pathname + 'ws';
 
 //            uri = "ws://127.0.0.1:3000/ws" // Yang dipake, yang ini
-        uri = "ws://localhost:3000/wsjsonmultiple";
-//            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
+//        uri = "ws://localhost:3000/wsjsonmultiple";
+            uri = "ws://127.0.0.1:9000/notifion-api/socket_server.php";
         var ws = new WebSocket(uri);
 
         ws.onopen = function () {
@@ -304,7 +304,6 @@ app.run(['$rootScope', '$mdSidenav', '$log', '$http', 'Session', 'Request', '$ti
                     $rootScope.$emit('reInitSuratKeluar');
                     $rootScope.session_auth.isUnsigned += 1;
                     console.log($rootScope.session_auth.isUnsigned);
-                    alert($rootScope.session_auth.isUnsigned);
                     dataUnsignedBadgeCounter($rootScope.session_auth);
                     $mdToast.show(
                             $mdToast.simple()

@@ -15,6 +15,7 @@ app.service('SuratKeluarService', ['$state', '$rootScope', '$mdToast', 'Request'
                 });
                 Request.putRequest("accSurat", data).success(function(feedback) {
                     console.log(feedback);
+                    alert(JSON.stringify(feedback));
                     $mdDialog.hide();
                     $mdToast.show(
                             $mdToast.simple()
